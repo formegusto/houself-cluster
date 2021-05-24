@@ -33,8 +33,9 @@ namespace houself_cluster
 	public interface IModel
 	{
 		void Attach(IModelObserver observer);
-		void ChangeOption(string action, int tabPageIdx);
+		void ChangeOption(string action, Dictionary<string, dynamic> payload);
 		void InitLoadExcel();
+		void StartClustering();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -48,6 +49,7 @@ namespace houself_cluster
 			// Cluster Option Config
 			//
 			this.options = new ClusterOptions();
+			this.options.keyword = "";
 			this.options.day = Day.SUN;
 			this.options.season = Season.ALL;
 		}
@@ -55,17 +57,21 @@ namespace houself_cluster
 		{
 			this.changed += new ModelHandler<HouselfClusterModel>(imo.ModelNotify);
 		}
-		public void ChangeOption(string a, int tabPageIdx)
+		public void ChangeOption(string a, Dictionary<string, dynamic> p)
 		{
 			switch(a)
 			{
 				case VIEW_ACTION.CHANGE_DAYS:
-					this.options.day = (Day)tabPageIdx;
+					this.options.day = (Day) p["tabPageIdx"];
 					Console.WriteLine(this.options.day);
 					break;
 				case VIEW_ACTION.CHANGE_SEASONS:
-					this.options.season = (Season)tabPageIdx;
+					this.options.season = (Season) p["tabPageIdx"];
 					Console.WriteLine(this.options.season);
+					break;
+				case VIEW_ACTION.CHANGE_KEYWORD:
+					this.options.keyword = p["keyword"];
+					Console.WriteLine(this.options.keyword);
 					break;
 			}
 		}
@@ -79,20 +85,16 @@ namespace houself_cluster
 
 				Application application = new Application();
 				Workbooks wbs = application.Workbooks;
-				Console.WriteLine(1);
 				Workbook wb = wbs.Open(path);
-				Console.WriteLine(2);
+				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.READ_FILE_SUCCESS));
+
 				Sheets shs = wb.Worksheets;
-				Console.WriteLine(3);
 				Worksheet ws = shs.get_Item(1) as Worksheet;
-				Console.WriteLine(4);
 				Range range = ws.UsedRange;
-				Console.WriteLine(5);
 
 				try
 				{
 					this.cell = ws.UsedRange.Value;
-					Console.WriteLine(6);
 				}
 				catch
 				{
@@ -104,6 +106,10 @@ namespace houself_cluster
 				this.changed.Invoke(this, new ModelEventArgs(COMMON_ACTION.STOP_LOADING));
 				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.INIT_EXCEL_LOAD_SUCCESS));
 			});
+		}
+		public void StartClustering()
+		{
+
 		}
 	}
 }

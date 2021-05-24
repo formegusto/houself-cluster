@@ -47,14 +47,17 @@
 			this.Sat = new MetroFramework.Controls.MetroTabPage();
 			this.Body = new MetroFramework.Controls.MetroPanel();
 			this.SideBar = new MetroFramework.Controls.MetroPanel();
-			this.LoadingComponent = new MetroFramework.Controls.MetroPanel();
-			this.Spinner = new MetroFramework.Controls.MetroProgressSpinner();
+			this.ClusteringBtn = new MetroFramework.Controls.MetroButton();
+			this.KeywordBox = new MetroFramework.Controls.MetroTextBox();
+			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.LoadingTitle = new MetroFramework.Controls.MetroLabel();
+			this.LoadingComponent = new MetroFramework.Controls.MetroPanel();
 			this.Header.SuspendLayout();
 			this.SeasonComponent.SuspendLayout();
 			this.SeasonTabs.SuspendLayout();
 			this.DayComponent.SuspendLayout();
 			this.DayTabs.SuspendLayout();
+			this.SideBar.SuspendLayout();
 			this.LoadingComponent.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -99,7 +102,7 @@
 			this.SeasonTabs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SeasonTabs.Location = new System.Drawing.Point(0, 0);
 			this.SeasonTabs.Name = "SeasonTabs";
-			this.SeasonTabs.SelectedIndex = 4;
+			this.SeasonTabs.SelectedIndex = 0;
 			this.SeasonTabs.Size = new System.Drawing.Size(1234, 50);
 			this.SeasonTabs.TabIndex = 2;
 			this.SeasonTabs.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -208,7 +211,7 @@
 			this.DayTabs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.DayTabs.Location = new System.Drawing.Point(0, 0);
 			this.DayTabs.Name = "DayTabs";
-			this.DayTabs.SelectedIndex = 6;
+			this.DayTabs.SelectedIndex = 0;
 			this.DayTabs.Size = new System.Drawing.Size(1234, 50);
 			this.DayTabs.TabIndex = 2;
 			this.DayTabs.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -337,6 +340,8 @@
 			// 
 			// SideBar
 			// 
+			this.SideBar.Controls.Add(this.ClusteringBtn);
+			this.SideBar.Controls.Add(this.KeywordBox);
 			this.SideBar.HorizontalScrollbarBarColor = true;
 			this.SideBar.HorizontalScrollbarHighlightOnWheel = false;
 			this.SideBar.HorizontalScrollbarSize = 10;
@@ -349,32 +354,63 @@
 			this.SideBar.VerticalScrollbarHighlightOnWheel = false;
 			this.SideBar.VerticalScrollbarSize = 10;
 			// 
-			// LoadingComponent
+			// ClusteringBtn
 			// 
-			this.LoadingComponent.Controls.Add(this.LoadingTitle);
-			this.LoadingComponent.Controls.Add(this.Spinner);
-			this.LoadingComponent.Font = new System.Drawing.Font("나눔고딕", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.LoadingComponent.HorizontalScrollbarBarColor = true;
-			this.LoadingComponent.HorizontalScrollbarHighlightOnWheel = false;
-			this.LoadingComponent.HorizontalScrollbarSize = 10;
-			this.LoadingComponent.Location = new System.Drawing.Point(23, 189);
-			this.LoadingComponent.Name = "LoadingComponent";
-			this.LoadingComponent.Size = new System.Drawing.Size(1234, 508);
-			this.LoadingComponent.TabIndex = 1;
-			this.LoadingComponent.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.LoadingComponent.VerticalScrollbarBarColor = true;
-			this.LoadingComponent.VerticalScrollbarHighlightOnWheel = false;
-			this.LoadingComponent.VerticalScrollbarSize = 10;
+			this.ClusteringBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.ClusteringBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.ClusteringBtn.Location = new System.Drawing.Point(0, 40);
+			this.ClusteringBtn.Name = "ClusteringBtn";
+			this.ClusteringBtn.Size = new System.Drawing.Size(428, 40);
+			this.ClusteringBtn.TabIndex = 3;
+			this.ClusteringBtn.Text = "Clustering";
+			this.ClusteringBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.ClusteringBtn.UseSelectable = true;
+			this.ClusteringBtn.Click += new System.EventHandler(this.ClusteringBtn_Click);
 			// 
-			// Spinner
+			// KeywordBox
 			// 
-			this.Spinner.Location = new System.Drawing.Point(498, 129);
-			this.Spinner.Maximum = 100;
-			this.Spinner.Name = "Spinner";
-			this.Spinner.Size = new System.Drawing.Size(250, 250);
-			this.Spinner.TabIndex = 2;
-			this.Spinner.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.Spinner.UseSelectable = true;
+			// 
+			// 
+			// 
+			this.KeywordBox.CustomButton.Image = null;
+			this.KeywordBox.CustomButton.Location = new System.Drawing.Point(390, 2);
+			this.KeywordBox.CustomButton.Name = "";
+			this.KeywordBox.CustomButton.Size = new System.Drawing.Size(35, 35);
+			this.KeywordBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.KeywordBox.CustomButton.TabIndex = 1;
+			this.KeywordBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.KeywordBox.CustomButton.UseSelectable = true;
+			this.KeywordBox.CustomButton.Visible = false;
+			this.KeywordBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.KeywordBox.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+			this.KeywordBox.Lines = new string[0];
+			this.KeywordBox.Location = new System.Drawing.Point(0, 0);
+			this.KeywordBox.MaxLength = 32767;
+			this.KeywordBox.Name = "KeywordBox";
+			this.KeywordBox.PasswordChar = '\0';
+			this.KeywordBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.KeywordBox.SelectedText = "";
+			this.KeywordBox.SelectionLength = 0;
+			this.KeywordBox.SelectionStart = 0;
+			this.KeywordBox.ShortcutsEnabled = true;
+			this.KeywordBox.Size = new System.Drawing.Size(428, 40);
+			this.KeywordBox.TabIndex = 2;
+			this.KeywordBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.KeywordBox.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.KeywordBox.UseSelectable = true;
+			this.KeywordBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.KeywordBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			this.KeywordBox.TextChanged += new System.EventHandler(this.Keyword_Changed);
+			// 
+			// metroProgressSpinner1
+			// 
+			this.metroProgressSpinner1.Location = new System.Drawing.Point(498, 129);
+			this.metroProgressSpinner1.Maximum = 100;
+			this.metroProgressSpinner1.Name = "metroProgressSpinner1";
+			this.metroProgressSpinner1.Size = new System.Drawing.Size(250, 250);
+			this.metroProgressSpinner1.TabIndex = 2;
+			this.metroProgressSpinner1.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.metroProgressSpinner1.UseSelectable = true;
 			// 
 			// LoadingTitle
 			// 
@@ -389,12 +425,31 @@
 			this.LoadingTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.LoadingTitle.Theme = MetroFramework.MetroThemeStyle.Dark;
 			// 
+			// LoadingComponent
+			// 
+			this.LoadingComponent.Controls.Add(this.LoadingTitle);
+			this.LoadingComponent.Controls.Add(this.metroProgressSpinner1);
+			this.LoadingComponent.Font = new System.Drawing.Font("나눔고딕", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.LoadingComponent.HorizontalScrollbarBarColor = true;
+			this.LoadingComponent.HorizontalScrollbarHighlightOnWheel = false;
+			this.LoadingComponent.HorizontalScrollbarSize = 10;
+			this.LoadingComponent.Location = new System.Drawing.Point(23, 189);
+			this.LoadingComponent.Name = "LoadingComponent";
+			this.LoadingComponent.Size = new System.Drawing.Size(1234, 508);
+			this.LoadingComponent.TabIndex = 1;
+			this.LoadingComponent.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.LoadingComponent.VerticalScrollbarBarColor = true;
+			this.LoadingComponent.VerticalScrollbarHighlightOnWheel = false;
+			this.LoadingComponent.VerticalScrollbarSize = 10;
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1280, 720);
 			this.Controls.Add(this.LoadingComponent);
+			// this.Controls.Add(this.SideBar);
+			// this.Controls.Add(this.Body);
 			this.Controls.Add(this.Header);
 			this.Name = "Component";
 			this.Resizable = false;
@@ -406,6 +461,7 @@
 			this.SeasonTabs.ResumeLayout(false);
 			this.DayComponent.ResumeLayout(false);
 			this.DayTabs.ResumeLayout(false);
+			this.SideBar.ResumeLayout(false);
 			this.LoadingComponent.ResumeLayout(false);
 			this.LoadingComponent.PerformLayout();
 			this.ResumeLayout(false);
@@ -433,9 +489,11 @@
 		private MetroFramework.Controls.MetroTabPage Summer;
 		private MetroFramework.Controls.MetroTabPage Autumn;
 		private MetroFramework.Controls.MetroTabPage Winter;
-		private MetroFramework.Controls.MetroPanel LoadingComponent;
-		private MetroFramework.Controls.MetroProgressSpinner Spinner;
+		private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
 		private MetroFramework.Controls.MetroLabel LoadingTitle;
+		private MetroFramework.Controls.MetroPanel LoadingComponent;
+		private MetroFramework.Controls.MetroTextBox KeywordBox;
+		private MetroFramework.Controls.MetroButton ClusteringBtn;
 	}
 }
 

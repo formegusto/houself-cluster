@@ -21,12 +21,18 @@ namespace houself_cluster
 			Console.WriteLine(string.Format("[View:ViewEventArgs -> Model] {0}", e.action));
 			switch (e.action)
 			{
+				case VIEW_ACTION.CHANGE_KEYWORD:
+					this.model.ChangeOption(e.action, e.payload);
+					break;
 				case VIEW_ACTION.CHANGE_DAYS:
 				case VIEW_ACTION.CHANGE_SEASONS:
-					this.model.ChangeOption(e.action, e.payload["tabPageIdx"]);
+					this.model.ChangeOption(e.action, e.payload);
 					break;
 				case VIEW_ACTION.INIT_EXCEL_LOAD:
 					this.model.InitLoadExcel();
+					break;
+				case VIEW_ACTION.START_CLUSTERING:
+					this.model.StartClustering();
 					break;
 			}
 		}

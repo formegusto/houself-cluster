@@ -8,12 +8,9 @@ using houself_cluster.Common;
 
 namespace houself_cluster
 {
-	public class LoadExcelConfig
-	{
-		public int user { get; set; }
-	}
 	public class ClusterOptions
 	{
+		public string keyword { get; set; }
 		public Day day { get; set; }
 		public Season season { get; set; }
 	}
