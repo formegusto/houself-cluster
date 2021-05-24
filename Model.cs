@@ -103,13 +103,18 @@ namespace houself_cluster
 					return;
 				}
 
+				LOAD_EXCEL_CONFIG.ROW = this.cell.GetLength(0);
+				LOAD_EXCEL_CONFIG.COLUMN = this.cell.Length / LOAD_EXCEL_CONFIG.ROW;
+				LOAD_EXCEL_CONFIG.USER = LOAD_EXCEL_CONFIG.COLUMN - 7;
+
 				this.changed.Invoke(this, new ModelEventArgs(COMMON_ACTION.STOP_LOADING));
 				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.INIT_EXCEL_LOAD_SUCCESS));
 			});
 		}
 		public void StartClustering()
 		{
-
+			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
+			Console.WriteLine(this.options.ToString());
 		}
 	}
 }
