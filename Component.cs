@@ -28,6 +28,9 @@ namespace houself_cluster
 		{
 			InitializeComponent();
 		}
+		public void Component_Shown(object sender, EventArgs e) => this.changed(
+			this, new ViewEventArgs(
+				VIEW_ACTION.INIT_EXCEL_LOAD));
 		private void DayTabs_Selected(object sender, TabControlEventArgs e) => this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.CHANGE_DAYS,

@@ -19,5 +19,7 @@ namespace houself_cluster.Common
 	}
 	public static class MODEL_ACTION
 	{
+		public const string INIT_EXCEL_LOAD_SUCCESS = "model/init_excel_load/success";
+		public const string INIT_EXCEL_LOAD_FAILURE = "model/init_excel_load/failure";
 	}
 }

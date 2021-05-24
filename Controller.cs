@@ -18,17 +18,21 @@ namespace houself_cluster
 		IModel model;
 		public void ViewChanged(IView v, ViewEventArgs e)
 		{
-			Console.WriteLine(string.Format("[View -> Model] {0}", e.action));
+			Console.WriteLine(string.Format("[View:ViewEventArgs -> Model] {0}", e.action));
 			switch (e.action)
 			{
 				case VIEW_ACTION.CHANGE_DAYS:
 				case VIEW_ACTION.CHANGE_SEASONS:
 					this.model.ChangeOption(e.action, e.payload["tabPageIdx"]);
 					break;
+				case VIEW_ACTION.INIT_EXCEL_LOAD:
+					this.model.InitLoadExcel();
+					break;
 			}
 		}
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)
 		{
+			Console.WriteLine(string.Format("[View:ModelEvent -> Model] {0}", action));
 		}
 		public HouselfClusterController(IView v, IModel m)
 		{

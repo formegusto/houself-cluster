@@ -47,11 +47,15 @@
 			this.Sat = new MetroFramework.Controls.MetroTabPage();
 			this.Body = new MetroFramework.Controls.MetroPanel();
 			this.SideBar = new MetroFramework.Controls.MetroPanel();
+			this.LoadingComponent = new MetroFramework.Controls.MetroPanel();
+			this.Spinner = new MetroFramework.Controls.MetroProgressSpinner();
+			this.LoadingTitle = new MetroFramework.Controls.MetroLabel();
 			this.Header.SuspendLayout();
 			this.SeasonComponent.SuspendLayout();
 			this.SeasonTabs.SuspendLayout();
 			this.DayComponent.SuspendLayout();
 			this.DayTabs.SuspendLayout();
+			this.LoadingComponent.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// Header
@@ -345,23 +349,65 @@
 			this.SideBar.VerticalScrollbarHighlightOnWheel = false;
 			this.SideBar.VerticalScrollbarSize = 10;
 			// 
+			// LoadingComponent
+			// 
+			this.LoadingComponent.Controls.Add(this.LoadingTitle);
+			this.LoadingComponent.Controls.Add(this.Spinner);
+			this.LoadingComponent.Font = new System.Drawing.Font("나눔고딕", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.LoadingComponent.HorizontalScrollbarBarColor = true;
+			this.LoadingComponent.HorizontalScrollbarHighlightOnWheel = false;
+			this.LoadingComponent.HorizontalScrollbarSize = 10;
+			this.LoadingComponent.Location = new System.Drawing.Point(23, 189);
+			this.LoadingComponent.Name = "LoadingComponent";
+			this.LoadingComponent.Size = new System.Drawing.Size(1234, 508);
+			this.LoadingComponent.TabIndex = 1;
+			this.LoadingComponent.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.LoadingComponent.VerticalScrollbarBarColor = true;
+			this.LoadingComponent.VerticalScrollbarHighlightOnWheel = false;
+			this.LoadingComponent.VerticalScrollbarSize = 10;
+			// 
+			// Spinner
+			// 
+			this.Spinner.Location = new System.Drawing.Point(498, 129);
+			this.Spinner.Maximum = 100;
+			this.Spinner.Name = "Spinner";
+			this.Spinner.Size = new System.Drawing.Size(250, 250);
+			this.Spinner.TabIndex = 2;
+			this.Spinner.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.Spinner.UseSelectable = true;
+			// 
+			// LoadingTitle
+			// 
+			this.LoadingTitle.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+			this.LoadingTitle.AutoSize = true;
+			this.LoadingTitle.FontSize = MetroFramework.MetroLabelSize.Tall;
+			this.LoadingTitle.Location = new System.Drawing.Point(509, 396);
+			this.LoadingTitle.Name = "LoadingTitle";
+			this.LoadingTitle.Size = new System.Drawing.Size(229, 25);
+			this.LoadingTitle.TabIndex = 3;
+			this.LoadingTitle.Text = "파일을 불러오는 중 입니다.";
+			this.LoadingTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.LoadingTitle.Theme = MetroFramework.MetroThemeStyle.Dark;
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1280, 720);
-			this.Controls.Add(this.SideBar);
-			this.Controls.Add(this.Body);
+			this.Controls.Add(this.LoadingComponent);
 			this.Controls.Add(this.Header);
 			this.Name = "Component";
 			this.Resizable = false;
 			this.Text = "Houself-Cluster";
 			this.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.Shown += new System.EventHandler(this.Component_Shown);
 			this.Header.ResumeLayout(false);
 			this.SeasonComponent.ResumeLayout(false);
 			this.SeasonTabs.ResumeLayout(false);
 			this.DayComponent.ResumeLayout(false);
 			this.DayTabs.ResumeLayout(false);
+			this.LoadingComponent.ResumeLayout(false);
+			this.LoadingComponent.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -387,6 +433,9 @@
 		private MetroFramework.Controls.MetroTabPage Summer;
 		private MetroFramework.Controls.MetroTabPage Autumn;
 		private MetroFramework.Controls.MetroTabPage Winter;
+		private MetroFramework.Controls.MetroPanel LoadingComponent;
+		private MetroFramework.Controls.MetroProgressSpinner Spinner;
+		private MetroFramework.Controls.MetroLabel LoadingTitle;
 	}
 }
 
