@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace houself_cluster
 {
-	public partial class Form1 : Form
+	public partial class Component : MetroFramework.Forms.MetroForm
 	{
-		public Form1()
+		public Component()
 		{
 			InitializeComponent();
 		}
