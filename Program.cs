@@ -16,7 +16,12 @@ namespace houself_cluster
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Component());
+
+			Component comp = new Component();
+			IModel model = new HouselfClusterModel();
+			IController controller = new HouselfClusterController(comp, model);
+
+			Application.Run(comp);
 		}
 	}
 }
