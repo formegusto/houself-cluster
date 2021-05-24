@@ -115,6 +115,20 @@ namespace houself_cluster
 		{
 			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
 			Console.WriteLine(this.options.ToString());
+
+			int searchCol = LOAD_EXCEL_CONFIG.STARTCOLUMN;
+			// 1. UID 탐색
+			for (; searchCol < LOAD_EXCEL_CONFIG.COLUMN + 1; searchCol++) {
+				if (this.options.keyword
+						==
+						string.Format("{0}-{1}-{2}", cell[3, searchCol], cell[4, searchCol], cell[5, searchCol])) {
+					Console.WriteLine(string.Format("칼럼 {0} 번째 찾았습니다.\n", searchCol));
+					break;
+				}
+			}
+
+			if (!(searchCol < (LOAD_EXCEL_CONFIG.COLUMN + 1)))
+				Console.WriteLine(string.Format("{0} 가구는 존재하지 않습니다.\n", this.options.keyword == "" ? "[Empty]" : this.options.keyword));
 		}
 	}
 }
