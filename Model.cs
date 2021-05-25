@@ -2,8 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using houself_cluster.Common;
@@ -35,7 +33,10 @@ namespace houself_cluster
 		void Attach(IModelObserver observer);
 		void ChangeOption(string action, Dictionary<string, dynamic> payload);
 		void InitLoadExcel();
+		// 1. UID 탐색
 		void StartClustering();
+		// 2. Datas 구성
+		void SetDatas();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -52,6 +53,7 @@ namespace houself_cluster
 			this.options.keyword = "";
 			this.options.day = Day.SUN;
 			this.options.season = Season.ALL;
+			this.options.timeslot = Timeslot.H3;
 		}
 		public void Attach(IModelObserver imo)
 		{
@@ -134,7 +136,26 @@ namespace houself_cluster
 				return;
 			}
 
+			this.options.searchCol = searchCol;
 			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEARCH_KEYWORD_FIND));
+		}
+
+		public void SetDatas()
+		{
+			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
+			Console.WriteLine(this.options.ToString());
+
+			for(int r = LOAD_EXCEL_CONFIG.STARTROW; r <= LOAD_EXCEL_CONFIG.ROW; r+=96)
+			{
+				// Date Parse
+				DateTime date = DateTime.ParseExact(
+					cell[r, LOAD_EXCEL_CONFIG.DATECOLUMN].ToString(),
+					"yyyyMMdd",
+					null
+					);
+				if ((int)date.DayOfWeek == (int)this.options.day)
+					Console.WriteLine(date);
+			}
 		}
 	}
 }

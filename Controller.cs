@@ -39,6 +39,16 @@ namespace houself_cluster
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)
 		{
 			Console.WriteLine(string.Format("[View:ModelEvent -> Model] {0}", action));
+
+			switch(action)
+			{
+				case MODEL_ACTION.REQUEST_DATAS:
+					this.model.SetDatas();
+
+					break;
+				default:
+					return;
+			}
 		}
 		public HouselfClusterController(IView v, IModel m)
 		{

@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace houself_cluster.Common
+﻿namespace houself_cluster.Common
 {
 	public class LOAD_EXCEL_CONFIG
 	{
 		public static int ROW, COLUMN, USER;
 		public static int TIMESLOT = 96;
+		
 		public static int STARTROW = 6;
 		public static int STARTCOLUMN = 8;
+
+		public static int DATECOLUMN = 1;
 		public static string ToString()
 		{
 			return string.Format(
@@ -23,9 +20,10 @@ namespace houself_cluster.Common
 				"TIMESLOT : {3}\n" +
 				"STARTROW : {4}\n" +
 				"STARTCOLUMN : {5}\n" +
+				"DATECOLUMN : {6}\n" +
 				"---------------------\n",
 				ROW, COLUMN,
-				USER, TIMESLOT, STARTROW, STARTCOLUMN);
+				USER, TIMESLOT, STARTROW, STARTCOLUMN, DATECOLUMN);
 		}
 	}
 }

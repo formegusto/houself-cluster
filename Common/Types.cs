@@ -24,4 +24,14 @@ namespace houself_cluster.Common
 		AUTUMN,
 		WINTER
 	}
+
+	public enum Timeslot
+	{
+		H3,
+		H4,
+		H6,
+		H8,
+		H12,
+		H24
+	}
 }

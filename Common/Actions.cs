@@ -28,5 +28,9 @@ namespace houself_cluster.Common
 
 		public const string SEARCH_KEYWORD_FIND = "model/search_keyword/find";
 		public const string SEARCH_KEYWORD_NOTFOUND = "model/search_keyword/notfound";
+
+		public const string REQUEST_DATAS = "model/request_datas";
+		public const string REQUEST_DATAS_SUCCESS = "model/request_datas/success";
+		public const string REQUEST_DATAS_FAILURE = "model/request_datas/failure";
 	}
 }

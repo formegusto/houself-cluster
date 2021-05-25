@@ -35,6 +35,7 @@ namespace houself_cluster
 					break;
 				case MODEL_ACTION.SEARCH_KEYWORD_FIND:
 					Console.WriteLine("찾음");
+					this.controller.Dispatch(MODEL_ACTION.REQUEST_DATAS);
 
 					break;
 				case MODEL_ACTION.SEARCH_KEYWORD_NOTFOUND:
