@@ -52,13 +52,17 @@
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.LoadingTitle = new MetroFramework.Controls.MetroLabel();
 			this.LoadingComponent = new MetroFramework.Controls.MetroPanel();
+			this.ChartLoadingComponent = new MetroFramework.Controls.MetroPanel();
+			this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.Header.SuspendLayout();
 			this.SeasonComponent.SuspendLayout();
 			this.SeasonTabs.SuspendLayout();
 			this.DayComponent.SuspendLayout();
 			this.DayTabs.SuspendLayout();
+			this.Body.SuspendLayout();
 			this.SideBar.SuspendLayout();
 			this.LoadingComponent.SuspendLayout();
+			this.ChartLoadingComponent.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// Header
@@ -326,6 +330,7 @@
 			// 
 			// Body
 			// 
+			// this.Body.Controls.Add(this.ChartLoadingComponent);
 			this.Body.HorizontalScrollbarBarColor = true;
 			this.Body.HorizontalScrollbarHighlightOnWheel = false;
 			this.Body.HorizontalScrollbarSize = 10;
@@ -429,7 +434,7 @@
 			// 
 			this.LoadingComponent.Controls.Add(this.LoadingTitle);
 			this.LoadingComponent.Controls.Add(this.metroProgressSpinner1);
-			this.LoadingComponent.Font = new System.Drawing.Font("나눔고딕", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.LoadingComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
 			this.LoadingComponent.HorizontalScrollbarBarColor = true;
 			this.LoadingComponent.HorizontalScrollbarHighlightOnWheel = false;
 			this.LoadingComponent.HorizontalScrollbarSize = 10;
@@ -441,6 +446,32 @@
 			this.LoadingComponent.VerticalScrollbarBarColor = true;
 			this.LoadingComponent.VerticalScrollbarHighlightOnWheel = false;
 			this.LoadingComponent.VerticalScrollbarSize = 10;
+			// 
+			// ChartLoadingComponent
+			// 
+			this.ChartLoadingComponent.Controls.Add(this.metroProgressSpinner2);
+			this.ChartLoadingComponent.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ChartLoadingComponent.HorizontalScrollbarBarColor = true;
+			this.ChartLoadingComponent.HorizontalScrollbarHighlightOnWheel = false;
+			this.ChartLoadingComponent.HorizontalScrollbarSize = 10;
+			this.ChartLoadingComponent.Location = new System.Drawing.Point(0, 0);
+			this.ChartLoadingComponent.Name = "ChartLoadingComponent";
+			this.ChartLoadingComponent.Size = new System.Drawing.Size(800, 508);
+			this.ChartLoadingComponent.TabIndex = 2;
+			this.ChartLoadingComponent.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.ChartLoadingComponent.VerticalScrollbarBarColor = true;
+			this.ChartLoadingComponent.VerticalScrollbarHighlightOnWheel = false;
+			this.ChartLoadingComponent.VerticalScrollbarSize = 10;
+			// 
+			// metroProgressSpinner2
+			// 
+			this.metroProgressSpinner2.Location = new System.Drawing.Point(275, 152);
+			this.metroProgressSpinner2.Maximum = 100;
+			this.metroProgressSpinner2.Name = "metroProgressSpinner2";
+			this.metroProgressSpinner2.Size = new System.Drawing.Size(250, 250);
+			this.metroProgressSpinner2.TabIndex = 2;
+			this.metroProgressSpinner2.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.metroProgressSpinner2.UseSelectable = true;
 			// 
 			// Component
 			// 
@@ -461,9 +492,11 @@
 			this.SeasonTabs.ResumeLayout(false);
 			this.DayComponent.ResumeLayout(false);
 			this.DayTabs.ResumeLayout(false);
+			this.Body.ResumeLayout(false);
 			this.SideBar.ResumeLayout(false);
 			this.LoadingComponent.ResumeLayout(false);
 			this.LoadingComponent.PerformLayout();
+			this.ChartLoadingComponent.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -494,6 +527,8 @@
 		private MetroFramework.Controls.MetroPanel LoadingComponent;
 		private MetroFramework.Controls.MetroTextBox KeywordBox;
 		private MetroFramework.Controls.MetroButton ClusteringBtn;
+		private MetroFramework.Controls.MetroPanel ChartLoadingComponent;
+		private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner2;
 	}
 }
 

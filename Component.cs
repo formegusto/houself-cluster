@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using houself_cluster.Common;
@@ -53,7 +47,13 @@ namespace houself_cluster
 
 					break;
 				case MODEL_ACTION.SET_CLUSTER_SUCCESS:
-					Console.WriteLine("클러스터 구성 완료");
+					Console.WriteLine("초기 클러스터 구성 완료");
+					this.Invoke((System.Action)(() =>
+						this.Body.Controls.Remove(
+						this.ChartLoadingComponent)
+						)
+					);
+
 
 					break;
 				default:
@@ -78,9 +78,17 @@ namespace houself_cluster
 			this.Controls.Add(this.SideBar);
 		}
 
-		public void ClusteringBtn_Click(object sender, EventArgs e) => this.changed(
+		public void ClusteringBtn_Click(object sender, EventArgs e)
+		{
+			this.Invoke((System.Action)(() =>
+						this.Body.Controls.Remove(
+						this.ChartLoadingComponent)
+						)
+					);
+			this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.START_CLUSTERING));
+		}
 
 		public void Component_Shown(object sender, EventArgs e) => this.changed(
 			this, new ViewEventArgs(
