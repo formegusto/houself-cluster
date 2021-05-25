@@ -42,6 +42,11 @@ namespace houself_cluster
 					Console.WriteLine("못 찾음");
 
 					break;
+				case MODEL_ACTION.REQUEST_DATAS_SUCCESS:
+					Console.WriteLine("초기 데이터 구성 완료");
+					this.controller.Dispatch(MODEL_ACTION.DATA_PREPROCESSING);
+
+					break;
 				default:
 					return;
 			}

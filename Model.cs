@@ -37,12 +37,18 @@ namespace houself_cluster
 		void StartClustering();
 		// 2. Datas 구성
 		void SetDatas();
+		// 3. Data Preprocessing : Timeslot 기반
+		void DataPreprocessing();
+		// 4. Cluster 구성
+		void SetCluster();
 	}
 	public class HouselfClusterModel: IModel
 	{
 		public event ModelHandler<HouselfClusterModel> changed;
 		// Load Excel Datas
 		public object[,] cell;
+		public List<Data> datas;
+		public List<Data> clusters;
 		public ClusterOptions options;
 		public HouselfClusterModel()
 		{
@@ -143,8 +149,6 @@ namespace houself_cluster
 		public void SetDatas()
 		{
 			List<Data> datas = new List<Data>();
-			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
-			Console.WriteLine(this.options.ToString());
 
 			for(int r = LOAD_EXCEL_CONFIG.STARTROW; r <= LOAD_EXCEL_CONFIG.ROW; r+=96)
 			{
@@ -168,6 +172,45 @@ namespace houself_cluster
 						));
 				}
 			}
+
+			this.options.K = (int) Math.Pow(datas.Count / 2, 1f / 2);
+			this.datas = datas;
+			this.clusters = new List<Data>();
+
+			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
+			Console.WriteLine(this.options.ToString());
+
+			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.REQUEST_DATAS_SUCCESS));
+		}
+
+		public void DataPreprocessing()
+		{
+			// 차원 축소
+			List<Data> newDatas = new List<Data>();
+
+			this.datas.ForEach((data) =>
+			{
+				Data newData = new Data(
+					data.date,	
+					data.uid,
+					new double[(int) this.options.timeslot]
+					);
+				for (int t = 0; t < data.timeslot.Length; t++)
+					newData.timeslot
+						[t / 
+							(LOAD_EXCEL_CONFIG.TIMESLOT / 
+								(int)this.options.timeslot)] 
+						+= data.timeslot[t];
+
+				newDatas.Add(newData);
+			});
+
+			Console.WriteLine(newDatas[0].timeslot.Length);
+		}
+
+		public void SetCluster()
+		{
+			
 		}
 	}
 }

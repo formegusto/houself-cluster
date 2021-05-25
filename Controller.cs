@@ -46,6 +46,10 @@ namespace houself_cluster
 					this.model.SetDatas();
 
 					break;
+				case MODEL_ACTION.DATA_PREPROCESSING:
+					this.model.DataPreprocessing();
+
+					break;
 				default:
 					return;
 			}

@@ -32,5 +32,13 @@ namespace houself_cluster.Common
 		public const string REQUEST_DATAS = "model/request_datas";
 		public const string REQUEST_DATAS_SUCCESS = "model/request_datas/success";
 		public const string REQUEST_DATAS_FAILURE = "model/request_datas/failure";
+
+		public const string DATA_PREPROCESSING = "model/data_ppro";
+		public const string DATA_PREPROCESSING_SUCCESS = "model/data_ppro/success";
+		public const string DATA_PREPROCESSING_FAILURE = "model/data_ppro/failure";
+
+		public const string SET_CLUSTER = "model/set_cluster";
+		public const string SET_CLUSTER_SUCCESS = "model/set_cluster/success";
+		public const string SET_CLUSTER_FAILURE = "model/set_cluster/failure";
 	}
 }

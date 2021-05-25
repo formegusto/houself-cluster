@@ -27,11 +27,11 @@ namespace houself_cluster.Common
 
 	public enum Timeslot
 	{
-		H3,
-		H4,
-		H6,
-		H8,
-		H12,
-		H24
+		H3 = 8,
+		H4 = 6,
+		H6 = 4,
+		H8 = 3,
+		H12 = 2,
+		H24 = 1
 	}
 }

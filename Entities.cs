@@ -10,6 +10,7 @@ namespace houself_cluster
 {
 	public class ClusterOptions
 	{
+		public int K;
 		public int searchCol;
 		public string keyword { get; set; }
 		public Day day { get; set; }
@@ -21,13 +22,15 @@ namespace houself_cluster
 		{
 			return string.Format(
 				"-----Option Info-----\n" +
-				"SEARCH_COL : {0}\n" +
-				"KEYWORD : {0}\n" +
-				"DAY : {1}\n" +
-				"SEASON : {2}\n" +
-				"TIMESLOT : {3}\n" +
+				"K : {0} \n" +
+				"SEARCH_COL : {1}\n" +
+				"KEYWORD : {2}\n" +
+				"DAY : {3}\n" +
+				"SEASON : {4}\n" +
+				"TIMESLOT : {5}\n" +
 				"---------------------\n",
-				searchCol,keyword == "" ? "[Empty]" : keyword, day, season, timeslot);
+				K, searchCol,
+				keyword == "" ? "[Empty]" : keyword, day, season, timeslot);
 		}
 	}
 
