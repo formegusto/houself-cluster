@@ -142,6 +142,7 @@ namespace houself_cluster
 
 		public void SetDatas()
 		{
+			List<Data> datas = new List<Data>();
 			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
 			Console.WriteLine(this.options.ToString());
 
@@ -154,7 +155,18 @@ namespace houself_cluster
 					null
 					);
 				if ((int)date.DayOfWeek == (int)this.options.day)
-					Console.WriteLine(date);
+				{
+					// TimeSlot Parse
+					List<double> timeslot = new List<double>();
+					for(int rr = r; rr < r + 96; rr++)
+						timeslot.Add(double.Parse(cell[rr, this.options.searchCol].ToString()) * 1000);
+
+					datas.Add(new Data(
+						date,
+						this.options.keyword,
+						timeslot.ToArray()
+						));
+				}
 			}
 		}
 	}
