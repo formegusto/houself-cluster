@@ -54,7 +54,6 @@ namespace houself_cluster
 						)
 					);
 
-
 					break;
 				default:
 					return;
@@ -81,7 +80,7 @@ namespace houself_cluster
 		public void ClusteringBtn_Click(object sender, EventArgs e)
 		{
 			this.Invoke((System.Action)(() =>
-						this.Body.Controls.Remove(
+						this.Body.Controls.Add(
 						this.ChartLoadingComponent)
 						)
 					);
