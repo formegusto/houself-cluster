@@ -50,6 +50,10 @@ namespace houself_cluster
 					this.model.DataPreprocessing();
 
 					break;
+				case MODEL_ACTION.SET_CLUSTER:
+					this.model.SetCluster();
+
+					break;
 				default:
 					return;
 			}

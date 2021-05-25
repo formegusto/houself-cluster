@@ -47,6 +47,15 @@ namespace houself_cluster
 					this.controller.Dispatch(MODEL_ACTION.DATA_PREPROCESSING);
 
 					break;
+				case MODEL_ACTION.DATA_PREPROCESSING_SUCCESS:
+					Console.WriteLine("데이터 전처리 완료");
+					this.controller.Dispatch(MODEL_ACTION.SET_CLUSTER);
+
+					break;
+				case MODEL_ACTION.SET_CLUSTER_SUCCESS:
+					Console.WriteLine("클러스터 구성 완료");
+
+					break;
 				default:
 					return;
 			}

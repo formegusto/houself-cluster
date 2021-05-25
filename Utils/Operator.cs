@@ -15,5 +15,17 @@ namespace houself_cluster.Utils
 				distance += Math.Pow(energy1[e] - energy2[e], 2);
 			return distance;
 		}
+
+		public static double Distance(double[] energy1, double[] energy2, double maxValue)
+		{
+			double distance = 0;
+			for (int e = 0; e < energy1.Length; e++)
+			{
+				distance += Math.Pow(energy1[e] - energy2[e], 2);
+				if (distance > maxValue)
+					return double.MaxValue;
+			}
+			return distance;
+		}
 	}
 }
