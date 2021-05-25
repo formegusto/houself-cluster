@@ -127,8 +127,14 @@ namespace houself_cluster
 				}
 			}
 
-			if (!(searchCol < (LOAD_EXCEL_CONFIG.COLUMN + 1)))
+			if (!(searchCol < (LOAD_EXCEL_CONFIG.COLUMN + 1))) { 
 				Console.WriteLine(string.Format("{0} 가구는 존재하지 않습니다.\n", this.options.keyword == "" ? "[Empty]" : this.options.keyword));
+				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEARCH_KEYWORD_NOTFOUND));
+
+				return;
+			}
+
+			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEARCH_KEYWORD_FIND));
 		}
 	}
 }

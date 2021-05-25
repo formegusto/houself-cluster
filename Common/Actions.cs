@@ -22,7 +22,11 @@ namespace houself_cluster.Common
 	public static class MODEL_ACTION
 	{
 		public const string READ_FILE_SUCCESS = "model/read_file/success";
+
 		public const string INIT_EXCEL_LOAD_SUCCESS = "model/init_excel_load/success";
 		public const string INIT_EXCEL_LOAD_FAILURE = "model/init_excel_load/failure";
+
+		public const string SEARCH_KEYWORD_FIND = "model/search_keyword/find";
+		public const string SEARCH_KEYWORD_NOTFOUND = "model/search_keyword/notfound";
 	}
 }

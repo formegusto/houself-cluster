@@ -33,6 +33,14 @@ namespace houself_cluster
 					this.Invoke((System.Action)(() => Body_Allocate()));
 
 					break;
+				case MODEL_ACTION.SEARCH_KEYWORD_FIND:
+					Console.WriteLine("찾음");
+
+					break;
+				case MODEL_ACTION.SEARCH_KEYWORD_NOTFOUND:
+					Console.WriteLine("못 찾음");
+
+					break;
 				default:
 					return;
 			}
