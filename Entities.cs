@@ -46,5 +46,27 @@ namespace houself_cluster
 			this.uid = u;
 			this.timeslot = ts;
 		}
+
+		public void ToPrint()
+		{
+			Console.WriteLine(string.Format("Date : {0}\n" +
+				"UID : {1}", this.date.ToString("yyyyMMdd"), this.uid));
+			for(int t = 0; t < this.timeslot.Length; t++)
+			{
+				Console.WriteLine(this.timeslot[t] + " ");
+				if ((t != 0) && ((t % 8) == 0))
+					Console.WriteLine();
+			}
+		}
+
+		public bool CompareTS(Data cts)
+		{
+			for(int t = 0; t < this.timeslot.Length; t++)
+			{
+				if (cts.timeslot[t] != this.timeslot[t])
+					return false;
+			}
+			return true;
+		}
 	}
 }

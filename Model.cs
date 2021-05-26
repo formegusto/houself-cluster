@@ -215,8 +215,12 @@ namespace houself_cluster
 		public void SetCluster()
 		{
 			Random random = new Random();
+			
+			List<Data> clusters = new List<Data>();
 
-			Data[] clusters = new Data[this.options.K];
+			for(int k = 0; k < this.options.K; k++)
+				clusters.Add(null);
+
 			int firstCluster = random.Next(0, this.datas.Count);
 			double[] copyTimeslot = new double
 				[this.datas[firstCluster].timeslot.Length];
@@ -231,11 +235,11 @@ namespace houself_cluster
 			for(int k = 1; k < this.options.K; k++)
 			{
 				Console.WriteLine(string.Format("{0}번 클러스터 구성 중", k));
-				double minDistance = Math.Sqrt(double.MaxValue);
 				double[] distanceArr = new double[this.datas.Count];
 
 				for(int s = 0; s < this.datas.Count; s++)
 				{
+					double minDistance = Math.Sqrt(double.MaxValue);
 					for (int kk = 0; kk < k; kk++)
 					{
 						double distance = Operator.Distance(this.datas[s].timeslot, clusters[kk].timeslot, minDistance);
@@ -251,21 +255,32 @@ namespace houself_cluster
 				for (int r = 1; r < roulette.Length; r++)
 					roulette[r] = roulette[r - 1] + distanceArr[r];
 
-				double ranValue = random.NextDouble() * roulette[roulette.Length - 1];
-				for(int r = 0; r < roulette.Length; r++)
-					if(ranValue <= roulette[r])
-					{
-						double[] copyTs = new double[
-								this.datas[r].timeslot.Length
-							];
-						this.datas[r].timeslot.CopyTo(copyTs, 0);
-						clusters[k] = new Data(
-							new DateTime(),
-							string.Format("cluster-{0}", k + 1),
-							copyTs
-							);
-					}
+				while (true)
+				{
+					double ranValue = random.NextDouble() * roulette[roulette.Length - 1];
+					for (int r = 0; r < roulette.Length; r++)
+						if (ranValue <= roulette[r])
+						{
+							double[] copyTs = new double[
+									this.datas[r].timeslot.Length
+								];
+							this.datas[r].timeslot.CopyTo(copyTs, 0);
+							clusters[k] = new Data(
+								new DateTime(),
+								string.Format("cluster-{0}", k + 1),
+								copyTs
+								);
+						}
+				}
+				
 			}
+
+			this.clusters = clusters;
+			this.clusters.ForEach((cluster) =>
+			{
+				cluster.ToPrint();
+			});
+
 
 			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SET_CLUSTER_SUCCESS));
 		}
