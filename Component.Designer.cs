@@ -54,6 +54,7 @@
 			this.LoadingComponent = new MetroFramework.Controls.MetroPanel();
 			this.ChartLoadingComponent = new MetroFramework.Controls.MetroPanel();
 			this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
+			this.ChartTable = new System.Windows.Forms.TableLayoutPanel();
 			this.Header.SuspendLayout();
 			this.SeasonComponent.SuspendLayout();
 			this.SeasonTabs.SuspendLayout();
@@ -330,7 +331,7 @@
 			// 
 			// Body
 			// 
-			// this.Body.Controls.Add(this.ChartLoadingComponent);
+			this.Body.Controls.Add(this.ChartTable);
 			this.Body.HorizontalScrollbarBarColor = true;
 			this.Body.HorizontalScrollbarHighlightOnWheel = false;
 			this.Body.HorizontalScrollbarSize = 10;
@@ -473,6 +474,21 @@
 			this.metroProgressSpinner2.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.metroProgressSpinner2.UseSelectable = true;
 			// 
+			// ChartTable
+			// 
+			this.ChartTable.ColumnCount = 3;
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ChartTable.Location = new System.Drawing.Point(0, 0);
+			this.ChartTable.Name = "ChartTable";
+			this.ChartTable.RowCount = 2;
+			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.ChartTable.Size = new System.Drawing.Size(800, 508);
+			this.ChartTable.TabIndex = 2;
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -529,6 +545,7 @@
 		private MetroFramework.Controls.MetroButton ClusteringBtn;
 		private MetroFramework.Controls.MetroPanel ChartLoadingComponent;
 		private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner2;
+		private System.Windows.Forms.TableLayoutPanel ChartTable;
 	}
 }
 

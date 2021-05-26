@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+
+using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+using LiveCharts.WinForms;
 
 using houself_cluster.Common;
 
@@ -48,11 +54,7 @@ namespace houself_cluster
 					break;
 				case MODEL_ACTION.SET_CLUSTER_SUCCESS:
 					Console.WriteLine("초기 클러스터 구성 완료");
-					this.Invoke((System.Action)(() =>
-						this.Body.Controls.Remove(
-						this.ChartLoadingComponent)
-						)
-					);
+					Chart_Allocate(e.payload["clusters"], e.payload["K"]);
 
 					break;
 				default:
@@ -76,19 +78,35 @@ namespace houself_cluster
 			this.Controls.Add(this.Body);
 			this.Controls.Add(this.SideBar);
 		}
+		public void Chart_Allocate(List<Data> clusters, int K)
+		{
+			for (int c = 0; c < K; c++)
+			{
+				this.Invoke((System.Action)(() =>
+				{
+					LiveCharts.WinForms.CartesianChart chart = new LiveCharts.WinForms.CartesianChart();
+					chart.Dock = System.Windows.Forms.DockStyle.Fill;
 
+					ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
+					for (int t = 0; t < clusters[c].timeslot.Length; t++)
+						cv.Add(new ObservablePoint(t, clusters[c].timeslot[t]));
+
+					LineSeries ls = new LineSeries
+					{
+						Title = string.Format("{0}", clusters[c].uid),
+						Values = cv
+					};
+					chart.Series.Add(ls);
+					this.ChartTable.Controls.Add(chart, c % 3, c / 3);
+				}));
+			}
+		}
 		public void ClusteringBtn_Click(object sender, EventArgs e)
 		{
-			this.Invoke((System.Action)(() =>
-						this.Body.Controls.Add(
-						this.ChartLoadingComponent)
-						)
-					);
 			this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.START_CLUSTERING));
 		}
-
 		public void Component_Shown(object sender, EventArgs e) => this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.INIT_EXCEL_LOAD));

@@ -292,7 +292,12 @@ namespace houself_cluster
 			});
 
 
-			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SET_CLUSTER_SUCCESS));
+			this.changed.Invoke(this, new ModelEventArgs(
+				MODEL_ACTION.SET_CLUSTER_SUCCESS, 
+				new Dictionary<string, dynamic>() {
+					{ "clusters", this.clusters },
+					{ "K", this.options.K }
+				}));
 		}
 	}
 }
