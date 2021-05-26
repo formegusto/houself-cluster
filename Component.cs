@@ -117,8 +117,11 @@ namespace houself_cluster
 				   Title = string.Format("{0}", data.date.ToString("yyyyMMdd")),
 				   Values = cv
 			   };
-
-			   this.chartList[K].Series.Add(ls);
+			   Task.Run(() =>
+			   {
+				   this.chartList[K].Series.Add(ls);
+			   });
+			   
 		   }));
 		}
 		public void Chart_Allocate(List<Cluster> clusters, int K)
