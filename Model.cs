@@ -255,7 +255,8 @@ namespace houself_cluster
 				for (int r = 1; r < roulette.Length; r++)
 					roulette[r] = roulette[r - 1] + distanceArr[r];
 
-				while (true)
+				bool isChk = false;
+				while (!isChk)
 				{
 					double ranValue = random.NextDouble() * roulette[roulette.Length - 1];
 					for (int r = 0; r < roulette.Length; r++)
@@ -265,11 +266,20 @@ namespace houself_cluster
 									this.datas[r].timeslot.Length
 								];
 							this.datas[r].timeslot.CopyTo(copyTs, 0);
-							clusters[k] = new Data(
+
+							Data data = new Data(
 								new DateTime(),
 								string.Format("cluster-{0}", k + 1),
 								copyTs
 								);
+
+							Data test = clusters.Find((cluster) => cluster != null && cluster.CompareTS(data));
+							
+							if(test == null)
+							{
+								isChk = true;
+								clusters[k] = data;
+							}
 						}
 				}
 				
