@@ -16,6 +16,8 @@ namespace houself_cluster
 	{
 		public event ViewHandler<IView> changed;
 		public IController controller;
+		List<LiveCharts.WinForms.CartesianChart> chartList;
+
 		public void SetController(IController controller)
 		{
 			this.controller = controller;
@@ -55,11 +57,35 @@ namespace houself_cluster
 				case MODEL_ACTION.SET_CLUSTER_SUCCESS:
 					Console.WriteLine("초기 클러스터 구성 완료");
 					Chart_Allocate(e.payload["clusters"], e.payload["K"]);
+					Delay(3000);
+					Task.Run(() =>
+					{
+						this.controller.Dispatch(MODEL_ACTION.ASSIGN_INSTANCE);
+					});
+					
+					break;
+				case MODEL_ACTION.ASSIGN_INSTANCE_SUCCESS:
+					// Console.WriteLine("{0} 데이터는 {1} 클러스터에 할당", (Data)e.payload["data"], e.payload["cluster"]);
+					Line_Allocate(e.payload["data"], e.payload["cluster"]);
 
 					break;
 				default:
 					return;
 			}
+		}
+		private static DateTime Delay(int MS)
+		{
+			DateTime ThisMoment = DateTime.Now;
+			TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
+			DateTime AfterWards = ThisMoment.Add(duration);
+
+			while (AfterWards >= ThisMoment)
+			{
+				System.Windows.Forms.Application.DoEvents();
+				ThisMoment = DateTime.Now;
+			}
+
+			return DateTime.Now;
 		}
 		public Component()
 		{
@@ -78,13 +104,33 @@ namespace houself_cluster
 			this.Controls.Add(this.Body);
 			this.Controls.Add(this.SideBar);
 		}
-		public void Chart_Allocate(List<Data> clusters, int K)
+		public void Line_Allocate(Data data, int K)
 		{
+			this.Invoke((System.Action)(() =>
+		   {
+			   ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
+			   for (int t = 0; t < data.timeslot.Length ; t++)
+				   cv.Add(new ObservablePoint(t, data.timeslot[t]));
+
+			   LineSeries ls = new LineSeries
+			   {
+				   Title = string.Format("{0}", data.date.ToString("yyyyMMdd")),
+				   Values = cv
+			   };
+
+			   this.chartList[K].Series.Add(ls);
+		   }));
+		}
+		public void Chart_Allocate(List<Cluster> clusters, int K)
+		{
+			this.chartList = new List<LiveCharts.WinForms.CartesianChart>();
+
 			for (int c = 0; c < K; c++)
 			{
 				this.Invoke((System.Action)(() =>
 				{
 					LiveCharts.WinForms.CartesianChart chart = new LiveCharts.WinForms.CartesianChart();
+					chartList.Add(chart);
 					chart.Dock = System.Windows.Forms.DockStyle.Fill;
 
 					ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();

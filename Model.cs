@@ -42,6 +42,8 @@ namespace houself_cluster
 		void DataPreprocessing();
 		// 4. Cluster 구성
 		void SetCluster();
+		// 5. Assign Instance 
+		void AssignInstance();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -49,7 +51,7 @@ namespace houself_cluster
 		// Load Excel Datas
 		public object[,] cell;
 		public List<Data> datas;
-		public List<Data> clusters;
+		public List<Cluster> clusters;
 		public ClusterOptions options;
 		public HouselfClusterModel()
 		{
@@ -176,7 +178,6 @@ namespace houself_cluster
 
 			this.options.K = (int) Math.Pow(datas.Count / 2, 1f / 2);
 			this.datas = datas;
-			this.clusters = new List<Data>();
 
 			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
 			Console.WriteLine(this.options.ToString());
@@ -216,7 +217,7 @@ namespace houself_cluster
 		{
 			Random random = new Random();
 			
-			List<Data> clusters = new List<Data>();
+			List<Cluster> clusters = new List<Cluster>();
 
 			for(int k = 0; k < this.options.K; k++)
 				clusters.Add(null);
@@ -226,7 +227,7 @@ namespace houself_cluster
 				[this.datas[firstCluster].timeslot.Length];
 			this.datas[firstCluster].timeslot.CopyTo(copyTimeslot, 0);
 
-			clusters[0] = new Data(
+			clusters[0] = new Cluster(
 				new DateTime(),
 				"cluster-1",
 				copyTimeslot
@@ -267,7 +268,7 @@ namespace houself_cluster
 								];
 							this.datas[r].timeslot.CopyTo(copyTs, 0);
 
-							Data data = new Data(
+							Cluster data = new Cluster(
 								new DateTime(),
 								string.Format("cluster-{0}", k + 1),
 								copyTs
@@ -298,6 +299,39 @@ namespace houself_cluster
 					{ "clusters", this.clusters },
 					{ "K", this.options.K }
 				}));
+		}
+
+		public void AssignInstance()
+		{
+			Parallel.For(0, this.datas.Count, d =>
+			{
+				double min1 = Math.Sqrt(double.MaxValue) - 1, min2 = Math.Sqrt(double.MaxValue);
+				
+				for(int k = 0; k < this.options.K; k++)
+				{
+					double distance = Operator.Distance(clusters[k].timeslot, datas[d].timeslot, min2);
+					if(min1 > distance)
+					{
+						min2 = min2;
+						this.datas[d].subCluster = this.datas[d].mainCluster;
+						min1 = distance;
+						this.datas[d].mainCluster = k;
+					}
+					else if (min2 > distance)
+					{
+						min2 = distance;
+						this.datas[d].subCluster = k;
+					}
+				}
+
+				this.changed.Invoke(this, new ModelEventArgs(
+					MODEL_ACTION.ASSIGN_INSTANCE_SUCCESS,
+					new Dictionary<string, dynamic>()
+					{
+						{"data", this.datas[d] },
+						{"cluster", this.datas[d].mainCluster }
+					}));
+			});
 		}
 	}
 }

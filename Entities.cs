@@ -39,6 +39,8 @@ namespace houself_cluster
 		public DateTime date;
 		public string uid;
 		public double[] timeslot;
+		public int mainCluster;
+		public int subCluster;
 
 		public Data(DateTime d, string u, double[] ts)
 		{
@@ -67,6 +69,15 @@ namespace houself_cluster
 					return false;
 			}
 			return true;
+		}
+	}
+
+	public class Cluster : Data
+	{
+		public List<Data> instances;
+		public Cluster(DateTime d, string u, double[] ts) : base(d, u, ts)
+		{
+			this.instances = new List<Data>();
 		}
 	}
 }

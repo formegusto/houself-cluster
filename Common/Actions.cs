@@ -40,5 +40,9 @@ namespace houself_cluster.Common
 		public const string SET_CLUSTER = "model/set_cluster";
 		public const string SET_CLUSTER_SUCCESS = "model/set_cluster/success";
 		public const string SET_CLUSTER_FAILURE = "model/set_cluster/failure";
+
+		public const string ASSIGN_INSTANCE = "model/assign_instance";
+		public const string ASSIGN_INSTANCE_SUCCESS = "model/assign_instance/success";
+		public const string ASSIGN_INSTANCE_FAILURE = "model/assign_instance/failure";
 	}
 }

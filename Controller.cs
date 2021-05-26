@@ -54,6 +54,10 @@ namespace houself_cluster
 					this.model.SetCluster();
 
 					break;
+				case MODEL_ACTION.ASSIGN_INSTANCE:
+					this.model.AssignInstance();
+
+					break;
 				default:
 					return;
 			}
