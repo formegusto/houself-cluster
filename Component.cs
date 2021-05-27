@@ -69,6 +69,21 @@ namespace houself_cluster
 					Line_Allocate(e.payload["data"], e.payload["cluster"]);
 
 					break;
+				case MODEL_ACTION.ASSIGN_ALL_INSTANCE_SUCCESS:
+					this.Invoke((System.Action)(() =>
+				   {
+					   this.SideBar.Controls.Clear();
+
+					   this.SideBar.Controls.Add(this.NextClusteringBtn);
+					   this.SideBar.Controls.Add(this.ClusteringBtn);
+					   this.SideBar.Controls.Add(this.KeywordBox);
+				   }));
+
+					break;
+				case MODEL_ACTION.RECLUSTER_SUCCESS:
+					this.Line_Reset(e.payload["clusters"], e.payload["K"]);
+
+					break;
 				default:
 					return;
 			}
@@ -103,6 +118,30 @@ namespace houself_cluster
 			//
 			this.Controls.Add(this.Body);
 			this.Controls.Add(this.SideBar);
+		}
+		public void Line_Reset(List<Cluster> clusters, int K)
+		{
+			for (int c = 0; c < K; c++)
+			{
+				this.Invoke((System.Action)(() =>
+				{
+					this.chartList[c].Series.Clear();
+
+					ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
+					for (int t = 0; t < clusters[c].timeslot.Length; t++)
+					{
+						cv.Add(new ObservablePoint(t, clusters[c].timeslot[t]));
+					}
+
+					LineSeries ls = new LineSeries
+					{
+						Title = string.Format("{0}", clusters[c].uid),
+						Values = cv
+					};
+
+					this.chartList[c].Series.Add(ls);
+				}));
+			}
 		}
 		public void Line_Allocate(Data data, int K)
 		{
@@ -151,12 +190,12 @@ namespace houself_cluster
 				}));
 			}
 		}
-		public void ClusteringBtn_Click(object sender, EventArgs e)
-		{
-			this.changed(
+		public void ClusteringBtn_Click(object sender, EventArgs e) => this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.START_CLUSTERING));
-		}
+		public void ReClusteringBtn_Click(object sender, EventArgs e) => this.changed(
+			this, new ViewEventArgs(
+				VIEW_ACTION.RECLUSTER));
 		public void Component_Shown(object sender, EventArgs e) => this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.INIT_EXCEL_LOAD));

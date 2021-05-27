@@ -15,6 +15,7 @@ namespace houself_cluster.Common
 	{
 		public const string INIT_EXCEL_LOAD = "view/init_excel_load";
 		public const string START_CLUSTERING = "view/start_clustering";
+		public const string RECLUSTER = "view/recluster";
 		public const string CHANGE_KEYWORD = "view/change_keyword";
 		public const string CHANGE_DAYS = "view/change_days";
 		public const string CHANGE_SEASONS = "view/change_seasons";
@@ -44,5 +45,9 @@ namespace houself_cluster.Common
 		public const string ASSIGN_INSTANCE = "model/assign_instance";
 		public const string ASSIGN_INSTANCE_SUCCESS = "model/assign_instance/success";
 		public const string ASSIGN_INSTANCE_FAILURE = "model/assign_instance/failure";
+		public const string ASSIGN_ALL_INSTANCE_SUCCESS = "model/assign_all_instance/success";
+
+		public const string RECLUSTER_SUCCESS = "model/recluster/success";
+		public const string RECLUSTER_FAILURE = "model/recluster/failure";
 	}
 }

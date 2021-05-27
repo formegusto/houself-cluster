@@ -44,6 +44,7 @@ namespace houself_cluster
 		void SetCluster();
 		// 5. Assign Instance 
 		void AssignInstance();
+		void ReSetCluster();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -85,6 +86,30 @@ namespace houself_cluster
 					Console.WriteLine(this.options.keyword);
 					break;
 			}
+		}
+		public void ReSetCluster()
+		{
+			for(int k = 0; k < this.options.K; k++)
+			{
+				for (int e = 0; e < this.clusters[k].timeslot.Length; e++)
+				{
+					this.clusters[k].timeslot[e] = 0;
+					for (int i = 0; i < this.clusters[k].instances.Count; i++)
+					{
+						this.clusters[k].timeslot[e] += this.clusters[k].instances[i].timeslot[e];
+						Console.WriteLine(this.clusters[k].timeslot[e]);
+					}
+					this.clusters[k].timeslot[e] /= this.clusters[k].instances.Count;
+					
+				}
+			}
+
+			this.changed.Invoke(this, new ModelEventArgs(
+					MODEL_ACTION.RECLUSTER_SUCCESS,
+				new Dictionary<string, dynamic>() {
+					{"clusters", this.clusters },
+					{"K", this.options.K }
+				}));
 		}
 		public void InitLoadExcel()
 		{
@@ -266,7 +291,8 @@ namespace houself_cluster
 							double[] copyTs = new double[
 									this.datas[r].timeslot.Length
 								];
-							this.datas[r].timeslot.CopyTo(copyTs, 0);
+							for(int t = 0; t < this.datas[r].timeslot.Length; t++)
+								 copyTs[t] = this.datas[r].timeslot[t];
 
 							Cluster data = new Cluster(
 								new DateTime(),
@@ -334,8 +360,14 @@ namespace houself_cluster
 						{"data", this.datas[d] },
 						{"cluster", this.datas[d].mainCluster }
 						}));
+
+					this.clusters[this.datas[d].mainCluster].instances.Add(this.datas[d]);
 				});
 			});
+
+			this.changed.Invoke(this, new ModelEventArgs(
+				MODEL_ACTION.ASSIGN_ALL_INSTANCE_SUCCESS
+				));
 		}
 	}
 }

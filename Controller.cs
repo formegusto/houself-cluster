@@ -34,6 +34,9 @@ namespace houself_cluster
 				case VIEW_ACTION.START_CLUSTERING:
 					this.model.StartClustering();
 					break;
+				case VIEW_ACTION.RECLUSTER:
+					this.model.ReSetCluster();
+					break;
 			}
 		}
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)

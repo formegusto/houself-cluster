@@ -46,6 +46,7 @@
 			this.Fri = new MetroFramework.Controls.MetroTabPage();
 			this.Sat = new MetroFramework.Controls.MetroTabPage();
 			this.Body = new MetroFramework.Controls.MetroPanel();
+			this.ChartTable = new System.Windows.Forms.TableLayoutPanel();
 			this.SideBar = new MetroFramework.Controls.MetroPanel();
 			this.ClusteringBtn = new MetroFramework.Controls.MetroButton();
 			this.KeywordBox = new MetroFramework.Controls.MetroTextBox();
@@ -54,7 +55,7 @@
 			this.LoadingComponent = new MetroFramework.Controls.MetroPanel();
 			this.ChartLoadingComponent = new MetroFramework.Controls.MetroPanel();
 			this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
-			this.ChartTable = new System.Windows.Forms.TableLayoutPanel();
+			this.NextClusteringBtn = new MetroFramework.Controls.MetroButton();
 			this.Header.SuspendLayout();
 			this.SeasonComponent.SuspendLayout();
 			this.SeasonTabs.SuspendLayout();
@@ -344,8 +345,24 @@
 			this.Body.VerticalScrollbarHighlightOnWheel = false;
 			this.Body.VerticalScrollbarSize = 10;
 			// 
+			// ChartTable
+			// 
+			this.ChartTable.ColumnCount = 3;
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ChartTable.Location = new System.Drawing.Point(0, 0);
+			this.ChartTable.Name = "ChartTable";
+			this.ChartTable.RowCount = 2;
+			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.ChartTable.Size = new System.Drawing.Size(800, 508);
+			this.ChartTable.TabIndex = 2;
+			// 
 			// SideBar
 			// 
+			// this.SideBar.Controls.Add(this.NextClusteringBtn);
 			this.SideBar.Controls.Add(this.ClusteringBtn);
 			this.SideBar.Controls.Add(this.KeywordBox);
 			this.SideBar.HorizontalScrollbarBarColor = true;
@@ -474,20 +491,18 @@
 			this.metroProgressSpinner2.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.metroProgressSpinner2.UseSelectable = true;
 			// 
-			// ChartTable
+			// NextClusteringBtn
 			// 
-			this.ChartTable.ColumnCount = 3;
-			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ChartTable.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ChartTable.Location = new System.Drawing.Point(0, 0);
-			this.ChartTable.Name = "ChartTable";
-			this.ChartTable.RowCount = 2;
-			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.ChartTable.Size = new System.Drawing.Size(800, 508);
-			this.ChartTable.TabIndex = 2;
+			this.NextClusteringBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.NextClusteringBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.NextClusteringBtn.Location = new System.Drawing.Point(0, 80);
+			this.NextClusteringBtn.Name = "NextClusteringBtn";
+			this.NextClusteringBtn.Size = new System.Drawing.Size(428, 40);
+			this.NextClusteringBtn.TabIndex = 4;
+			this.NextClusteringBtn.Text = "NextClustering";
+			this.NextClusteringBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.NextClusteringBtn.UseSelectable = true;
+			this.NextClusteringBtn.Click += new System.EventHandler(this.ReClusteringBtn_Click);
 			// 
 			// Component
 			// 
@@ -546,6 +561,7 @@
 		private MetroFramework.Controls.MetroPanel ChartLoadingComponent;
 		private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner2;
 		private System.Windows.Forms.TableLayoutPanel ChartTable;
+		private MetroFramework.Controls.MetroButton NextClusteringBtn;
 	}
 }
 
