@@ -108,6 +108,7 @@ namespace houself_cluster
 		{
 			this.Invoke((System.Action)(() =>
 		   {
+			   Console.WriteLine(string.Format("{0} --- Distance : {1}", data.date.ToString("yyyyMMdd"), data.distance));
 			   ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
 			   for (int t = 0; t < data.timeslot.Length ; t++)
 				   cv.Add(new ObservablePoint(t, data.timeslot[t]));

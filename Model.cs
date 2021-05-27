@@ -305,32 +305,36 @@ namespace houself_cluster
 		{
 			Parallel.For(0, this.datas.Count, d =>
 			{
-				double min1 = Math.Sqrt(double.MaxValue) - 1, min2 = Math.Sqrt(double.MaxValue);
-				
-				for(int k = 0; k < this.options.K; k++)
+				Task.Run(() =>
 				{
-					double distance = Operator.Distance(clusters[k].timeslot, datas[d].timeslot, min2);
-					if(min1 > distance)
-					{
-						min2 = min2;
-						this.datas[d].subCluster = this.datas[d].mainCluster;
-						min1 = distance;
-						this.datas[d].mainCluster = k;
-					}
-					else if (min2 > distance)
-					{
-						min2 = distance;
-						this.datas[d].subCluster = k;
-					}
-				}
+					double min1 = Math.Sqrt(double.MaxValue) - 1, min2 = Math.Sqrt(double.MaxValue);
 
-				this.changed.Invoke(this, new ModelEventArgs(
-					MODEL_ACTION.ASSIGN_INSTANCE_SUCCESS,
-					new Dictionary<string, dynamic>()
+					for (int k = 0; k < this.options.K; k++)
 					{
+						double distance = Operator.Distance(clusters[k].timeslot, datas[d].timeslot, min2);
+						if (min1 > distance)
+						{
+							min2 = min1;
+							this.datas[d].subCluster = this.datas[d].mainCluster;
+							min1 = distance;
+							this.datas[d].distance = min1;
+							this.datas[d].mainCluster = k;
+						}
+						else if (min2 > distance)
+						{
+							min2 = distance;
+							this.datas[d].subCluster = k;
+						}
+					}
+
+					this.changed.Invoke(this, new ModelEventArgs(
+						MODEL_ACTION.ASSIGN_INSTANCE_SUCCESS,
+						new Dictionary<string, dynamic>()
+						{
 						{"data", this.datas[d] },
 						{"cluster", this.datas[d].mainCluster }
-					}));
+						}));
+				});
 			});
 		}
 	}

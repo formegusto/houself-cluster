@@ -41,12 +41,14 @@ namespace houself_cluster
 		public double[] timeslot;
 		public int mainCluster;
 		public int subCluster;
+		public double distance;
 
 		public Data(DateTime d, string u, double[] ts)
 		{
 			this.date = d;
 			this.uid = u;
 			this.timeslot = ts;
+			this.distance = Math.Sqrt(double.MaxValue);
 		}
 
 		public void ToPrint()
