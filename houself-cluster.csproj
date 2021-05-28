@@ -88,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\DateUtils.cs" />
     <Compile Include="Utils\Operator.cs" />
+    <Compile Include="Utils\SeasonUtils.cs" />
     <Compile Include="View.cs" />
     <EmbeddedResource Include="Component.resx">
       <DependentUpon>Component.cs</DependentUpon>

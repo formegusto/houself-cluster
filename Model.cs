@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using houself_cluster.Common;
@@ -177,6 +178,8 @@ namespace houself_cluster
 		public void SetDatas()
 		{
 			List<Data> datas = new List<Data>();
+			List<int> targetMonth = SeasonUtils.SeasonToMonth(this.options.season);
+
 
 			for(int r = LOAD_EXCEL_CONFIG.STARTROW; r <= LOAD_EXCEL_CONFIG.ROW; r+=96)
 			{
@@ -186,6 +189,12 @@ namespace houself_cluster
 					"yyyyMMdd",
 					null
 					);
+
+				if (!targetMonth.Contains(date.Month)) {
+					Console.WriteLine("왜 안드러와");
+					continue;
+				}
+
 				if ((int)date.DayOfWeek == (int)this.options.day)
 				{
 					// TimeSlot Parse
