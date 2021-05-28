@@ -82,6 +82,11 @@ namespace houself_cluster
 					break;
 				case MODEL_ACTION.RECLUSTER_SUCCESS:
 					this.Line_Reset(e.payload["clusters"], e.payload["K"]);
+					Delay(3000);
+					Task.Run(() =>
+					{
+						this.controller.Dispatch(MODEL_ACTION.ASSIGN_INSTANCE);
+					});
 
 					break;
 				default:

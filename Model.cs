@@ -329,6 +329,9 @@ namespace houself_cluster
 
 		public void AssignInstance()
 		{
+			for (int k = 0; k < this.options.K; k++)
+				this.clusters[k].instances.Clear();
+
 			Parallel.For(0, this.datas.Count, d =>
 			{
 				Task.Run(() =>
