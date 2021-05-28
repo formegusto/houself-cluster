@@ -77,9 +77,23 @@ namespace houself_cluster
 	public class Cluster : Data
 	{
 		public List<Data> instances;
+		public Dictionary<Season, int> seasonFrequency;
 		public Cluster(DateTime d, string u, double[] ts) : base(d, u, ts)
 		{
 			this.instances = new List<Data>();
+			this.seasonFrequency = new Dictionary<Season, int>();
+			this.seasonFrequency.Add(Season.SPRING, 0);
+			this.seasonFrequency.Add(Season.SUMMER, 0);
+			this.seasonFrequency.Add(Season.AUTUMN, 0);
+			this.seasonFrequency.Add(Season.WINTER, 0);
+		}
+
+		public void initSeasonFrequeny()
+		{
+			this.seasonFrequency[Season.SPRING] = 0;
+			this.seasonFrequency[Season.SUMMER] = 0;
+			this.seasonFrequency[Season.AUTUMN] = 0;
+			this.seasonFrequency[Season.WINTER] = 0;
 		}
 	}
 }

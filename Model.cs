@@ -327,14 +327,16 @@ namespace houself_cluster
 				}));
 		}
 
-		public void AssignInstance()
+		public async void AssignInstance()
 		{
 			for (int k = 0; k < this.options.K; k++)
-				this.clusters[k].instances.Clear();
-
-			Parallel.For(0, this.datas.Count, d =>
 			{
-				Task.Run(() =>
+				this.clusters[k].instances.Clear();
+				this.clusters[k].initSeasonFrequeny();
+			}
+
+			for(int d = 0; d< this.datas.Count; d++) {
+				await Task.Run(() =>
 				{
 					double min1 = Math.Sqrt(double.MaxValue) - 1, min2 = Math.Sqrt(double.MaxValue);
 
@@ -356,6 +358,12 @@ namespace houself_cluster
 						}
 					}
 
+					int mK = this.datas[d].mainCluster;
+					/*
+					Console.WriteLine(this.clusters[this.datas[d].mainCluster] + "Have" + this.datas[d].uid + "\n" +
+						"this date " + this.datas[d].date.ToString("yyyyMMdd") + "\n" +
+						"this season " + );
+						*/
 					this.changed.Invoke(this, new ModelEventArgs(
 						MODEL_ACTION.ASSIGN_INSTANCE_SUCCESS,
 						new Dictionary<string, dynamic>()
@@ -364,10 +372,24 @@ namespace houself_cluster
 						{"cluster", this.datas[d].mainCluster }
 						}));
 
-					this.clusters[this.datas[d].mainCluster].instances.Add(this.datas[d]);
-				});
-			});
+					this.clusters[mK].instances.Add(this.datas[d]);
+					Season season = DateUtils.DateToSeason(this.datas[d].date);
+					if (this.clusters[mK].seasonFrequency.ContainsKey(season))
+					{
+						this.clusters[mK].seasonFrequency[season] += 1;
+					}
 
+				});
+			}
+
+			this.clusters.ForEach((c) =>
+			{
+				Console.WriteLine(string.Format("----{0} season Frequency----", c.uid));
+				foreach(KeyValuePair<Season,int> items in c.seasonFrequency)
+				{
+					Console.WriteLine(string.Format("Season ==> {0}, Frequency ==> {1}", items.Key, items.Value));
+				}
+			});
 			this.changed.Invoke(this, new ModelEventArgs(
 				MODEL_ACTION.ASSIGN_ALL_INSTANCE_SUCCESS
 				));
