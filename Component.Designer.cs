@@ -29,13 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.Header = new MetroFramework.Controls.MetroPanel();
+			this.TimeslotComponent = new MetroFramework.Controls.MetroPanel();
 			this.SeasonComponent = new MetroFramework.Controls.MetroPanel();
-			this.SeasonTabs = new MetroFramework.Controls.MetroTabControl();
-			this.All = new MetroFramework.Controls.MetroTabPage();
-			this.Spring = new MetroFramework.Controls.MetroTabPage();
-			this.Summer = new MetroFramework.Controls.MetroTabPage();
-			this.Autumn = new MetroFramework.Controls.MetroTabPage();
-			this.Winter = new MetroFramework.Controls.MetroTabPage();
 			this.DayComponent = new MetroFramework.Controls.MetroPanel();
 			this.DayTabs = new MetroFramework.Controls.MetroTabControl();
 			this.Sun = new MetroFramework.Controls.MetroTabPage();
@@ -46,7 +41,6 @@
 			this.Fri = new MetroFramework.Controls.MetroTabPage();
 			this.Sat = new MetroFramework.Controls.MetroTabPage();
 			this.Body = new MetroFramework.Controls.MetroPanel();
-			this.ChartTable = new System.Windows.Forms.TableLayoutPanel();
 			this.SideBar = new MetroFramework.Controls.MetroPanel();
 			this.ClusteringBtn = new MetroFramework.Controls.MetroButton();
 			this.KeywordBox = new MetroFramework.Controls.MetroTextBox();
@@ -56,19 +50,35 @@
 			this.ChartLoadingComponent = new MetroFramework.Controls.MetroPanel();
 			this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.NextClusteringBtn = new MetroFramework.Controls.MetroButton();
+			this.ChartTable = new System.Windows.Forms.TableLayoutPanel();
+			this.SeasonTabs = new MetroFramework.Controls.MetroTabControl();
+			this.All = new MetroFramework.Controls.MetroTabPage();
+			this.Spring = new MetroFramework.Controls.MetroTabPage();
+			this.Summer = new MetroFramework.Controls.MetroTabPage();
+			this.Autumn = new MetroFramework.Controls.MetroTabPage();
+			this.Winter = new MetroFramework.Controls.MetroTabPage();
+			this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+			this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+			this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+			this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+			this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+			this.metroTabPage5 = new MetroFramework.Controls.MetroTabPage();
 			this.Header.SuspendLayout();
+			this.TimeslotComponent.SuspendLayout();
 			this.SeasonComponent.SuspendLayout();
-			this.SeasonTabs.SuspendLayout();
 			this.DayComponent.SuspendLayout();
 			this.DayTabs.SuspendLayout();
 			this.Body.SuspendLayout();
 			this.SideBar.SuspendLayout();
 			this.LoadingComponent.SuspendLayout();
 			this.ChartLoadingComponent.SuspendLayout();
+			this.SeasonTabs.SuspendLayout();
+			this.metroTabControl1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// Header
 			// 
+			this.Header.Controls.Add(this.TimeslotComponent);
 			this.Header.Controls.Add(this.SeasonComponent);
 			this.Header.Controls.Add(this.DayComponent);
 			this.Header.HorizontalScrollbarBarColor = true;
@@ -76,12 +86,27 @@
 			this.Header.HorizontalScrollbarSize = 10;
 			this.Header.Location = new System.Drawing.Point(23, 63);
 			this.Header.Name = "Header";
-			this.Header.Size = new System.Drawing.Size(1234, 120);
+			this.Header.Size = new System.Drawing.Size(1234, 170);
 			this.Header.TabIndex = 0;
 			this.Header.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.Header.VerticalScrollbarBarColor = true;
 			this.Header.VerticalScrollbarHighlightOnWheel = false;
 			this.Header.VerticalScrollbarSize = 10;
+			// 
+			// TimeslotComponent
+			// 
+			this.TimeslotComponent.Controls.Add(this.metroTabControl1);
+			this.TimeslotComponent.HorizontalScrollbarBarColor = true;
+			this.TimeslotComponent.HorizontalScrollbarHighlightOnWheel = false;
+			this.TimeslotComponent.HorizontalScrollbarSize = 10;
+			this.TimeslotComponent.Location = new System.Drawing.Point(0, 122);
+			this.TimeslotComponent.Name = "TimeslotComponent";
+			this.TimeslotComponent.Size = new System.Drawing.Size(1234, 50);
+			this.TimeslotComponent.TabIndex = 3;
+			this.TimeslotComponent.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.TimeslotComponent.VerticalScrollbarBarColor = true;
+			this.TimeslotComponent.VerticalScrollbarHighlightOnWheel = false;
+			this.TimeslotComponent.VerticalScrollbarSize = 10;
 			// 
 			// SeasonComponent
 			// 
@@ -97,98 +122,6 @@
 			this.SeasonComponent.VerticalScrollbarBarColor = true;
 			this.SeasonComponent.VerticalScrollbarHighlightOnWheel = false;
 			this.SeasonComponent.VerticalScrollbarSize = 10;
-			// 
-			// SeasonTabs
-			// 
-			this.SeasonTabs.Controls.Add(this.All);
-			this.SeasonTabs.Controls.Add(this.Spring);
-			this.SeasonTabs.Controls.Add(this.Summer);
-			this.SeasonTabs.Controls.Add(this.Autumn);
-			this.SeasonTabs.Controls.Add(this.Winter);
-			this.SeasonTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SeasonTabs.Location = new System.Drawing.Point(0, 0);
-			this.SeasonTabs.Name = "SeasonTabs";
-			this.SeasonTabs.SelectedIndex = 0;
-			this.SeasonTabs.Size = new System.Drawing.Size(1234, 50);
-			this.SeasonTabs.TabIndex = 2;
-			this.SeasonTabs.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.SeasonTabs.UseSelectable = true;
-			this.SeasonTabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.SeasonTabs_Selected);
-			// 
-			// All
-			// 
-			this.All.HorizontalScrollbarBarColor = true;
-			this.All.HorizontalScrollbarHighlightOnWheel = false;
-			this.All.HorizontalScrollbarSize = 10;
-			this.All.Location = new System.Drawing.Point(4, 38);
-			this.All.Name = "All";
-			this.All.Size = new System.Drawing.Size(1226, 8);
-			this.All.TabIndex = 0;
-			this.All.Text = "All";
-			this.All.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.All.VerticalScrollbarBarColor = true;
-			this.All.VerticalScrollbarHighlightOnWheel = false;
-			this.All.VerticalScrollbarSize = 10;
-			// 
-			// Spring
-			// 
-			this.Spring.HorizontalScrollbarBarColor = true;
-			this.Spring.HorizontalScrollbarHighlightOnWheel = false;
-			this.Spring.HorizontalScrollbarSize = 10;
-			this.Spring.Location = new System.Drawing.Point(4, 38);
-			this.Spring.Name = "Spring";
-			this.Spring.Size = new System.Drawing.Size(1226, 8);
-			this.Spring.TabIndex = 1;
-			this.Spring.Text = "Spring";
-			this.Spring.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.Spring.VerticalScrollbarBarColor = true;
-			this.Spring.VerticalScrollbarHighlightOnWheel = false;
-			this.Spring.VerticalScrollbarSize = 10;
-			// 
-			// Summer
-			// 
-			this.Summer.HorizontalScrollbarBarColor = true;
-			this.Summer.HorizontalScrollbarHighlightOnWheel = false;
-			this.Summer.HorizontalScrollbarSize = 10;
-			this.Summer.Location = new System.Drawing.Point(4, 38);
-			this.Summer.Name = "Summer";
-			this.Summer.Size = new System.Drawing.Size(1226, 8);
-			this.Summer.TabIndex = 2;
-			this.Summer.Text = "Summer";
-			this.Summer.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.Summer.VerticalScrollbarBarColor = true;
-			this.Summer.VerticalScrollbarHighlightOnWheel = false;
-			this.Summer.VerticalScrollbarSize = 10;
-			// 
-			// Autumn
-			// 
-			this.Autumn.HorizontalScrollbarBarColor = true;
-			this.Autumn.HorizontalScrollbarHighlightOnWheel = false;
-			this.Autumn.HorizontalScrollbarSize = 10;
-			this.Autumn.Location = new System.Drawing.Point(4, 38);
-			this.Autumn.Name = "Autumn";
-			this.Autumn.Size = new System.Drawing.Size(1226, 8);
-			this.Autumn.TabIndex = 3;
-			this.Autumn.Text = "Autumn";
-			this.Autumn.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.Autumn.VerticalScrollbarBarColor = true;
-			this.Autumn.VerticalScrollbarHighlightOnWheel = false;
-			this.Autumn.VerticalScrollbarSize = 10;
-			// 
-			// Winter
-			// 
-			this.Winter.HorizontalScrollbarBarColor = true;
-			this.Winter.HorizontalScrollbarHighlightOnWheel = false;
-			this.Winter.HorizontalScrollbarSize = 10;
-			this.Winter.Location = new System.Drawing.Point(4, 38);
-			this.Winter.Name = "Winter";
-			this.Winter.Size = new System.Drawing.Size(1226, 8);
-			this.Winter.TabIndex = 4;
-			this.Winter.Text = "Winter";
-			this.Winter.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.Winter.VerticalScrollbarBarColor = true;
-			this.Winter.VerticalScrollbarHighlightOnWheel = false;
-			this.Winter.VerticalScrollbarSize = 10;
 			// 
 			// DayComponent
 			// 
@@ -336,41 +269,25 @@
 			this.Body.HorizontalScrollbarBarColor = true;
 			this.Body.HorizontalScrollbarHighlightOnWheel = false;
 			this.Body.HorizontalScrollbarSize = 10;
-			this.Body.Location = new System.Drawing.Point(23, 189);
+			this.Body.Location = new System.Drawing.Point(23, 239);
 			this.Body.Name = "Body";
-			this.Body.Size = new System.Drawing.Size(800, 508);
+			this.Body.Size = new System.Drawing.Size(800, 458);
 			this.Body.TabIndex = 2;
 			this.Body.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.Body.VerticalScrollbarBarColor = true;
 			this.Body.VerticalScrollbarHighlightOnWheel = false;
 			this.Body.VerticalScrollbarSize = 10;
 			// 
-			// ChartTable
-			// 
-			this.ChartTable.ColumnCount = 3;
-			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ChartTable.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ChartTable.Location = new System.Drawing.Point(0, 0);
-			this.ChartTable.Name = "ChartTable";
-			this.ChartTable.RowCount = 2;
-			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.ChartTable.Size = new System.Drawing.Size(800, 508);
-			this.ChartTable.TabIndex = 2;
-			// 
 			// SideBar
 			// 
-			// this.SideBar.Controls.Add(this.NextClusteringBtn);
 			this.SideBar.Controls.Add(this.ClusteringBtn);
 			this.SideBar.Controls.Add(this.KeywordBox);
 			this.SideBar.HorizontalScrollbarBarColor = true;
 			this.SideBar.HorizontalScrollbarHighlightOnWheel = false;
 			this.SideBar.HorizontalScrollbarSize = 10;
-			this.SideBar.Location = new System.Drawing.Point(829, 189);
+			this.SideBar.Location = new System.Drawing.Point(829, 239);
 			this.SideBar.Name = "SideBar";
-			this.SideBar.Size = new System.Drawing.Size(428, 508);
+			this.SideBar.Size = new System.Drawing.Size(428, 458);
 			this.SideBar.TabIndex = 2;
 			this.SideBar.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.SideBar.VerticalScrollbarBarColor = true;
@@ -427,7 +344,7 @@
 			// 
 			// metroProgressSpinner1
 			// 
-			this.metroProgressSpinner1.Location = new System.Drawing.Point(498, 129);
+			this.metroProgressSpinner1.Location = new System.Drawing.Point(498, 179);
 			this.metroProgressSpinner1.Maximum = 100;
 			this.metroProgressSpinner1.Name = "metroProgressSpinner1";
 			this.metroProgressSpinner1.Size = new System.Drawing.Size(250, 250);
@@ -440,7 +357,7 @@
 			this.LoadingTitle.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.LoadingTitle.AutoSize = true;
 			this.LoadingTitle.FontSize = MetroFramework.MetroLabelSize.Tall;
-			this.LoadingTitle.Location = new System.Drawing.Point(509, 396);
+			this.LoadingTitle.Location = new System.Drawing.Point(509, 346);
 			this.LoadingTitle.Name = "LoadingTitle";
 			this.LoadingTitle.Size = new System.Drawing.Size(229, 25);
 			this.LoadingTitle.TabIndex = 3;
@@ -456,9 +373,9 @@
 			this.LoadingComponent.HorizontalScrollbarBarColor = true;
 			this.LoadingComponent.HorizontalScrollbarHighlightOnWheel = false;
 			this.LoadingComponent.HorizontalScrollbarSize = 10;
-			this.LoadingComponent.Location = new System.Drawing.Point(23, 189);
+			this.LoadingComponent.Location = new System.Drawing.Point(27, 239);
 			this.LoadingComponent.Name = "LoadingComponent";
-			this.LoadingComponent.Size = new System.Drawing.Size(1234, 508);
+			this.LoadingComponent.Size = new System.Drawing.Size(1234, 458);
 			this.LoadingComponent.TabIndex = 1;
 			this.LoadingComponent.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.LoadingComponent.VerticalScrollbarBarColor = true;
@@ -504,6 +421,203 @@
 			this.NextClusteringBtn.UseSelectable = true;
 			this.NextClusteringBtn.Click += new System.EventHandler(this.ReClusteringBtn_Click);
 			// 
+			// ChartTable
+			// 
+			this.ChartTable.ColumnCount = 3;
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ChartTable.Location = new System.Drawing.Point(0, 0);
+			this.ChartTable.Name = "ChartTable";
+			this.ChartTable.RowCount = 2;
+			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.ChartTable.Size = new System.Drawing.Size(800, 458);
+			this.ChartTable.TabIndex = 3;
+			// 
+			// SeasonTabs
+			// 
+			this.SeasonTabs.Controls.Add(this.All);
+			this.SeasonTabs.Controls.Add(this.Spring);
+			this.SeasonTabs.Controls.Add(this.Summer);
+			this.SeasonTabs.Controls.Add(this.Autumn);
+			this.SeasonTabs.Controls.Add(this.Winter);
+			this.SeasonTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SeasonTabs.Location = new System.Drawing.Point(0, 0);
+			this.SeasonTabs.Name = "SeasonTabs";
+			this.SeasonTabs.SelectedIndex = 0;
+			this.SeasonTabs.Size = new System.Drawing.Size(1234, 50);
+			this.SeasonTabs.TabIndex = 4;
+			this.SeasonTabs.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.SeasonTabs.UseSelectable = true;
+			// 
+			// All
+			// 
+			this.All.HorizontalScrollbarBarColor = true;
+			this.All.HorizontalScrollbarHighlightOnWheel = false;
+			this.All.HorizontalScrollbarSize = 10;
+			this.All.Location = new System.Drawing.Point(4, 38);
+			this.All.Name = "All";
+			this.All.Size = new System.Drawing.Size(1226, 8);
+			this.All.TabIndex = 0;
+			this.All.Text = "All";
+			this.All.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.All.VerticalScrollbarBarColor = true;
+			this.All.VerticalScrollbarHighlightOnWheel = false;
+			this.All.VerticalScrollbarSize = 10;
+			// 
+			// Spring
+			// 
+			this.Spring.HorizontalScrollbarBarColor = true;
+			this.Spring.HorizontalScrollbarHighlightOnWheel = false;
+			this.Spring.HorizontalScrollbarSize = 10;
+			this.Spring.Location = new System.Drawing.Point(4, 36);
+			this.Spring.Name = "Spring";
+			this.Spring.Size = new System.Drawing.Size(1226, 10);
+			this.Spring.TabIndex = 1;
+			this.Spring.Text = "Spring";
+			this.Spring.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.Spring.VerticalScrollbarBarColor = true;
+			this.Spring.VerticalScrollbarHighlightOnWheel = false;
+			this.Spring.VerticalScrollbarSize = 10;
+			// 
+			// Summer
+			// 
+			this.Summer.HorizontalScrollbarBarColor = true;
+			this.Summer.HorizontalScrollbarHighlightOnWheel = false;
+			this.Summer.HorizontalScrollbarSize = 10;
+			this.Summer.Location = new System.Drawing.Point(4, 36);
+			this.Summer.Name = "Summer";
+			this.Summer.Size = new System.Drawing.Size(1226, 10);
+			this.Summer.TabIndex = 2;
+			this.Summer.Text = "Summer";
+			this.Summer.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.Summer.VerticalScrollbarBarColor = true;
+			this.Summer.VerticalScrollbarHighlightOnWheel = false;
+			this.Summer.VerticalScrollbarSize = 10;
+			// 
+			// Autumn
+			// 
+			this.Autumn.HorizontalScrollbarBarColor = true;
+			this.Autumn.HorizontalScrollbarHighlightOnWheel = false;
+			this.Autumn.HorizontalScrollbarSize = 10;
+			this.Autumn.Location = new System.Drawing.Point(4, 36);
+			this.Autumn.Name = "Autumn";
+			this.Autumn.Size = new System.Drawing.Size(1226, 10);
+			this.Autumn.TabIndex = 3;
+			this.Autumn.Text = "Autumn";
+			this.Autumn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.Autumn.VerticalScrollbarBarColor = true;
+			this.Autumn.VerticalScrollbarHighlightOnWheel = false;
+			this.Autumn.VerticalScrollbarSize = 10;
+			// 
+			// Winter
+			// 
+			this.Winter.HorizontalScrollbarBarColor = true;
+			this.Winter.HorizontalScrollbarHighlightOnWheel = false;
+			this.Winter.HorizontalScrollbarSize = 10;
+			this.Winter.Location = new System.Drawing.Point(4, 36);
+			this.Winter.Name = "Winter";
+			this.Winter.Size = new System.Drawing.Size(1226, 10);
+			this.Winter.TabIndex = 4;
+			this.Winter.Text = "Winter";
+			this.Winter.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.Winter.VerticalScrollbarBarColor = true;
+			this.Winter.VerticalScrollbarHighlightOnWheel = false;
+			this.Winter.VerticalScrollbarSize = 10;
+			// 
+			// metroTabControl1
+			// 
+			this.metroTabControl1.Controls.Add(this.metroTabPage1);
+			this.metroTabControl1.Controls.Add(this.metroTabPage2);
+			this.metroTabControl1.Controls.Add(this.metroTabPage3);
+			this.metroTabControl1.Controls.Add(this.metroTabPage4);
+			this.metroTabControl1.Controls.Add(this.metroTabPage5);
+			this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
+			this.metroTabControl1.Name = "metroTabControl1";
+			this.metroTabControl1.SelectedIndex = 4;
+			this.metroTabControl1.Size = new System.Drawing.Size(1234, 50);
+			this.metroTabControl1.TabIndex = 4;
+			this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.metroTabControl1.UseSelectable = true;
+			// 
+			// metroTabPage1
+			// 
+			this.metroTabPage1.HorizontalScrollbarBarColor = true;
+			this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+			this.metroTabPage1.HorizontalScrollbarSize = 10;
+			this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+			this.metroTabPage1.Name = "metroTabPage1";
+			this.metroTabPage1.Size = new System.Drawing.Size(1226, 8);
+			this.metroTabPage1.TabIndex = 0;
+			this.metroTabPage1.Text = "metroTabPage1";
+			this.metroTabPage1.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.metroTabPage1.VerticalScrollbarBarColor = true;
+			this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+			this.metroTabPage1.VerticalScrollbarSize = 10;
+			// 
+			// metroTabPage2
+			// 
+			this.metroTabPage2.HorizontalScrollbarBarColor = true;
+			this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+			this.metroTabPage2.HorizontalScrollbarSize = 10;
+			this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
+			this.metroTabPage2.Name = "metroTabPage2";
+			this.metroTabPage2.Size = new System.Drawing.Size(1226, 8);
+			this.metroTabPage2.TabIndex = 1;
+			this.metroTabPage2.Text = "metroTabPage2";
+			this.metroTabPage2.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.metroTabPage2.VerticalScrollbarBarColor = true;
+			this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+			this.metroTabPage2.VerticalScrollbarSize = 10;
+			// 
+			// metroTabPage3
+			// 
+			this.metroTabPage3.HorizontalScrollbarBarColor = true;
+			this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
+			this.metroTabPage3.HorizontalScrollbarSize = 10;
+			this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
+			this.metroTabPage3.Name = "metroTabPage3";
+			this.metroTabPage3.Size = new System.Drawing.Size(1226, 8);
+			this.metroTabPage3.TabIndex = 2;
+			this.metroTabPage3.Text = "metroTabPage3";
+			this.metroTabPage3.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.metroTabPage3.VerticalScrollbarBarColor = true;
+			this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
+			this.metroTabPage3.VerticalScrollbarSize = 10;
+			// 
+			// metroTabPage4
+			// 
+			this.metroTabPage4.HorizontalScrollbarBarColor = true;
+			this.metroTabPage4.HorizontalScrollbarHighlightOnWheel = false;
+			this.metroTabPage4.HorizontalScrollbarSize = 10;
+			this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
+			this.metroTabPage4.Name = "metroTabPage4";
+			this.metroTabPage4.Size = new System.Drawing.Size(1226, 8);
+			this.metroTabPage4.TabIndex = 3;
+			this.metroTabPage4.Text = "metroTabPage4";
+			this.metroTabPage4.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.metroTabPage4.VerticalScrollbarBarColor = true;
+			this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
+			this.metroTabPage4.VerticalScrollbarSize = 10;
+			// 
+			// metroTabPage5
+			// 
+			this.metroTabPage5.HorizontalScrollbarBarColor = true;
+			this.metroTabPage5.HorizontalScrollbarHighlightOnWheel = false;
+			this.metroTabPage5.HorizontalScrollbarSize = 10;
+			this.metroTabPage5.Location = new System.Drawing.Point(4, 38);
+			this.metroTabPage5.Name = "metroTabPage5";
+			this.metroTabPage5.Size = new System.Drawing.Size(1226, 8);
+			this.metroTabPage5.TabIndex = 4;
+			this.metroTabPage5.Text = "metroTabPage5";
+			this.metroTabPage5.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.metroTabPage5.VerticalScrollbarBarColor = true;
+			this.metroTabPage5.VerticalScrollbarHighlightOnWheel = false;
+			this.metroTabPage5.VerticalScrollbarSize = 10;
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -519,8 +633,8 @@
 			this.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.Shown += new System.EventHandler(this.Component_Shown);
 			this.Header.ResumeLayout(false);
+			this.TimeslotComponent.ResumeLayout(false);
 			this.SeasonComponent.ResumeLayout(false);
-			this.SeasonTabs.ResumeLayout(false);
 			this.DayComponent.ResumeLayout(false);
 			this.DayTabs.ResumeLayout(false);
 			this.Body.ResumeLayout(false);
@@ -528,6 +642,8 @@
 			this.LoadingComponent.ResumeLayout(false);
 			this.LoadingComponent.PerformLayout();
 			this.ChartLoadingComponent.ResumeLayout(false);
+			this.SeasonTabs.ResumeLayout(false);
+			this.metroTabControl1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -540,7 +656,6 @@
 		private MetroFramework.Controls.MetroPanel DayComponent;
 		private MetroFramework.Controls.MetroPanel SeasonComponent;
 		private MetroFramework.Controls.MetroTabControl DayTabs;
-		private MetroFramework.Controls.MetroTabControl SeasonTabs;
 		private MetroFramework.Controls.MetroTabPage Sun;
 		private MetroFramework.Controls.MetroTabPage Mon;
 		private MetroFramework.Controls.MetroTabPage Tue;
@@ -548,11 +663,6 @@
 		private MetroFramework.Controls.MetroTabPage Thu;
 		private MetroFramework.Controls.MetroTabPage Fri;
 		private MetroFramework.Controls.MetroTabPage Sat;
-		private MetroFramework.Controls.MetroTabPage All;
-		private MetroFramework.Controls.MetroTabPage Spring;
-		private MetroFramework.Controls.MetroTabPage Summer;
-		private MetroFramework.Controls.MetroTabPage Autumn;
-		private MetroFramework.Controls.MetroTabPage Winter;
 		private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
 		private MetroFramework.Controls.MetroLabel LoadingTitle;
 		private MetroFramework.Controls.MetroPanel LoadingComponent;
@@ -560,8 +670,21 @@
 		private MetroFramework.Controls.MetroButton ClusteringBtn;
 		private MetroFramework.Controls.MetroPanel ChartLoadingComponent;
 		private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner2;
-		private System.Windows.Forms.TableLayoutPanel ChartTable;
 		private MetroFramework.Controls.MetroButton NextClusteringBtn;
+		private MetroFramework.Controls.MetroPanel TimeslotComponent;
+		private MetroFramework.Controls.MetroTabControl metroTabControl1;
+		private MetroFramework.Controls.MetroTabPage metroTabPage1;
+		private MetroFramework.Controls.MetroTabPage metroTabPage2;
+		private MetroFramework.Controls.MetroTabPage metroTabPage3;
+		private MetroFramework.Controls.MetroTabPage metroTabPage4;
+		private MetroFramework.Controls.MetroTabPage metroTabPage5;
+		private MetroFramework.Controls.MetroTabControl SeasonTabs;
+		private MetroFramework.Controls.MetroTabPage All;
+		private MetroFramework.Controls.MetroTabPage Spring;
+		private MetroFramework.Controls.MetroTabPage Summer;
+		private MetroFramework.Controls.MetroTabPage Autumn;
+		private MetroFramework.Controls.MetroTabPage Winter;
+		private System.Windows.Forms.TableLayoutPanel ChartTable;
 	}
 }
 
