@@ -253,6 +253,7 @@
 			this.SeasonTabs.TabIndex = 4;
 			this.SeasonTabs.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.SeasonTabs.UseSelectable = true;
+			this.SeasonTabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.SeasonTabs_Selected);
 			// 
 			// All
 			// 

@@ -222,8 +222,21 @@ namespace houself_cluster
 				{
 					// TimeSlot Parse
 					List<double> timeslot = new List<double>();
-					for(int rr = r; rr < r + 96; rr++)
-						timeslot.Add(double.Parse(cell[rr, this.options.searchCol].ToString()) * 1000);
+					for(int rr = r; rr < r + 96; rr++) {
+						double parseData = 0;
+						try
+						{
+							parseData = double.Parse(cell[rr, this.options.searchCol].ToString()) * 1000;
+							
+						} catch(FormatException e)
+						{
+							parseData = 0;
+						} finally
+						{
+							timeslot.Add(parseData);
+						}
+						
+					}
 
 					datas.Add(new Data(
 						date,
