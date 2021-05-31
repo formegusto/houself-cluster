@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
-using LiveCharts.WinForms;
 
 using houself_cluster.Common;
 
@@ -160,6 +161,7 @@ namespace houself_cluster
 			   LineSeries ls = new LineSeries
 			   {
 				   Title = string.Format("{0}", data.date.ToString("yyyyMMdd")),
+				   Stroke = Brushes.Red,
 				   Values = cv
 			   };
 			   Task.Run(() =>
