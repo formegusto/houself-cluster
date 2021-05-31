@@ -26,6 +26,7 @@ namespace houself_cluster
 					break;
 				case VIEW_ACTION.CHANGE_DAYS:
 				case VIEW_ACTION.CHANGE_SEASONS:
+				case VIEW_ACTION.CHANGE_TIMESLOT:
 					this.model.ChangeOption(e.action, e.payload);
 					break;
 				case VIEW_ACTION.INIT_EXCEL_LOAD:

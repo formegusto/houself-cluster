@@ -19,6 +19,7 @@ namespace houself_cluster.Common
 		public const string CHANGE_KEYWORD = "view/change_keyword";
 		public const string CHANGE_DAYS = "view/change_days";
 		public const string CHANGE_SEASONS = "view/change_seasons";
+		public const string CHANGE_TIMESLOT = "view/change_timeslot";
 	}
 	public static class MODEL_ACTION
 	{

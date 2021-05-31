@@ -82,6 +82,29 @@ namespace houself_cluster
 					this.options.season = (Season) p["tabPageIdx"];
 					Console.WriteLine(this.options.season);
 					break;
+				case VIEW_ACTION.CHANGE_TIMESLOT:
+					switch(p["tabPageIdx"])
+					{
+						case 0:
+							this.options.timeslot = Timeslot.H3;
+							break;
+						case 1:
+							this.options.timeslot = Timeslot.H4;
+							break;
+						case 2:
+							this.options.timeslot = Timeslot.H6;
+							break;
+						case 3:
+							this.options.timeslot = Timeslot.H8;
+							break;
+						case 4:
+							this.options.timeslot = Timeslot.H12;
+							break;
+						case 5:
+							this.options.timeslot = Timeslot.H24;
+							break;
+					}
+					break;
 				case VIEW_ACTION.CHANGE_KEYWORD:
 					this.options.keyword = p["keyword"];
 					Console.WriteLine(this.options.keyword);

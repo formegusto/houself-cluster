@@ -212,6 +212,10 @@ namespace houself_cluster
 			this, new ViewEventArgs(
 				VIEW_ACTION.CHANGE_SEASONS,
 				new Dictionary<string, dynamic>() { { "tabPageIdx", e.TabPageIndex } }));
+		private void TimeslotTabs_Selected(object sender, TabControlEventArgs e) => this.changed(
+			this, new ViewEventArgs(
+				VIEW_ACTION.CHANGE_TIMESLOT,
+				new Dictionary<string, dynamic>() { { "tabPageIdx", e.TabPageIndex } }));
 		private void Keyword_Changed(object sender, EventArgs e) => this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.CHANGE_KEYWORD,
