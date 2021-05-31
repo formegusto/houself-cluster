@@ -74,6 +74,7 @@ namespace houself_cluster
 					this.Invoke((System.Action)(() =>
 				   {
 					   this.SideBar.Controls.Clear();
+					   Cluster_Line_Allocate(e.payload["clusters"], e.payload["K"]);
 
 					   this.SideBar.Controls.Add(this.NextClusteringBtn);
 					   this.SideBar.Controls.Add(this.ClusteringBtn);
@@ -132,20 +133,6 @@ namespace houself_cluster
 				this.Invoke((System.Action)(() =>
 				{
 					this.chartList[c].Series.Clear();
-
-					ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
-					for (int t = 0; t < clusters[c].timeslot.Length; t++)
-					{
-						cv.Add(new ObservablePoint(t, clusters[c].timeslot[t]));
-					}
-
-					LineSeries ls = new LineSeries
-					{
-						Title = string.Format("{0}", clusters[c].uid),
-						Values = cv
-					};
-
-					this.chartList[c].Series.Add(ls);
 				}));
 			}
 		}
@@ -155,14 +142,16 @@ namespace houself_cluster
 		   {
 			   Console.WriteLine(string.Format("{0} --- Distance : {1}", data.date.ToString("yyyyMMdd"), data.distance));
 			   ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
-			   for (int t = 0; t < data.timeslot.Length ; t++)
-				   cv.Add(new ObservablePoint(t, data.timeslot[t]));
+			   for (int t = 0; t < data.timeslot.Length; t++)
+				   cv.Add(new ObservablePoint(t * (24 / data.timeslot.Length), data.timeslot[t]));
+			   
 
 			   LineSeries ls = new LineSeries
 			   {
 				   Title = string.Format("{0}", data.date.ToString("yyyyMMdd")),
 				   Stroke = Brushes.Red,
-				   Values = cv
+				   Values = cv,
+				   StrokeThickness = 1,
 			   };
 			   Task.Run(() =>
 			   {
@@ -171,6 +160,28 @@ namespace houself_cluster
 			   
 		   }));
 		}
+		public void Cluster_Line_Allocate(List<Cluster> clusters, int K)
+		{
+			for (int c = 0; c < K; c++)
+			{
+				this.Invoke((System.Action)(() =>
+				{
+					ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
+					for (int t = 0; t < clusters[c].timeslot.Length; t++)
+						cv.Add(new ObservablePoint(t * (24 / clusters[c].timeslot.Length), clusters[c].timeslot[t]));
+
+					LineSeries ls = new LineSeries
+					{
+						Title = string.Format("{0}", clusters[c].uid),
+						Stroke = Brushes.Blue,
+						Values = cv,
+						StrokeThickness = 4,
+					};
+					this.chartList[c].Series.Add(ls);
+				}));
+			}
+		}
+
 		public void Chart_Allocate(List<Cluster> clusters, int K)
 		{
 			this.chartList = new List<LiveCharts.WinForms.CartesianChart>();
@@ -183,16 +194,6 @@ namespace houself_cluster
 					chartList.Add(chart);
 					chart.Dock = System.Windows.Forms.DockStyle.Fill;
 
-					ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
-					for (int t = 0; t < clusters[c].timeslot.Length; t++)
-						cv.Add(new ObservablePoint(t, clusters[c].timeslot[t]));
-
-					LineSeries ls = new LineSeries
-					{
-						Title = string.Format("{0}", clusters[c].uid),
-						Values = cv
-					};
-					chart.Series.Add(ls);
 					this.ChartTable.Controls.Add(chart, c % 3, c / 3);
 				}));
 			}

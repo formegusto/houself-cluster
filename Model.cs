@@ -423,8 +423,11 @@ namespace houself_cluster
 				}
 			});
 			this.changed.Invoke(this, new ModelEventArgs(
-				MODEL_ACTION.ASSIGN_ALL_INSTANCE_SUCCESS
-				));
+				MODEL_ACTION.ASSIGN_ALL_INSTANCE_SUCCESS,
+				new Dictionary<string, dynamic>() {
+					{ "clusters", this.clusters },
+					{ "K", this.options.K }
+				}));
 		}
 	}
 }
