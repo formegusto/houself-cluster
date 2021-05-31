@@ -195,9 +195,27 @@ namespace houself_cluster
 				}));
 			}
 		}
-		public void ClusteringBtn_Click(object sender, EventArgs e) => this.changed(
+
+		public void Chart_Clear()
+		{
+			this.chartList.ForEach((chart) =>
+			{
+				this.ChartTable.Controls.Remove(chart);
+				chart.Dispose();
+			});
+
+			this.chartList = null;
+			Delay(3000);
+		}
+		public void ClusteringBtn_Click(object sender, EventArgs e) {
+			if(this.chartList != null)
+			{
+				Chart_Clear();
+			}
+			this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.START_CLUSTERING));
+		}
 		public void ReClusteringBtn_Click(object sender, EventArgs e) => this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.RECLUSTER));
