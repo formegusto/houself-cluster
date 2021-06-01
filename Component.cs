@@ -196,19 +196,22 @@ namespace houself_cluster
 					chart.Dock = System.Windows.Forms.DockStyle.Fill;
 
 					MetroFramework.Controls.MetroLabel title = new MetroFramework.Controls.MetroLabel();
-					title.Text = string.Format("title - {0}", c);
-					this.ChartTable.Controls.Add(new ChartPanel(), c % 3, c / 3);
+					this.ChartTable.Controls.Add(new ChartPanel(string.Format("title - {0}", c), chart), c % 3, c / 3);
 				}));
 			}
 		}
 
 		public void Chart_Clear()
 		{
+			this.ChartTable.Controls.Clear();
+
+			/*
 			this.chartList.ForEach((chart) =>
 			{
 				this.ChartTable.Controls.Remove(chart);
 				chart.Dispose();
-			});
+			})
+			*/;
 
 			this.chartList = null;
 			Delay(3000);
