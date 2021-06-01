@@ -197,7 +197,7 @@ namespace houself_cluster
 
 					MetroFramework.Controls.MetroLabel title = new MetroFramework.Controls.MetroLabel();
 					title.Text = string.Format("title - {0}", c);
-					this.ChartTable.Controls.Add(new ChartContainer(title), c % 3, c / 3);
+					this.ChartTable.Controls.Add(new ChartPanel(), c % 3, c / 3);
 				}));
 			}
 		}
