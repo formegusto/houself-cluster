@@ -127,5 +127,28 @@ namespace houself_cluster.Utils
 
 			return dates;
 		}
+
+		public static string SeasonToKR(Season season)
+		{
+			string kr = "봄";
+
+			switch(season)
+			{
+				case Season.SPRING:
+					kr = "봄";
+					break;
+				case Season.SUMMER:
+					kr = "여름";
+					break;
+				case Season.AUTUMN:
+					kr = "가을";
+					break;
+				case Season.WINTER:
+					kr = "겨울";
+					break;
+			}
+
+			return kr;
+		}
 	}
 }

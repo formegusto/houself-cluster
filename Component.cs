@@ -10,6 +10,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 
 using houself_cluster.Common;
+using houself_cluster.Atom;
 
 namespace houself_cluster
 {
@@ -194,7 +195,9 @@ namespace houself_cluster
 					chartList.Add(chart);
 					chart.Dock = System.Windows.Forms.DockStyle.Fill;
 
-					this.ChartTable.Controls.Add(chart, c % 3, c / 3);
+					MetroFramework.Controls.MetroLabel title = new MetroFramework.Controls.MetroLabel();
+					title.Text = string.Format("title - {0}", c);
+					this.ChartTable.Controls.Add(new ChartContainer(title), c % 3, c / 3);
 				}));
 			}
 		}
