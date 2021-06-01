@@ -19,6 +19,7 @@ namespace houself_cluster
 		public event ViewHandler<IView> changed;
 		public IController controller;
 		List<LiveCharts.WinForms.CartesianChart> chartList;
+		List<ChartPanel> chartPanelGroup;
 
 		public void SetController(IController controller)
 		{
@@ -178,6 +179,7 @@ namespace houself_cluster
 						Values = cv,
 						StrokeThickness = 4,
 					};
+					this.chartPanelGroup[c].SetText(clusters[c].SeasonStatistic());
 					this.chartList[c].Series.Add(ls);
 				}));
 			}
@@ -186,17 +188,18 @@ namespace houself_cluster
 		public void Chart_Allocate(List<Cluster> clusters, int K)
 		{
 			this.chartList = new List<LiveCharts.WinForms.CartesianChart>();
+			this.chartPanelGroup = new List<ChartPanel>();
 
 			for (int c = 0; c < K; c++)
 			{
 				this.Invoke((System.Action)(() =>
 				{
 					LiveCharts.WinForms.CartesianChart chart = new LiveCharts.WinForms.CartesianChart();
+					ChartPanel chartPanel = new ChartPanel(chart);
+					this.chartPanelGroup.Add(chartPanel);
 					chartList.Add(chart);
 					chart.Dock = System.Windows.Forms.DockStyle.Fill;
-
-					MetroFramework.Controls.MetroLabel title = new MetroFramework.Controls.MetroLabel();
-					this.ChartTable.Controls.Add(new ChartPanel(string.Format("title - {0}", c), chart), c % 3, c / 3);
+					this.ChartTable.Controls.Add(chartPanel, c % 3, c / 3);
 				}));
 			}
 		}
@@ -214,6 +217,7 @@ namespace houself_cluster
 			*/;
 
 			this.chartList = null;
+			this.chartPanelGroup = null;
 			Delay(3000);
 		}
 		public void ClusteringBtn_Click(object sender, EventArgs e) {

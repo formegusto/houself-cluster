@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using houself_cluster.Common;
+using houself_cluster.Utils;
 
 namespace houself_cluster
 {
@@ -94,6 +95,36 @@ namespace houself_cluster
 			this.seasonFrequency[Season.SUMMER] = 0;
 			this.seasonFrequency[Season.AUTUMN] = 0;
 			this.seasonFrequency[Season.WINTER] = 0;
+		}
+
+		public string SeasonStatistic()
+		{
+			string mainSeason = "";
+			string subSeason = "";
+
+			int main = -1;
+			int sub = -1;
+			foreach (KeyValuePair<Season, int> items in this.seasonFrequency)
+			{
+				if(main < this.seasonFrequency[items.Key])
+				{
+					sub = main;
+					main = this.seasonFrequency[items.Key];
+
+					mainSeason = string.Format("{0}:{1}", SeasonUtils.SeasonToKR(items.Key), main);
+					subSeason = mainSeason;
+				}
+				else
+				{
+					if(sub < this.seasonFrequency[items.Key])
+					{
+						sub = this.seasonFrequency[items.Key];
+						subSeason = string.Format("{0}:{1}", SeasonUtils.SeasonToKR(items.Key), sub);
+					}
+				}
+			}
+
+			return string.Format("{0} {1}", mainSeason, subSeason);
 		}
 	}
 }

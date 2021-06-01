@@ -10,7 +10,7 @@ namespace houself_cluster.Atom
 	{
 		public System.Windows.Forms.TableLayoutPanel Table;
 		public MetroFramework.Controls.MetroLabel Title;
-		public ChartPanel(string title, LiveCharts.WinForms.CartesianChart chart)
+		public ChartPanel(LiveCharts.WinForms.CartesianChart chart)
 		{
 			this.Table = new System.Windows.Forms.TableLayoutPanel();
 			this.Title = new MetroFramework.Controls.MetroLabel();
@@ -30,7 +30,7 @@ namespace houself_cluster.Atom
 			this.Table.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Table.Location = Location = new System.Drawing.Point(0, 0);
 
-			this.Title.Text = title;
+			this.Title.Text = "";
 			this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.Title.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Title.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -42,6 +42,11 @@ namespace houself_cluster.Atom
 			this.ResumeLayout(false);
 			this.Title.ResumeLayout(false);
 			this.Table.ResumeLayout(false);
+		}
+
+		public void SetText(string text)
+		{
+			this.Title.Text = text;
 		}
 	}
 }
