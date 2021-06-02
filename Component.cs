@@ -225,6 +225,7 @@ namespace houself_cluster
 			this.chartPanelGroup = null;
 			Delay(3000);
 		}
+		public void SaveBtn_Click(object sender, EventArgs e) => (new ResultComponent(this.chartPanelGroup)).Show();
 		public void ClusteringBtn_Click(object sender, EventArgs e) {
 			if(this.chartList != null)
 			{

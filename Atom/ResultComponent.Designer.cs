@@ -29,13 +29,13 @@
 		private void InitializeComponent()
 		{
 			this.Body = new MetroFramework.Controls.MetroPanel();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.ChartTable = new System.Windows.Forms.TableLayoutPanel();
 			this.Body.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// Body
 			// 
-			this.Body.Controls.Add(this.tableLayoutPanel1);
+			this.Body.Controls.Add(this.ChartTable);
 			this.Body.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Body.HorizontalScrollbarBarColor = true;
 			this.Body.HorizontalScrollbarHighlightOnWheel = false;
@@ -49,20 +49,20 @@
 			this.Body.VerticalScrollbarHighlightOnWheel = false;
 			this.Body.VerticalScrollbarSize = 10;
 			// 
-			// tableLayoutPanel1
+			// ChartTable
 			// 
-			this.tableLayoutPanel1.ColumnCount = 3;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(1160, 520);
-			this.tableLayoutPanel1.TabIndex = 2;
+			this.ChartTable.ColumnCount = 3;
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ChartTable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ChartTable.Location = new System.Drawing.Point(0, 0);
+			this.ChartTable.Name = "ChartTable";
+			this.ChartTable.RowCount = 2;
+			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.ChartTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.ChartTable.Size = new System.Drawing.Size(1160, 520);
+			this.ChartTable.TabIndex = 2;
 			// 
 			// ResultComponent
 			// 
@@ -82,6 +82,6 @@
 		#endregion
 
 		private MetroFramework.Controls.MetroPanel Body;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.TableLayoutPanel ChartTable;
 	}
 }

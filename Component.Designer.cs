@@ -656,6 +656,7 @@
 			this.SaveBtn.Text = "Result Save";
 			this.SaveBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.SaveBtn.UseSelectable = true;
+			this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
 			// 
 			// Component
 			// 
