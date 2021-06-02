@@ -78,6 +78,7 @@ namespace houself_cluster
 					   this.SideBar.Controls.Clear();
 					   Cluster_Line_Allocate(e.payload["clusters"], e.payload["K"]);
 
+					   this.SideBar.Controls.Add(this.SaveBtn);
 					   this.SideBar.Controls.Add(this.NextClusteringBtn);
 					   this.SideBar.Controls.Add(this.ClusteringBtn);
 					   this.SideBar.Controls.Add(this.KeywordBox);

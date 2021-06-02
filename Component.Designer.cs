@@ -64,6 +64,7 @@
 			this.ChartLoadingComponent = new MetroFramework.Controls.MetroPanel();
 			this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.NextClusteringBtn = new MetroFramework.Controls.MetroButton();
+			this.SaveBtn = new MetroFramework.Controls.MetroButton();
 			this.Header.SuspendLayout();
 			this.TimeslotComponent.SuspendLayout();
 			this.TimeslotTabs.SuspendLayout();
@@ -502,6 +503,7 @@
 			// 
 			// SideBar
 			// 
+			// this.SideBar.Controls.Add(this.SaveBtn);
 			this.SideBar.Controls.Add(this.ClusteringBtn);
 			this.SideBar.Controls.Add(this.KeywordBox);
 			this.SideBar.HorizontalScrollbarBarColor = true;
@@ -643,12 +645,26 @@
 			this.NextClusteringBtn.UseSelectable = true;
 			this.NextClusteringBtn.Click += new System.EventHandler(this.ReClusteringBtn_Click);
 			// 
+			// SaveBtn
+			// 
+			this.SaveBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.SaveBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.SaveBtn.Location = new System.Drawing.Point(0, 80);
+			this.SaveBtn.Name = "SaveBtn";
+			this.SaveBtn.Size = new System.Drawing.Size(428, 40);
+			this.SaveBtn.TabIndex = 4;
+			this.SaveBtn.Text = "Result Save";
+			this.SaveBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.SaveBtn.UseSelectable = true;
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1280, 720);
 			this.Controls.Add(this.LoadingComponent);
+			// this.Controls.Add(this.Body);
+			// this.Controls.Add(this.SideBar);
 			this.Controls.Add(this.Header);
 			this.Name = "Component";
 			this.Resizable = false;
@@ -709,6 +725,7 @@
 		private MetroFramework.Controls.MetroTabPage Winter;
 		private System.Windows.Forms.TableLayoutPanel ChartTable;
 		private MetroFramework.Controls.MetroTabPage H24;
+		private MetroFramework.Controls.MetroButton SaveBtn;
 	}
 }
 
