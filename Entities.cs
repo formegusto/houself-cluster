@@ -73,6 +73,14 @@ namespace houself_cluster
 			}
 			return true;
 		}
+
+		public bool isZero()
+		{
+			for (int t = 0; t < this.timeslot.Length; t++)
+				if (this.timeslot[t] != 0)
+					return false;
+			return true;
+		}
 	}
 
 	public class Cluster : Data

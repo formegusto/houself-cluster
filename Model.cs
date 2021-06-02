@@ -239,11 +239,14 @@ namespace houself_cluster
 						
 					}
 
-					datas.Add(new Data(
+					Data newData = new Data(
 						date,
 						this.options.keyword,
-						timeslot.ToArray()
-						));
+						timeslot.ToArray());
+
+					// 검증
+					if(!newData.isZero())
+						datas.Add(newData);
 				}
 			}
 
