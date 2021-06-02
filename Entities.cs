@@ -127,4 +127,23 @@ namespace houself_cluster
 			return string.Format("{0} {1}", mainSeason, subSeason);
 		}
 	}
+
+	public class SeasonFrequency: IComparable
+	{
+		public Season season;
+		public int frequency;
+
+		public SeasonFrequency(int idx)
+		{
+			this.season = (Season)idx;
+			this.frequency = 0;
+		}
+
+		public int CompareTo(object obj)
+		{
+			if (obj is SeasonFrequency)
+				return ((obj as SeasonFrequency).frequency).CompareTo(this.frequency);
+			throw new ArgumentException("Object is not a SeasonFrequency");
+		}
+	}
 }
