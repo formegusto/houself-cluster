@@ -78,53 +78,19 @@ namespace houself_cluster
 	public class Cluster : Data
 	{
 		public List<Data> instances;
-		public Dictionary<Season, int> seasonFrequency;
+		public List<SeasonFrequency> seasonFrequency;
 		public Cluster(DateTime d, string u, double[] ts) : base(d, u, ts)
 		{
 			this.instances = new List<Data>();
-			this.seasonFrequency = new Dictionary<Season, int>();
-			this.seasonFrequency.Add(Season.SPRING, 0);
-			this.seasonFrequency.Add(Season.SUMMER, 0);
-			this.seasonFrequency.Add(Season.AUTUMN, 0);
-			this.seasonFrequency.Add(Season.WINTER, 0);
+			initSeasonFrequeny();
+			
 		}
 
 		public void initSeasonFrequeny()
 		{
-			this.seasonFrequency[Season.SPRING] = 0;
-			this.seasonFrequency[Season.SUMMER] = 0;
-			this.seasonFrequency[Season.AUTUMN] = 0;
-			this.seasonFrequency[Season.WINTER] = 0;
-		}
-
-		public string SeasonStatistic()
-		{
-			string mainSeason = "";
-			string subSeason = "";
-
-			int main = -1;
-			int sub = -1;
-			foreach (KeyValuePair<Season, int> items in this.seasonFrequency)
-			{
-				if(main < this.seasonFrequency[items.Key])
-				{
-					sub = main;
-					main = this.seasonFrequency[items.Key];
-
-					mainSeason = string.Format("{0}:{1}", SeasonUtils.SeasonToKR(items.Key), main);
-					subSeason = mainSeason;
-				}
-				else
-				{
-					if(sub < this.seasonFrequency[items.Key])
-					{
-						sub = this.seasonFrequency[items.Key];
-						subSeason = string.Format("{0}:{1}", SeasonUtils.SeasonToKR(items.Key), sub);
-					}
-				}
-			}
-
-			return string.Format("{0} {1}", mainSeason, subSeason);
+			this.seasonFrequency = new List<SeasonFrequency>();
+			for (int s = 0; s < 4; s++)
+				this.seasonFrequency.Add(new SeasonFrequency(s));
 		}
 	}
 
@@ -135,7 +101,13 @@ namespace houself_cluster
 
 		public SeasonFrequency(int idx)
 		{
-			this.season = (Season)idx;
+			this.season = (Season)(idx + 1);
+			this.frequency = 0;
+		}
+
+		public SeasonFrequency(Season season)
+		{
+			this.season = season;
 			this.frequency = 0;
 		}
 

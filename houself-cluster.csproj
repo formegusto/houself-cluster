@@ -75,6 +75,12 @@
     <Compile Include="Atom\ChartPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Atom\ResultComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Atom\ResultComponent.Designer.cs">
+      <DependentUpon>ResultComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\Actions.cs" />
     <Compile Include="Common\Config.cs" />
     <Compile Include="Common\Types.cs" />
@@ -93,6 +99,9 @@
     <Compile Include="Utils\Operator.cs" />
     <Compile Include="Utils\SeasonUtils.cs" />
     <Compile Include="View.cs" />
+    <EmbeddedResource Include="Atom\ResultComponent.resx">
+      <DependentUpon>ResultComponent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Component.resx">
       <DependentUpon>Component.cs</DependentUpon>
     </EmbeddedResource>

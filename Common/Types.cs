@@ -19,10 +19,10 @@ namespace houself_cluster.Common
 	public enum Season
 	{
 		ALL,
-		SPRING = 0,
-		SUMMER = 1,
-		AUTUMN = 2,
-		WINTER = 3
+		SPRING,
+		SUMMER,
+		AUTUMN,
+		WINTER
 	}
 
 	public enum Timeslot

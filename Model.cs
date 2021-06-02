@@ -419,21 +419,25 @@ namespace houself_cluster
 
 					this.clusters[mK].instances.Add(this.datas[d]);
 					Season season = DateUtils.DateToSeason(this.datas[d].date);
-					if (this.clusters[mK].seasonFrequency.ContainsKey(season))
-					{
-						this.clusters[mK].seasonFrequency[season] += 1;
-					}
+					this.clusters[mK].seasonFrequency[(int)season - 1].frequency++;
 
 				});
 			}
 
 			this.clusters.ForEach((c) =>
 			{
+				c.seasonFrequency.Sort();
 				Console.WriteLine(string.Format("----{0} season Frequency----", c.uid));
+				c.seasonFrequency.ForEach((sf) =>
+				{
+					Console.WriteLine(string.Format("Season ==> {0}, Frequency ==> {1}", sf.season, sf.frequency));
+				});
+				/*
 				foreach(KeyValuePair<Season,int> items in c.seasonFrequency)
 				{
 					Console.WriteLine(string.Format("Season ==> {0}, Frequency ==> {1}", items.Key, items.Value));
 				}
+				*/
 			});
 			this.changed.Invoke(this, new ModelEventArgs(
 				MODEL_ACTION.ASSIGN_ALL_INSTANCE_SUCCESS,

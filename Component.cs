@@ -11,6 +11,7 @@ using LiveCharts.Wpf;
 
 using houself_cluster.Common;
 using houself_cluster.Atom;
+using houself_cluster.Utils;
 
 namespace houself_cluster
 {
@@ -180,7 +181,10 @@ namespace houself_cluster
 						Values = cv,
 						StrokeThickness = 4,
 					};
-					this.chartPanelGroup[c].SetText(clusters[c].SeasonStatistic());
+					this.chartPanelGroup[c].SetText(string.Format("{0}{1}", 
+						string.Format("{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[0].season), clusters[c].seasonFrequency[0].frequency),
+						string.Format(",{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[1].season), clusters[c].seasonFrequency[1].frequency)
+						));
 					this.chartList[c].Series.Add(ls);
 				}));
 			}
