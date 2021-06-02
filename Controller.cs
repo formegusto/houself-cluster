@@ -38,6 +38,9 @@ namespace houself_cluster
 				case VIEW_ACTION.RECLUSTER:
 					this.model.ReSetCluster();
 					break;
+				case VIEW_ACTION.SAVEMODE:
+					this.model.SaveMode();
+					break;
 			}
 		}
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)

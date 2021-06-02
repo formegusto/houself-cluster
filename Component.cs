@@ -95,6 +95,17 @@ namespace houself_cluster
 					});
 
 					break;
+				case MODEL_ACTION.SAVEMODE_DATA:
+					ClusterOptions options = e.payload["option"];
+					(new ResultComponent(
+						string.Format("{0}-{1} {2} 결과",
+							options.keyword,
+							SeasonUtils.SeasonToKR(options.season),
+							DateUtils.DayToKR(options.day)
+						)
+						,this.chartPanelGroup)).Show();
+
+					break;
 				default:
 					return;
 			}
@@ -181,9 +192,11 @@ namespace houself_cluster
 						Values = cv,
 						StrokeThickness = 4,
 					};
-					this.chartPanelGroup[c].SetText(string.Format("{0}{1}", 
+					this.chartPanelGroup[c].SetText(string.Format("{0}|{1}|{2}|{3}", 
 						string.Format("{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[0].season), clusters[c].seasonFrequency[0].frequency),
-						string.Format(",{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[1].season), clusters[c].seasonFrequency[1].frequency)
+						string.Format("{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[1].season), clusters[c].seasonFrequency[1].frequency),
+						string.Format("{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[2].season), clusters[c].seasonFrequency[2].frequency),
+						string.Format("{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[3].season), clusters[c].seasonFrequency[3].frequency)
 						));
 					this.chartList[c].Series.Add(ls);
 				}));
@@ -225,7 +238,7 @@ namespace houself_cluster
 			this.chartPanelGroup = null;
 			Delay(3000);
 		}
-		public void SaveBtn_Click(object sender, EventArgs e) => (new ResultComponent(this.chartPanelGroup)).Show();
+		public void SaveBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.SAVEMODE));
 		public void ClusteringBtn_Click(object sender, EventArgs e) {
 			if(this.chartList != null)
 			{

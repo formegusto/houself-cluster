@@ -46,6 +46,7 @@ namespace houself_cluster
 		// 5. Assign Instance 
 		void AssignInstance();
 		void ReSetCluster();
+		void SaveMode();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -443,7 +444,16 @@ namespace houself_cluster
 				MODEL_ACTION.ASSIGN_ALL_INSTANCE_SUCCESS,
 				new Dictionary<string, dynamic>() {
 					{ "clusters", this.clusters },
-					{ "K", this.options.K }
+					{ "K", this.options.K },
+				}));
+		}
+
+		public void SaveMode()
+		{
+			this.changed.Invoke(this, new ModelEventArgs(
+				MODEL_ACTION.SAVEMODE_DATA,
+				new Dictionary<string, dynamic>() {
+					{ "option", this.options }
 				}));
 		}
 	}

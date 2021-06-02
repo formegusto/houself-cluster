@@ -134,6 +134,9 @@ namespace houself_cluster.Utils
 
 			switch(season)
 			{
+				case Season.ALL:
+					kr = "ALL";
+					break;
 				case Season.SPRING:
 					kr = "봄";
 					break;

@@ -12,9 +12,11 @@ namespace houself_cluster.Atom
 {
 	public partial class ResultComponent : MetroFramework.Forms.MetroForm
 	{
-		public ResultComponent(List<ChartPanel> chartPanelGroup)
+		public ResultComponent(string title,List<ChartPanel> chartPanelGroup)
 		{
 			InitializeComponent();
+
+			this.Text = title;
 
 			for (int c = 0; c < chartPanelGroup.Count; c++)
 				this.ChartTable.Controls.Add(chartPanelGroup[c], c % 3, c / 3);

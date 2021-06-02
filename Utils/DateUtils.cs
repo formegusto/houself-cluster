@@ -29,5 +29,37 @@ namespace houself_cluster.Utils
 					return Season.ALL;
 			}	
 		}
+
+		public static string DayToKR(Day day)
+		{
+			string kr = "일";
+
+			switch(day)
+			{
+				case Day.SUN:
+					kr = "일";
+					break;
+				case Day.MON:
+					kr = "월";
+					break;
+				case Day.TUE:
+					kr = "화";
+					break;
+				case Day.WED:
+					kr = "수";
+					break;
+				case Day.THU:
+					kr = "목";
+					break;
+				case Day.FRI:
+					kr = "금";
+					break;
+				case Day.SAT:
+					kr = "토";
+					break;
+
+			}
+			return kr;
+		}
 	}
 }
