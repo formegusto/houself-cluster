@@ -27,5 +27,25 @@ namespace houself_cluster.Utils
 			}
 			return distance;
 		}
+
+		public static double ECV(Cluster[] clusters, Data[] datas)
+		{
+			double[] mean = new double[datas[0].timeslot.Length];
+			Parallel.For(0, datas[0].timeslot.Length, (e) =>
+			{
+				for (int d = 0; d < datas.Length; d++)
+					mean[e] += datas[d].timeslot[e];
+				mean[e] /= datas.Length;
+			});
+
+			double TSS = 0; // Total Sum of Squares
+			double WSS = 0; // Within cluster Sum of Squares
+			for (int d = 0; d < datas.Length; d++)
+			{
+				TSS += Math.Pow(Distance(datas[d].timeslot, mean), 2);
+				WSS += Math.Pow(Distance(datas[d].timeslot, clusters[datas[d].mainCluster].timeslot), 2);
+			}
+			return 1 - WSS / TSS;
+		}
 	}
 }

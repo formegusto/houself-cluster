@@ -79,6 +79,8 @@ namespace houself_cluster
 					   this.SideBar.Controls.Clear();
 					   Cluster_Line_Allocate(e.payload["clusters"], e.payload["K"]);
 
+					   this.SideBar.Controls.Add(this.ecvBtn);
+					   this.SideBar.Controls.Add(this.mergeButton);
 					   this.SideBar.Controls.Add(this.SaveBtn);
 					   this.SideBar.Controls.Add(this.NextClusteringBtn);
 					   this.SideBar.Controls.Add(this.ClusteringBtn);
@@ -239,6 +241,8 @@ namespace houself_cluster
 			Delay(3000);
 		}
 		public void SaveBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.SAVEMODE));
+		public void MergeBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.MERGECLUSTER));
+		public void ECVBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.EVALUATE));
 		public void ClusteringBtn_Click(object sender, EventArgs e) {
 			if(this.chartList != null)
 			{

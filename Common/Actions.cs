@@ -16,6 +16,8 @@ namespace houself_cluster.Common
 		public const string INIT_EXCEL_LOAD = "view/init_excel_load";
 		public const string START_CLUSTERING = "view/start_clustering";
 		public const string RECLUSTER = "view/recluster";
+		public const string MERGECLUSTER = "view/mergeclutser";
+		public const string EVALUATE = "view/evaluate";
 		public const string SAVEMODE = "view/savemode";
 		public const string CHANGE_KEYWORD = "view/change_keyword";
 		public const string CHANGE_DAYS = "view/change_days";

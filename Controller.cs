@@ -41,6 +41,12 @@ namespace houself_cluster
 				case VIEW_ACTION.SAVEMODE:
 					this.model.SaveMode();
 					break;
+				case VIEW_ACTION.MERGECLUSTER:
+					this.model.MergeCluster();
+					break;
+				case VIEW_ACTION.EVALUATE:
+					this.model.Evaluate();
+					break;
 			}
 		}
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)

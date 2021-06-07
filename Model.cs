@@ -47,6 +47,8 @@ namespace houself_cluster
 		void AssignInstance();
 		void ReSetCluster();
 		void SaveMode();
+		void MergeCluster();
+		void Evaluate();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -214,10 +216,11 @@ namespace houself_cluster
 					null
 					);
 
+				/*
 				if (!targetMonth.Contains(date.Month)) {
 					Console.WriteLine("왜 안드러와");
 					continue;
-				}
+				}*/
 
 				if ((int)date.DayOfWeek == (int)this.options.day)
 				{
@@ -458,6 +461,22 @@ namespace houself_cluster
 				new Dictionary<string, dynamic>() {
 					{ "option", this.options }
 				}));
+		}
+
+		public void MergeCluster()
+		{
+			Console.WriteLine("현재 클러스터들 값");
+			this.clusters.ForEach((cluster) =>
+			{
+				cluster.ToPrint();
+			});
+		}
+
+		public void Evaluate()
+		{
+			double ECV = Operator.ECV(this.clusters.ToArray(), this.datas.ToArray());
+
+			Console.WriteLine(string.Format("ECV ----> {0} ",ECV));
 		}
 	}
 }

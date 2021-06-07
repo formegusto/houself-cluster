@@ -65,6 +65,8 @@
 			this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.NextClusteringBtn = new MetroFramework.Controls.MetroButton();
 			this.SaveBtn = new MetroFramework.Controls.MetroButton();
+			this.mergeButton = new MetroFramework.Controls.MetroButton();
+			this.ecvBtn = new MetroFramework.Controls.MetroButton();
 			this.Header.SuspendLayout();
 			this.TimeslotComponent.SuspendLayout();
 			this.TimeslotTabs.SuspendLayout();
@@ -503,7 +505,6 @@
 			// 
 			// SideBar
 			// 
-			// this.SideBar.Controls.Add(this.SaveBtn);
 			this.SideBar.Controls.Add(this.ClusteringBtn);
 			this.SideBar.Controls.Add(this.KeywordBox);
 			this.SideBar.HorizontalScrollbarBarColor = true;
@@ -658,6 +659,32 @@
 			this.SaveBtn.UseSelectable = true;
 			this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
 			// 
+			// mergeButton
+			// 
+			this.mergeButton.Dock = System.Windows.Forms.DockStyle.Top;
+			this.mergeButton.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.mergeButton.Location = new System.Drawing.Point(0, 80);
+			this.mergeButton.Name = "mergeButton";
+			this.mergeButton.Size = new System.Drawing.Size(428, 40);
+			this.mergeButton.TabIndex = 4;
+			this.mergeButton.Text = "Merging";
+			this.mergeButton.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.mergeButton.UseSelectable = true;
+			this.mergeButton.Click += new System.EventHandler(this.MergeBtn_Click);
+			// 
+			// ecvBtn
+			// 
+			this.ecvBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.ecvBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.ecvBtn.Location = new System.Drawing.Point(0, 80);
+			this.ecvBtn.Name = "ecvBtn";
+			this.ecvBtn.Size = new System.Drawing.Size(428, 40);
+			this.ecvBtn.TabIndex = 4;
+			this.ecvBtn.Text = "ECV";
+			this.ecvBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.ecvBtn.UseSelectable = true;
+			this.ecvBtn.Click += new System.EventHandler(this.ECVBtn_Click);
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -727,6 +754,8 @@
 		private System.Windows.Forms.TableLayoutPanel ChartTable;
 		private MetroFramework.Controls.MetroTabPage H24;
 		private MetroFramework.Controls.MetroButton SaveBtn;
+		private MetroFramework.Controls.MetroButton mergeButton;
+		private MetroFramework.Controls.MetroButton ecvBtn;
 	}
 }
 
