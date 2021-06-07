@@ -161,12 +161,29 @@ namespace houself_cluster
 			   ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
 			   for (int t = 0; t < data.timeslot.Length; t++)
 				   cv.Add(new ObservablePoint(t * (24 / data.timeslot.Length), data.timeslot[t]));
-			   
 
+			   Brush brush = Brushes.Red;
+			   switch (DateUtils.DateToSeason(data.date))
+			   {
+				   case Season.SPRING:
+					   brush = Brushes.Red;
+					   break;
+				   case Season.SUMMER:
+					   brush = Brushes.Purple;
+					   break;
+				   case Season.AUTUMN:
+					   brush = Brushes.SeaGreen;
+					   break;
+				   case Season.WINTER:
+					   brush = Brushes.Silver;
+					   break;
+			   }
+
+			   
 			   LineSeries ls = new LineSeries
 			   {
 				   Title = string.Format("{0}", data.date.ToString("yyyyMMdd")),
-				   Stroke = Brushes.Red,
+				   Stroke = brush,
 				   Values = cv,
 				   StrokeThickness = 1,
 			   };

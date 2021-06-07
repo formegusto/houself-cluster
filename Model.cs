@@ -216,11 +216,11 @@ namespace houself_cluster
 					null
 					);
 
-				/*
+				
 				if (!targetMonth.Contains(date.Month)) {
-					Console.WriteLine("왜 안드러와");
+					// Console.WriteLine("왜 안드러와");
 					continue;
-				}*/
+				}
 
 				if ((int)date.DayOfWeek == (int)this.options.day)
 				{
@@ -496,14 +496,22 @@ namespace houself_cluster
 			for(int i = 0; i < clusters.Count; i++)
 			{
 				if (maxFrequencyIdx == i) continue;
-				if(secondIdx[0] < clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+				if(secondIdx.FindIndex((sec) => sec == i) == -1)
 				{
-					secondIdx.Clear();
-					secondIdx.Add(i);
-				} else if (secondIdx[0] == clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
-				{
-					secondIdx.Add(i);
+					if (secondFrequency < clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+					{
+						secondIdx.Clear();
+						secondIdx.Add(i);
+						secondFrequency = clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
+						Console.WriteLine("새로 만들게");
+					}
+					else if (secondFrequency == clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+					{
+						secondIdx.Add(i);
+						Console.WriteLine("같은 거 넣는 중");
+					}
 				}
+				
 			}
 
 			Console.WriteLine(string.Format("현재 {0}에 가장 높은 빈도수를 가진\n " +
@@ -513,7 +521,9 @@ namespace houself_cluster
 			{
 				Console.WriteLine("{0}", sec);
 			});
-			
+
+			// 2순위 중
+			// unique idx 선별			
 		}
 
 		public void Evaluate()
