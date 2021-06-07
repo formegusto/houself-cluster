@@ -465,11 +465,26 @@ namespace houself_cluster
 
 		public void MergeCluster()
 		{
+			/*
 			Console.WriteLine("현재 클러스터들 값");
 			this.clusters.ForEach((cluster) =>
 			{
 				cluster.ToPrint();
 			});
+			*/
+
+			int maxFrequencyIdx = 0;
+			int frequency = clusters[0].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
+
+			for (int i = 1; i < clusters.Count; i++)
+				if (frequency < clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+				{
+					frequency = clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
+					maxFrequencyIdx = i;
+				}
+
+			Console.WriteLine(string.Format("현재 {0}에 가장 높은 빈도수를 가진\n " +
+				"클러스터는 {1} 번째 클러스터입니다.", this.options.season, maxFrequencyIdx));
 		}
 
 		public void Evaluate()
