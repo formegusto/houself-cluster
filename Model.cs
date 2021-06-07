@@ -475,16 +475,45 @@ namespace houself_cluster
 
 			int maxFrequencyIdx = 0;
 			int frequency = clusters[0].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
+			
 
+			// 1위 클러스터 만들기
 			for (int i = 1; i < clusters.Count; i++)
+			{
 				if (frequency < clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
 				{
 					frequency = clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
 					maxFrequencyIdx = i;
 				}
+			}
+
+			List<int> secondIdx = new List<int>();
+			int secondFrequency = maxFrequencyIdx != 0 ? 
+				clusters[0].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency
+					:
+				clusters[1].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
+			secondIdx.Add(maxFrequencyIdx != 0 ? 0 : 1);
+			for(int i = 0; i < clusters.Count; i++)
+			{
+				if (maxFrequencyIdx == i) continue;
+				if(secondIdx[0] < clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+				{
+					secondIdx.Clear();
+					secondIdx.Add(i);
+				} else if (secondIdx[0] == clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+				{
+					secondIdx.Add(i);
+				}
+			}
 
 			Console.WriteLine(string.Format("현재 {0}에 가장 높은 빈도수를 가진\n " +
 				"클러스터는 {1} 번째 클러스터입니다.", this.options.season, maxFrequencyIdx));
+			Console.WriteLine("2순위");
+			secondIdx.ForEach((sec) =>
+			{
+				Console.WriteLine("{0}", sec);
+			});
+			
 		}
 
 		public void Evaluate()
