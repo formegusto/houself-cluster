@@ -77,7 +77,7 @@ namespace houself_cluster
 					this.Invoke((System.Action)(() =>
 				   {
 					   this.SideBar.Controls.Clear();
-					   Cluster_Line_Allocate(e.payload["clusters"], e.payload["K"]);
+					   Cluster_Line_Allocate((List<Cluster>)e.payload["clusters"], e.payload["K"]);
 
 					   this.SideBar.Controls.Add(this.ecvBtn);
 					   this.SideBar.Controls.Add(this.mergeButton);
@@ -106,6 +106,13 @@ namespace houself_cluster
 							DateUtils.DayToKR(options.day)
 						)
 						,this.chartPanelGroup)).Show();
+
+					break;
+				case MODEL_ACTION.MERGECLUSTER_SUCCESS:
+					// Cluster_Line_Allocate((Cluster) e.payload["cluster"], e.payload["K"]);
+					this.changed(
+						this, new ViewEventArgs(
+							VIEW_ACTION.RECLUSTER));
 
 					break;
 				default:
@@ -193,6 +200,33 @@ namespace houself_cluster
 			   });
 			   
 		   }));
+		}
+		public void Cluster_Line_Allocate(Cluster cluster, int K)
+		{
+			this.Invoke((System.Action)(() =>
+			{
+				LiveCharts.WinForms.CartesianChart chart = new LiveCharts.WinForms.CartesianChart();
+				ChartPanel chartPanel = new ChartPanel(chart);
+				this.chartPanelGroup.Add(chartPanel);
+				chartList.Add(chart);
+				chart.Dock = System.Windows.Forms.DockStyle.Fill;
+
+				this.ChartTable.Controls.Add(chartPanel, K % 3, K / 3);
+
+				ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
+				for (int t = 0; t < cluster.timeslot.Length; t++)
+					cv.Add(new ObservablePoint(t * (24 / cluster.timeslot.Length), cluster.timeslot[t]));
+
+				LineSeries ls = new LineSeries
+				{
+					Title = string.Format("{0}", cluster.uid),
+					Stroke = Brushes.Blue,
+					Values = cv,
+					StrokeThickness = 4,
+				};
+				
+				this.chartList[K].Series.Add(ls);
+			}));
 		}
 		public void Cluster_Line_Allocate(List<Cluster> clusters, int K)
 		{

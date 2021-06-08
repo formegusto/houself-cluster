@@ -87,11 +87,19 @@ namespace houself_cluster
 	{
 		public List<Data> instances;
 		public List<SeasonFrequency> seasonFrequency;
+		public bool direct;
 		public Cluster(DateTime d, string u, double[] ts) : base(d, u, ts)
 		{
 			this.instances = new List<Data>();
 			initSeasonFrequeny();
-			
+			direct = false;
+		}
+
+		public Cluster(DateTime d, string u, double[] ts, bool dir) : base(d, u, ts)
+		{
+			this.instances = new List<Data>();
+			initSeasonFrequeny();
+			direct = dir;
 		}
 
 		public void initSeasonFrequeny()
@@ -99,6 +107,18 @@ namespace houself_cluster
 			this.seasonFrequency = new List<SeasonFrequency>();
 			for (int s = 0; s < 4; s++)
 				this.seasonFrequency.Add(new SeasonFrequency(s));
+		}
+
+		public bool isUnique(Season season)
+		{
+			for(int s = 0; s < seasonFrequency.Count; s++)
+			{
+				if (seasonFrequency[s].season != season &&
+					seasonFrequency[s].frequency != 0)
+					return false;
+			}
+
+			return true;
 		}
 	}
 

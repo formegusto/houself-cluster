@@ -118,6 +118,12 @@ namespace houself_cluster
 		{
 			for(int k = 0; k < this.options.K; k++)
 			{
+				if(this.clusters[k].direct)
+				{
+					this.clusters[k].direct = false;
+					continue;
+				}
+
 				for (int e = 0; e < this.clusters[k].timeslot.Length; e++)
 				{
 					this.clusters[k].timeslot[e] = 0;
@@ -472,7 +478,7 @@ namespace houself_cluster
 				cluster.ToPrint();
 			});
 			*/
-
+			if (this.options.season == Season.ALL) return;
 			int maxFrequencyIdx = 0;
 			int frequency = clusters[0].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
 			
@@ -498,18 +504,22 @@ namespace houself_cluster
 				if (maxFrequencyIdx == i) continue;
 				if(secondIdx.FindIndex((sec) => sec == i) == -1)
 				{
-					if (secondFrequency < clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+					if (!clusters[i].isUnique(this.options.season))
 					{
-						secondIdx.Clear();
-						secondIdx.Add(i);
-						secondFrequency = clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
-						Console.WriteLine("새로 만들게");
+						if (secondFrequency < clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+						{
+							secondIdx.Clear();
+							secondIdx.Add(i);
+							secondFrequency = clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
+
+						}
+						else if (secondFrequency == clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
+						{
+							secondIdx.Add(i);
+
+						}
 					}
-					else if (secondFrequency == clusters[i].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency)
-					{
-						secondIdx.Add(i);
-						Console.WriteLine("같은 거 넣는 중");
-					}
+					
 				}
 				
 			}
@@ -522,8 +532,46 @@ namespace houself_cluster
 				Console.WriteLine("{0}", sec);
 			});
 
-			// 2순위 중
-			// unique idx 선별			
+			// 2순위 합병
+			Cluster newCluster = null;
+			if (secondIdx.Count > 1)
+			{
+				double[] timeslot = new double[clusters[secondIdx[0]].timeslot.Length];
+				for(int t=0; t < clusters[secondIdx[0]].timeslot.Length; t++)
+				{
+					double mean = (clusters[secondIdx[0]].timeslot[t]
+						+ clusters[secondIdx[1]].timeslot[t]) / 2;
+					timeslot[t] = mean;
+				}
+				Cluster DelCluster_1 = this.clusters[secondIdx[0]];
+				Cluster DelCluster_2 = this.clusters[secondIdx[1]];
+				newCluster = new Cluster(DateTime.Now, clusters[secondIdx[0]].uid, timeslot, true);
+				this.clusters.Remove(DelCluster_1);
+				this.clusters.Remove(DelCluster_2);
+			} 
+			else
+			{
+				double[] timeslot = new double[clusters[maxFrequencyIdx].timeslot.Length];
+				for (int t = 0; t < clusters[maxFrequencyIdx].timeslot.Length; t++)
+				{
+					double mean = (clusters[maxFrequencyIdx].timeslot[t]
+						+ clusters[secondIdx[0]].timeslot[t]) / 2;
+					timeslot[t] = mean;
+				}
+				Cluster DelCluster_1 = this.clusters[maxFrequencyIdx];
+				Cluster DelCluster_2 = this.clusters[secondIdx[0]];
+				newCluster = new Cluster(DateTime.Now, clusters[maxFrequencyIdx].uid, timeslot, true);
+				this.clusters.Remove(DelCluster_1);
+				this.clusters.Remove(DelCluster_2);
+			}
+			this.clusters.Add(newCluster);
+			this.options.K--;
+			this.changed.Invoke(this, new ModelEventArgs(
+				MODEL_ACTION.MERGECLUSTER_SUCCESS,
+				new Dictionary<string, dynamic>() {
+					{ "cluster", newCluster },
+					{ "K", this.options.K },
+				}));
 		}
 
 		public void Evaluate()

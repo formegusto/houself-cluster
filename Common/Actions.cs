@@ -55,5 +55,7 @@ namespace houself_cluster.Common
 		public const string RECLUSTER_FAILURE = "model/recluster/failure";
 
 		public const string SAVEMODE_DATA = "model/savemode/data";
+
+		public const string MERGECLUSTER_SUCCESS = "view/mergeclutser/success";
 	}
 }
