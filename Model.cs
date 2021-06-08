@@ -55,6 +55,7 @@ namespace houself_cluster
 		public event ModelHandler<HouselfClusterModel> changed;
 		// Load Excel Datas
 		public object[,] cell;
+		public int mergeLv;
 		public List<Data> datas;
 		public List<Cluster> clusters;
 		public ClusterOptions options;
@@ -63,6 +64,7 @@ namespace houself_cluster
 			//
 			// Cluster Option Config
 			//
+			this.mergeLv = 0;
 			this.options = new ClusterOptions();
 			this.options.keyword = "";
 			this.options.day = Day.SUN;
@@ -316,6 +318,7 @@ namespace houself_cluster
 				copyTimeslot
 				);
 
+			mergeLv = 0;
 			for(int k = 1; k < this.options.K; k++)
 			{
 				Console.WriteLine(string.Format("{0}번 클러스터 구성 중", k));
@@ -479,6 +482,7 @@ namespace houself_cluster
 			});
 			*/
 			if (this.options.season == Season.ALL) return;
+			mergeLv++;
 			int maxFrequencyIdx = 0;
 			int frequency = clusters[0].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
 			
@@ -571,6 +575,7 @@ namespace houself_cluster
 				new Dictionary<string, dynamic>() {
 					{ "cluster", newCluster },
 					{ "K", this.options.K },
+					{ "Lv", this.mergeLv }
 				}));
 		}
 

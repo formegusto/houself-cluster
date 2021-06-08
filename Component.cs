@@ -29,11 +29,11 @@ namespace houself_cluster
 		public void ModelNotify(IModel model, ModelEventArgs e)
 		{
 			Console.WriteLine(string.Format("[Model -> View] {0}", e.action));
-			switch(e.action)
+			switch (e.action)
 			{
 				case MODEL_ACTION.READ_FILE_SUCCESS:
 					this.Invoke((System.Action)(() => this.LoadingTitle.Text = "셀을 읽는 중 입니다."));
-					
+
 					break;
 				case MODEL_ACTION.INIT_EXCEL_LOAD_SUCCESS:
 					this.Invoke((System.Action)(() => Body_Allocate()));
@@ -66,7 +66,7 @@ namespace houself_cluster
 					{
 						this.controller.Dispatch(MODEL_ACTION.ASSIGN_INSTANCE);
 					});
-					
+
 					break;
 				case MODEL_ACTION.ASSIGN_INSTANCE_SUCCESS:
 					// Console.WriteLine("{0} 데이터는 {1} 클러스터에 할당", (Data)e.payload["data"], e.payload["cluster"]);
@@ -105,11 +105,12 @@ namespace houself_cluster
 							SeasonUtils.SeasonToKR(options.season),
 							DateUtils.DayToKR(options.day)
 						)
-						,this.chartPanelGroup)).Show();
+						, this.chartPanelGroup)).Show();
 
 					break;
 				case MODEL_ACTION.MERGECLUSTER_SUCCESS:
-					// Cluster_Line_Allocate((Cluster) e.payload["cluster"], e.payload["K"]);
+					Cluster_Line_Allocate((Cluster)e.payload["cluster"], e.payload["K"], e.payload["Lv"]);
+					Delay(3000);
 					this.changed(
 						this, new ViewEventArgs(
 							VIEW_ACTION.RECLUSTER));
@@ -201,17 +202,22 @@ namespace houself_cluster
 			   
 		   }));
 		}
-		public void Cluster_Line_Allocate(Cluster cluster, int K)
+		public void Cluster_Line_Allocate(Cluster cluster, int K, int Lv)
 		{
 			this.Invoke((System.Action)(() =>
 			{
 				LiveCharts.WinForms.CartesianChart chart = new LiveCharts.WinForms.CartesianChart();
 				ChartPanel chartPanel = new ChartPanel(chart);
+				ChartPanel DelPanel = this.chartPanelGroup[K];
+				LiveCharts.WinForms.CartesianChart DelChart = this.chartList[K];
+				this.chartPanelGroup.Remove(DelPanel);
 				this.chartPanelGroup.Add(chartPanel);
+				chartList.Remove(DelChart);
 				chartList.Add(chart);
 				chart.Dock = System.Windows.Forms.DockStyle.Fill;
 
-				this.ChartTable.Controls.Add(chartPanel, K % 3, K / 3);
+				this.ChartTable.Controls.Remove(DelPanel);
+				this.ChartTable.Controls.Add(chartPanel, (K) % 3, (K)/ 3);
 
 				ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
 				for (int t = 0; t < cluster.timeslot.Length; t++)
@@ -225,7 +231,9 @@ namespace houself_cluster
 					StrokeThickness = 4,
 				};
 				
-				this.chartList[K].Series.Add(ls);
+				this.chartList[this.chartList.Count - 1].Series.Add(ls);
+
+				chartPanel.SetText(string.Format("merge level {0}", Lv));
 			}));
 		}
 		public void Cluster_Line_Allocate(List<Cluster> clusters, int K)
