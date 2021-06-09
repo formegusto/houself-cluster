@@ -19,6 +19,7 @@ namespace houself_cluster.Common
 		public const string MERGECLUSTER = "view/mergeclutser";
 		public const string EVALUATE = "view/evaluate";
 		public const string SAVEMODE = "view/savemode";
+		public const string SEASON_STATISTIC = "view/season_statistic";
 		public const string CHANGE_KEYWORD = "view/change_keyword";
 		public const string CHANGE_DAYS = "view/change_days";
 		public const string CHANGE_SEASONS = "view/change_seasons";
@@ -57,5 +58,8 @@ namespace houself_cluster.Common
 		public const string SAVEMODE_DATA = "model/savemode/data";
 
 		public const string MERGECLUSTER_SUCCESS = "view/mergeclutser/success";
+
+		public const string SEASON_STATISTIC_SUCCESS = "view/season_statistic/success";
+		public const string SEASON_STATISTIC_FAILURE = "view/season_statistic/failure";
 	}
 }

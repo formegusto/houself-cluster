@@ -38,6 +38,7 @@ namespace houself_cluster
 	public class Data
 	{
 		public DateTime date;
+		public Season season;
 		public string uid;
 		public double[] timeslot;
 		public int mainCluster;
@@ -47,6 +48,7 @@ namespace houself_cluster
 		public Data(DateTime d, string u, double[] ts)
 		{
 			this.date = d;
+			this.season = DateUtils.DateToSeason(d);
 			this.uid = u;
 			this.timeslot = ts;
 			this.distance = Math.Sqrt(double.MaxValue);

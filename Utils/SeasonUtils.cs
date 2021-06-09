@@ -153,5 +153,49 @@ namespace houself_cluster.Utils
 
 			return kr;
 		}
+
+		public static System.Windows.Media.Brush GetBrush(DateTime date)
+		{
+			System.Windows.Media.Brush brush = System.Windows.Media.Brushes.Red;
+			switch (DateUtils.DateToSeason(date))
+			{
+				case Season.SPRING:
+					brush = System.Windows.Media.Brushes.Red;
+					break;
+				case Season.SUMMER:
+					brush = System.Windows.Media.Brushes.Purple;
+					break;
+				case Season.AUTUMN:
+					brush = System.Windows.Media.Brushes.SeaGreen;
+					break;
+				case Season.WINTER:
+					brush = System.Windows.Media.Brushes.Silver;
+					break;
+			}
+
+			return brush;
+		}
+
+		public static System.Windows.Media.Brush GetBrush(Season season)
+		{
+			System.Windows.Media.Brush brush = System.Windows.Media.Brushes.Red;
+			switch (season)
+			{
+				case Season.SPRING:
+					brush = System.Windows.Media.Brushes.Red;
+					break;
+				case Season.SUMMER:
+					brush = System.Windows.Media.Brushes.Purple;
+					break;
+				case Season.AUTUMN:
+					brush = System.Windows.Media.Brushes.SeaGreen;
+					break;
+				case Season.WINTER:
+					brush = System.Windows.Media.Brushes.Silver;
+					break;
+			}
+
+			return brush;
+		}
 	}
 }

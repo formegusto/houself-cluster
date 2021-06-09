@@ -49,6 +49,7 @@ namespace houself_cluster
 		void SaveMode();
 		void MergeCluster();
 		void Evaluate();
+		void SeasonStatistic();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -584,6 +585,11 @@ namespace houself_cluster
 			double ECV = Operator.ECV(this.clusters.ToArray(), this.datas.ToArray());
 
 			Console.WriteLine(string.Format("ECV ----> {0} ",ECV));
+		}
+
+		public void SeasonStatistic()
+		{
+
 		}
 	}
 }

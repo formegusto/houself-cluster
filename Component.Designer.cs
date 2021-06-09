@@ -56,7 +56,6 @@
 			this.Body = new MetroFramework.Controls.MetroPanel();
 			this.ChartTable = new System.Windows.Forms.TableLayoutPanel();
 			this.SideBar = new MetroFramework.Controls.MetroPanel();
-			this.ClusteringBtn = new MetroFramework.Controls.MetroButton();
 			this.KeywordBox = new MetroFramework.Controls.MetroTextBox();
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.LoadingTitle = new MetroFramework.Controls.MetroLabel();
@@ -67,6 +66,8 @@
 			this.SaveBtn = new MetroFramework.Controls.MetroButton();
 			this.mergeButton = new MetroFramework.Controls.MetroButton();
 			this.ecvBtn = new MetroFramework.Controls.MetroButton();
+			this.ClusteringBtn = new MetroFramework.Controls.MetroButton();
+			this.statisticBtn = new MetroFramework.Controls.MetroButton();
 			this.Header.SuspendLayout();
 			this.TimeslotComponent.SuspendLayout();
 			this.TimeslotTabs.SuspendLayout();
@@ -519,19 +520,6 @@
 			this.SideBar.VerticalScrollbarHighlightOnWheel = false;
 			this.SideBar.VerticalScrollbarSize = 10;
 			// 
-			// ClusteringBtn
-			// 
-			this.ClusteringBtn.Dock = System.Windows.Forms.DockStyle.Top;
-			this.ClusteringBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
-			this.ClusteringBtn.Location = new System.Drawing.Point(0, 40);
-			this.ClusteringBtn.Name = "ClusteringBtn";
-			this.ClusteringBtn.Size = new System.Drawing.Size(428, 40);
-			this.ClusteringBtn.TabIndex = 3;
-			this.ClusteringBtn.Text = "Clustering";
-			this.ClusteringBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.ClusteringBtn.UseSelectable = true;
-			this.ClusteringBtn.Click += new System.EventHandler(this.ClusteringBtn_Click);
-			// 
 			// KeywordBox
 			// 
 			// 
@@ -685,6 +673,31 @@
 			this.ecvBtn.UseSelectable = true;
 			this.ecvBtn.Click += new System.EventHandler(this.ECVBtn_Click);
 			// 
+			// ClusteringBtn
+			// 
+			this.ClusteringBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.ClusteringBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.ClusteringBtn.Location = new System.Drawing.Point(0, 40);
+			this.ClusteringBtn.Name = "ClusteringBtn";
+			this.ClusteringBtn.Size = new System.Drawing.Size(428, 40);
+			this.ClusteringBtn.TabIndex = 3;
+			this.ClusteringBtn.Text = "Clustering";
+			this.ClusteringBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.ClusteringBtn.UseSelectable = true;
+			this.ClusteringBtn.Click += new System.EventHandler(this.ClusteringBtn_Click);
+			// 
+			// statisticBtn
+			// 
+			this.statisticBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.statisticBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.statisticBtn.Location = new System.Drawing.Point(0, 80);
+			this.statisticBtn.Name = "statisticBtn";
+			this.statisticBtn.Size = new System.Drawing.Size(428, 40);
+			this.statisticBtn.TabIndex = 4;
+			this.statisticBtn.Text = "Season Statistic";
+			this.statisticBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.statisticBtn.UseSelectable = true;
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -734,7 +747,6 @@
 		private MetroFramework.Controls.MetroLabel LoadingTitle;
 		private MetroFramework.Controls.MetroPanel LoadingComponent;
 		private MetroFramework.Controls.MetroTextBox KeywordBox;
-		private MetroFramework.Controls.MetroButton ClusteringBtn;
 		private MetroFramework.Controls.MetroPanel ChartLoadingComponent;
 		private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner2;
 		private MetroFramework.Controls.MetroButton NextClusteringBtn;
@@ -756,6 +768,8 @@
 		private MetroFramework.Controls.MetroButton SaveBtn;
 		private MetroFramework.Controls.MetroButton mergeButton;
 		private MetroFramework.Controls.MetroButton ecvBtn;
+		private MetroFramework.Controls.MetroButton statisticBtn;
+		private MetroFramework.Controls.MetroButton ClusteringBtn;
 	}
 }
 

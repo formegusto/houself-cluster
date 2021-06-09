@@ -79,6 +79,7 @@ namespace houself_cluster
 					   this.SideBar.Controls.Clear();
 					   Cluster_Line_Allocate((List<Cluster>)e.payload["clusters"], e.payload["K"]);
 
+					   this.SideBar.Controls.Add(this.statisticBtn);
 					   this.SideBar.Controls.Add(this.ecvBtn);
 					   this.SideBar.Controls.Add(this.mergeButton);
 					   this.SideBar.Controls.Add(this.SaveBtn);
@@ -169,29 +170,11 @@ namespace houself_cluster
 			   ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
 			   for (int t = 0; t < data.timeslot.Length; t++)
 				   cv.Add(new ObservablePoint(t * (24 / data.timeslot.Length), data.timeslot[t]));
-
-			   Brush brush = Brushes.Red;
-			   switch (DateUtils.DateToSeason(data.date))
-			   {
-				   case Season.SPRING:
-					   brush = Brushes.Red;
-					   break;
-				   case Season.SUMMER:
-					   brush = Brushes.Purple;
-					   break;
-				   case Season.AUTUMN:
-					   brush = Brushes.SeaGreen;
-					   break;
-				   case Season.WINTER:
-					   brush = Brushes.Silver;
-					   break;
-			   }
-
 			   
 			   LineSeries ls = new LineSeries
 			   {
 				   Title = string.Format("{0}", data.date.ToString("yyyyMMdd")),
-				   Stroke = brush,
+				   Stroke = SeasonUtils.GetBrush(data.date),
 				   Values = cv,
 				   StrokeThickness = 1,
 			   };
@@ -299,6 +282,7 @@ namespace houself_cluster
 			this.chartPanelGroup = null;
 			Delay(3000);
 		}
+		public void StatisticBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.SEASON_STATISTIC));
 		public void SaveBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.SAVEMODE));
 		public void MergeBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.MERGECLUSTER));
 		public void ECVBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.EVALUATE));
