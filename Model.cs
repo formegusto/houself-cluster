@@ -372,6 +372,20 @@ namespace houself_cluster
 			});
 			this.datas = movingDatas;
 
+			this.datas.ForEach((data) =>
+			{
+				double k = 2 / (data.timeslot.Length + 1);
+				Data newData = new Data(
+						data.date,
+						data.uid,
+						new double[data.timeslot.Length]
+					);
+				for (int t = data.timeslot.Length - 1; t > 0; t--)
+				{
+					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
+				}
+			});
+
 			Console.WriteLine(newDatas[0].timeslot.Length);
 			
 
