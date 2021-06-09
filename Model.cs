@@ -273,9 +273,36 @@ namespace houself_cluster
 
 		public void DataPreprocessing()
 		{
+			// 이동평균
+			// 3h로 일단 고정
+			List<Data> movingDatas = new List<Data>();
+			this.datas.ForEach((data) =>
+			{
+				Data newData = new Data(
+					data.date,
+					data.uid,
+					new double[data.timeslot.Length]
+					);
+
+				double partialSum = 0.0;
+				for(int t = 0; t < data.timeslot.Length ; t++)
+				{
+					partialSum += data.timeslot[t];
+					if (t < (3 - 1))
+					{
+						newData.timeslot[t] = 0;
+					} else
+					{
+						newData.timeslot[t] = partialSum / 3;
+						partialSum -= data.timeslot[t - (3 - 1)];
+					}
+				}
+				movingDatas.Add(newData);
+			});
+			this.datas = movingDatas;
+
 			// 차원 축소
 			List<Data> newDatas = new List<Data>();
-
 			this.datas.ForEach((data) =>
 			{
 				Data newData = new Data(
