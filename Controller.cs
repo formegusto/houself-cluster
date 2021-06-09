@@ -47,6 +47,9 @@ namespace houself_cluster
 				case VIEW_ACTION.EVALUATE:
 					this.model.Evaluate();
 					break;
+				case VIEW_ACTION.SEASON_STATISTIC:
+					this.model.SeasonStatistic();
+					break;
 			}
 		}
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)

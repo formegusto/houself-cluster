@@ -697,6 +697,7 @@
 			this.statisticBtn.Text = "Season Statistic";
 			this.statisticBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.statisticBtn.UseSelectable = true;
+			this.statisticBtn.Click += new System.EventHandler(this.StatisticBtn_Click);
 			// 
 			// Component
 			// 

@@ -486,7 +486,6 @@ namespace houself_cluster
 			mergeLv++;
 			int maxFrequencyIdx = 0;
 			int frequency = clusters[0].seasonFrequency.Find((sf) => sf.season == this.options.season).frequency;
-			
 
 			// 1위 클러스터 만들기
 			for (int i = 1; i < clusters.Count; i++)
@@ -526,7 +525,6 @@ namespace houself_cluster
 					}
 					
 				}
-				
 			}
 
 			Console.WriteLine(string.Format("현재 {0}에 가장 높은 빈도수를 가진\n " +
@@ -590,6 +588,42 @@ namespace houself_cluster
 		public void SeasonStatistic()
 		{
 
+			for(int c = 0; c < this.clusters.Count; c++)
+			{
+				List<Cluster> statistics = new List<Cluster>();
+
+				// 초기화
+				for (int s = 0; s < 4; s++)
+				{
+					double[] timeslot = new double[clusters[c].timeslot.Length];
+					for (int t = 0; t < timeslot.Length; t++)
+						timeslot[t] = 0;
+
+					statistics.Add(new Cluster(DateTime.Now, string.Format("{0}-{1}", clusters[c].uid, (Season)(s + 1)), timeslot));
+				}
+
+				clusters[c].instances.ForEach((data) =>
+				{
+					for (int t = 0; t < data.timeslot.Length; t++)
+						statistics[((int)data.season) - 1].timeslot[t] += data.timeslot[t];
+				});
+
+				// 평균 정리
+				for (int s = 0; s < 4; s++)
+				{
+					for (int t = 0; t < statistics[s].timeslot.Length; t++)
+						if (statistics[s].timeslot[t] != 0 && clusters[c].seasonFrequency[s].frequency != 0)
+						{
+							statistics[s].timeslot[t] /= clusters[c].seasonFrequency[s].frequency;
+						}
+				}
+
+				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEASON_STATISTIC_SUCCESS, new Dictionary<string, dynamic> { { "statistics", statistics } }));
+			}
+			this.clusters.ForEach((cluster) =>
+			{
+				
+			});
 		}
 	}
 }

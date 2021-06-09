@@ -117,6 +117,13 @@ namespace houself_cluster
 							VIEW_ACTION.RECLUSTER));
 
 					break;
+				case MODEL_ACTION.SEASON_STATISTIC_SUCCESS:
+					((List<Cluster>) e.payload["statistics"]).ForEach((statistic) =>
+					{
+						statistic.ToPrint();
+					});
+
+					break;
 				default:
 					return;
 			}
