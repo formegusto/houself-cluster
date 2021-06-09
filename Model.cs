@@ -335,11 +335,22 @@ namespace houself_cluster
 					new double[(int) this.options.timeslot]
 					);
 				for (int t = 0; t < data.timeslot.Length; t++)
+				{
 					newData.timeslot
-						[t / 
-							(LOAD_EXCEL_CONFIG.TIMESLOT / 
-								(int)this.options.timeslot)] 
+						[t /
+							(LOAD_EXCEL_CONFIG.TIMESLOT /
+								(int)this.options.timeslot)]
 						+= data.timeslot[t];
+					if(((t + 1) /
+							(LOAD_EXCEL_CONFIG.TIMESLOT /
+								(int)this.options.timeslot)) != 
+						(t /
+							(LOAD_EXCEL_CONFIG.TIMESLOT /
+								(int)this.options.timeslot)))
+					{
+						data.timeslot[t] /= (int)this.options.timeslot;
+					}
+				}
 
 				newDatas.Add(newData);
 			});
