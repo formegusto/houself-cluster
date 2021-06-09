@@ -612,13 +612,14 @@ namespace houself_cluster
 				for (int s = 0; s < 4; s++)
 				{
 					for (int t = 0; t < statistics[s].timeslot.Length; t++)
-						if (statistics[s].timeslot[t] != 0 && clusters[c].seasonFrequency[s].frequency != 0)
+						if (statistics[s].timeslot[t] != 0 && clusters[c].seasonFrequency.Find((sf) => sf.season == (Season) (s+1)).frequency != 0)
 						{
-							statistics[s].timeslot[t] /= clusters[c].seasonFrequency[s].frequency;
+							statistics[s].timeslot[t] /= clusters[c].seasonFrequency.Find((sf) => sf.season == (Season)(s + 1)).frequency;
 						}
 				}
 
-				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEASON_STATISTIC_SUCCESS, new Dictionary<string, dynamic> { { "statistics", statistics } }));
+				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEASON_STATISTIC_SUCCESS, new Dictionary<string, dynamic> { { "statistics", statistics }, { "idx", c } }));
+
 			}
 			this.clusters.ForEach((cluster) =>
 			{

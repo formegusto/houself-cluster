@@ -118,10 +118,7 @@ namespace houself_cluster
 
 					break;
 				case MODEL_ACTION.SEASON_STATISTIC_SUCCESS:
-					((List<Cluster>) e.payload["statistics"]).ForEach((statistic) =>
-					{
-						statistic.ToPrint();
-					});
+					Season_Line_Allocate(e.payload["statistics"], e.payload["idx"]);
 
 					break;
 				default:
@@ -166,6 +163,27 @@ namespace houself_cluster
 				this.Invoke((System.Action)(() =>
 				{
 					this.chartList[c].Series.Clear();
+				}));
+			}
+		}
+		public void Season_Line_Allocate(List<Cluster> sclusters, int idx)
+		{
+			for (int c = 0; c < 4; c++)
+			{
+				this.Invoke((System.Action)(() =>
+				{
+					ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
+					for (int t = 0; t < sclusters[c].timeslot.Length; t++)
+						cv.Add(new ObservablePoint(t * (24 / sclusters[c].timeslot.Length), sclusters[c].timeslot[t]));
+
+					LineSeries ls = new LineSeries
+					{
+						Title = string.Format("{0}", sclusters[c].uid),
+						Stroke = SeasonUtils.GetBrush((Season) (c+1)),
+						Values = cv,
+						StrokeThickness = 4,
+					};
+					this.chartList[idx].Series.Add(ls);
 				}));
 			}
 		}
