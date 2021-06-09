@@ -280,6 +280,7 @@ namespace houself_cluster
 
 		public void DataPreprocessing()
 		{
+			/*
 			// 이동평균
 			// 3h로 일단 고정
 			List<Data> movingDatas = new List<Data>();
@@ -323,7 +324,7 @@ namespace houself_cluster
 					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
 				}
 			});
-
+			*/
 			// 차원 축소
 			List<Data> newDatas = new List<Data>();
 			this.datas.ForEach((data) =>
@@ -342,9 +343,37 @@ namespace houself_cluster
 
 				newDatas.Add(newData);
 			});
+			this.datas = newDatas;
+
+			List<Data> movingDatas = new List<Data>();
+			this.datas.ForEach((data) =>
+			{
+				Data newData = new Data(
+					data.date,
+					data.uid,
+					new double[(int)this.options.timeslot]
+					);
+
+				double partialSum = 0.0;
+				for (int t = 0; t < data.timeslot.Length; t++)
+				{
+					partialSum += data.timeslot[t];
+					if (t < (1))
+					{
+						newData.timeslot[t] = data.timeslot[t];
+					}
+					else
+					{
+						newData.timeslot[t] = partialSum / 2;
+						partialSum -= data.timeslot[t - 1];
+					}
+				}
+				movingDatas.Add(newData);
+			});
+			this.datas = movingDatas;
 
 			Console.WriteLine(newDatas[0].timeslot.Length);
-			this.datas = newDatas;
+			
 
 			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.DATA_PREPROCESSING_SUCCESS));
 		}
