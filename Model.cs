@@ -262,7 +262,14 @@ namespace houself_cluster
 				}
 			}
 
-			this.options.K = (int) Math.Pow(datas.Count / 2, 1f / 2);
+			if(this.options.season != Season.ALL)
+			{
+				this.options.K = (int)Math.Pow(datas.Count / 2, 1f / 2) + 1;
+			} else
+			{
+				this.options.K = (int)Math.Pow(datas.Count / 2, 1f / 2);
+			}
+			
 			this.datas = datas;
 
 			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
@@ -290,7 +297,7 @@ namespace houself_cluster
 					partialSum += data.timeslot[t];
 					if (t < (3 - 1))
 					{
-						newData.timeslot[t] = 0;
+						newData.timeslot[t] = data.timeslot[t];
 					} else
 					{
 						newData.timeslot[t] = partialSum / 3;
@@ -300,6 +307,22 @@ namespace houself_cluster
 				movingDatas.Add(newData);
 			});
 			this.datas = movingDatas;
+
+			// 지수 이동 평균
+			List<Data> SMA = new List<Data>();
+			this.datas.ForEach((data) =>
+			{
+				double k = 2 / (data.timeslot.Length + 1);
+				Data newData = new Data(
+						data.date,
+						data.uid,
+						new double[data.timeslot.Length]
+					);
+				for(int t = data.timeslot.Length - 1; t > 0; t--)
+				{
+					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
+				}
+			});
 
 			// 차원 축소
 			List<Data> newDatas = new List<Data>();
