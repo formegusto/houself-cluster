@@ -16,7 +16,7 @@ namespace houself_cluster.Atom
 {
 	public partial class AllChart : MetroFramework.Forms.MetroForm
 	{
-		public AllChart(List<Data> datas, System.Windows.Media.Brush brush)
+		public AllChart(List<Data> datas, List<Cluster> clusters,System.Windows.Media.Brush brush)
 		{
 			InitializeComponent();
 
@@ -32,6 +32,24 @@ namespace houself_cluster.Atom
 					Stroke = brush,
 					Values = cv,
 					StrokeThickness = 1,
+					PointGeometry = null,
+				};
+
+				this.Chart.Series.Add(ls);
+			});
+
+			clusters.ForEach((cluster) =>
+			{
+				ChartValues<ObservablePoint> cv = new ChartValues<ObservablePoint>();
+				for (int t = 0; t < cluster.timeslot.Length; t++)
+					cv.Add(new ObservablePoint(t * (24 / cluster.timeslot.Length), cluster.timeslot[t]));
+
+				LineSeries ls = new LineSeries
+				{
+					Title = string.Format("{0}", cluster.uid),
+					Stroke = System.Windows.Media.Brushes.AliceBlue,
+					Values = cv,
+					StrokeThickness = 4,
 					PointGeometry = null,
 				};
 

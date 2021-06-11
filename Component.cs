@@ -123,7 +123,7 @@ namespace houself_cluster
 
 					break;
 				case MODEL_ACTION.CONFIRM_SUCCESS:
-					new AllChart(e.payload["datas"], SeasonUtils.GetBrush(e.payload["season"])).Show();
+					new AllChart(e.payload["datas"], e.payload["clusters"],SeasonUtils.GetBrush(e.payload["season"])).Show();
 
 					break;
 				default:

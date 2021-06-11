@@ -142,7 +142,7 @@ namespace houself_cluster
 				}
 			}
 
-			/*
+			
 			List<Cluster> movingClusters = new List<Cluster>();
 			this.clusters.ForEach((cluster) =>
 			{
@@ -399,6 +399,7 @@ namespace houself_cluster
 			this.datas = newDatas;
 			this.initDatas = this.datas;
 
+			/*
 			List<Data> movingDatas = new List<Data>();
 			this.datas.ForEach((data) =>
 			{
