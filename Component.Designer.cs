@@ -507,7 +507,6 @@
 			// 
 			// SideBar
 			// 
-			this.SideBar.Controls.Add(this.ConfirmBtn);
 			this.SideBar.Controls.Add(this.ClusteringBtn);
 			this.SideBar.Controls.Add(this.KeywordBox);
 			this.SideBar.HorizontalScrollbarBarColor = true;
@@ -712,14 +711,16 @@
 			this.ConfirmBtn.Text = "Confirm";
 			this.ConfirmBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
 			this.ConfirmBtn.UseSelectable = true;
+			this.ConfirmBtn.Click += new System.EventHandler(this.ConfirmBtn_Click);
 			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1280, 720);
-			this.Controls.Add(this.Body);
-			this.Controls.Add(this.SideBar);
+			this.Controls.Add(this.LoadingComponent);
+			// this.Controls.Add(this.Body);
+			// this.Controls.Add(this.SideBar);
 			this.Controls.Add(this.Header);
 			this.Name = "Component";
 			this.Resizable = false;

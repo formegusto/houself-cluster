@@ -50,6 +50,9 @@ namespace houself_cluster
 				case VIEW_ACTION.SEASON_STATISTIC:
 					this.model.SeasonStatistic();
 					break;
+				case VIEW_ACTION.CONFIRM:
+					this.model.Confirm();
+					break;
 			}
 		}
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)

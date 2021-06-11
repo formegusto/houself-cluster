@@ -79,6 +79,7 @@ namespace houself_cluster
 					   this.SideBar.Controls.Clear();
 					   Cluster_Line_Allocate((List<Cluster>)e.payload["clusters"], e.payload["K"]);
 
+					   this.SideBar.Controls.Add(this.ConfirmBtn);
 					   this.SideBar.Controls.Add(this.statisticBtn);
 					   this.SideBar.Controls.Add(this.ecvBtn);
 					   this.SideBar.Controls.Add(this.mergeButton);
@@ -119,6 +120,10 @@ namespace houself_cluster
 					break;
 				case MODEL_ACTION.SEASON_STATISTIC_SUCCESS:
 					Season_Line_Allocate(e.payload["statistics"], e.payload["idx"]);
+
+					break;
+				case MODEL_ACTION.CONFIRM_SUCCESS:
+					new AllChart(e.payload["datas"], SeasonUtils.GetBrush(e.payload["season"])).Show();
 
 					break;
 				default:
@@ -324,6 +329,10 @@ namespace houself_cluster
 			this, new ViewEventArgs(
 				VIEW_ACTION.START_CLUSTERING));
 		}
+		public void ConfirmBtn_Click(object sender, EventArgs e) => this.changed(
+			this, new ViewEventArgs(
+				VIEW_ACTION.CONFIRM)
+			);
 		public void ReClusteringBtn_Click(object sender, EventArgs e) => this.changed(
 			this, new ViewEventArgs(
 				VIEW_ACTION.RECLUSTER));

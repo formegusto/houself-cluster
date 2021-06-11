@@ -72,6 +72,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atom\AllChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Atom\AllChart.Designer.cs">
+      <DependentUpon>AllChart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Atom\ChartPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     <Compile Include="Utils\Operator.cs" />
     <Compile Include="Utils\SeasonUtils.cs" />
     <Compile Include="View.cs" />
+    <EmbeddedResource Include="Atom\AllChart.resx">
+      <DependentUpon>AllChart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Atom\ResultComponent.resx">
       <DependentUpon>ResultComponent.cs</DependentUpon>
     </EmbeddedResource>

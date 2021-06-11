@@ -50,6 +50,7 @@ namespace houself_cluster
 		void MergeCluster();
 		void Evaluate();
 		void SeasonStatistic();
+		void Confirm();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -366,8 +367,6 @@ namespace houself_cluster
 			*/
 			// 차원 축소
 
-			this.initDatas = this.datas;
-
 			List<Data> newDatas = new List<Data>();
 			this.datas.ForEach((data) =>
 			{
@@ -396,9 +395,10 @@ namespace houself_cluster
 
 				newDatas.Add(newData);
 			});
-			this.datas = newDatas;
-
 			
+			this.datas = newDatas;
+			this.initDatas = this.datas;
+
 			List<Data> movingDatas = new List<Data>();
 			this.datas.ForEach((data) =>
 			{
@@ -803,6 +803,18 @@ namespace houself_cluster
 				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEASON_STATISTIC_SUCCESS, new Dictionary<string, dynamic> { { "statistics", statistics }, { "idx", c } }));
 
 			}
+		}
+
+		public void Confirm()
+		{
+			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.CONFIRM_SUCCESS,
+				new Dictionary<string, dynamic>
+				{
+					{"datas", this.initDatas },
+					{"clusters", this.clusters },
+					{"season", this.options.season }
+				}
+				));
 		}
 	}
 }

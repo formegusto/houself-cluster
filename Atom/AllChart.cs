@@ -31,7 +31,7 @@ namespace houself_cluster.Atom
 					Title = string.Format("{0}", data.uid),
 					Stroke = brush,
 					Values = cv,
-					StrokeThickness = 4,
+					StrokeThickness = 1,
 					PointGeometry = null,
 				};
 
