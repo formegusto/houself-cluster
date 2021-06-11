@@ -56,6 +56,7 @@
 			this.Body = new MetroFramework.Controls.MetroPanel();
 			this.ChartTable = new System.Windows.Forms.TableLayoutPanel();
 			this.SideBar = new MetroFramework.Controls.MetroPanel();
+			this.ClusteringBtn = new MetroFramework.Controls.MetroButton();
 			this.KeywordBox = new MetroFramework.Controls.MetroTextBox();
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.LoadingTitle = new MetroFramework.Controls.MetroLabel();
@@ -66,8 +67,8 @@
 			this.SaveBtn = new MetroFramework.Controls.MetroButton();
 			this.mergeButton = new MetroFramework.Controls.MetroButton();
 			this.ecvBtn = new MetroFramework.Controls.MetroButton();
-			this.ClusteringBtn = new MetroFramework.Controls.MetroButton();
 			this.statisticBtn = new MetroFramework.Controls.MetroButton();
+			this.ConfirmBtn = new MetroFramework.Controls.MetroButton();
 			this.Header.SuspendLayout();
 			this.TimeslotComponent.SuspendLayout();
 			this.TimeslotTabs.SuspendLayout();
@@ -506,6 +507,7 @@
 			// 
 			// SideBar
 			// 
+			this.SideBar.Controls.Add(this.ConfirmBtn);
 			this.SideBar.Controls.Add(this.ClusteringBtn);
 			this.SideBar.Controls.Add(this.KeywordBox);
 			this.SideBar.HorizontalScrollbarBarColor = true;
@@ -519,6 +521,19 @@
 			this.SideBar.VerticalScrollbarBarColor = true;
 			this.SideBar.VerticalScrollbarHighlightOnWheel = false;
 			this.SideBar.VerticalScrollbarSize = 10;
+			// 
+			// ClusteringBtn
+			// 
+			this.ClusteringBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.ClusteringBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.ClusteringBtn.Location = new System.Drawing.Point(0, 40);
+			this.ClusteringBtn.Name = "ClusteringBtn";
+			this.ClusteringBtn.Size = new System.Drawing.Size(428, 40);
+			this.ClusteringBtn.TabIndex = 3;
+			this.ClusteringBtn.Text = "Clustering";
+			this.ClusteringBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.ClusteringBtn.UseSelectable = true;
+			this.ClusteringBtn.Click += new System.EventHandler(this.ClusteringBtn_Click);
 			// 
 			// KeywordBox
 			// 
@@ -673,19 +688,6 @@
 			this.ecvBtn.UseSelectable = true;
 			this.ecvBtn.Click += new System.EventHandler(this.ECVBtn_Click);
 			// 
-			// ClusteringBtn
-			// 
-			this.ClusteringBtn.Dock = System.Windows.Forms.DockStyle.Top;
-			this.ClusteringBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
-			this.ClusteringBtn.Location = new System.Drawing.Point(0, 40);
-			this.ClusteringBtn.Name = "ClusteringBtn";
-			this.ClusteringBtn.Size = new System.Drawing.Size(428, 40);
-			this.ClusteringBtn.TabIndex = 3;
-			this.ClusteringBtn.Text = "Clustering";
-			this.ClusteringBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
-			this.ClusteringBtn.UseSelectable = true;
-			this.ClusteringBtn.Click += new System.EventHandler(this.ClusteringBtn_Click);
-			// 
 			// statisticBtn
 			// 
 			this.statisticBtn.Dock = System.Windows.Forms.DockStyle.Top;
@@ -699,14 +701,25 @@
 			this.statisticBtn.UseSelectable = true;
 			this.statisticBtn.Click += new System.EventHandler(this.StatisticBtn_Click);
 			// 
+			// ConfirmBtn
+			// 
+			this.ConfirmBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.ConfirmBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.ConfirmBtn.Location = new System.Drawing.Point(0, 80);
+			this.ConfirmBtn.Name = "ConfirmBtn";
+			this.ConfirmBtn.Size = new System.Drawing.Size(428, 40);
+			this.ConfirmBtn.TabIndex = 4;
+			this.ConfirmBtn.Text = "Confirm";
+			this.ConfirmBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.ConfirmBtn.UseSelectable = true;
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1280, 720);
-			this.Controls.Add(this.LoadingComponent);
-			// this.Controls.Add(this.Body);
-			// this.Controls.Add(this.SideBar);
+			this.Controls.Add(this.Body);
+			this.Controls.Add(this.SideBar);
 			this.Controls.Add(this.Header);
 			this.Name = "Component";
 			this.Resizable = false;
@@ -771,6 +784,7 @@
 		private MetroFramework.Controls.MetroButton ecvBtn;
 		private MetroFramework.Controls.MetroButton statisticBtn;
 		private MetroFramework.Controls.MetroButton ClusteringBtn;
+		private MetroFramework.Controls.MetroButton ConfirmBtn;
 	}
 }
 

@@ -57,6 +57,7 @@ namespace houself_cluster
 		// Load Excel Datas
 		public object[,] cell;
 		public int mergeLv;
+		public List<Data> initDatas;
 		public List<Data> datas;
 		public List<Cluster> clusters;
 		public ClusterOptions options;
@@ -140,6 +141,7 @@ namespace houself_cluster
 				}
 			}
 
+			/*
 			List<Cluster> movingClusters = new List<Cluster>();
 			this.clusters.ForEach((cluster) =>
 			{
@@ -166,6 +168,16 @@ namespace houself_cluster
 				movingClusters.Add(newData);
 			});
 			this.clusters = movingClusters;
+			/*
+			this.clusters.ForEach((data) =>
+			{
+				double k = 2 / (data.timeslot.Length + 1);
+				for (int t = data.timeslot.Length - 1; t > 0; t--)
+				{
+					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
+				}
+			});
+			*/
 
 			this.changed.Invoke(this, new ModelEventArgs(
 					MODEL_ACTION.RECLUSTER_SUCCESS,
@@ -353,6 +365,9 @@ namespace houself_cluster
 			});
 			*/
 			// 차원 축소
+
+			this.initDatas = this.datas;
+
 			List<Data> newDatas = new List<Data>();
 			this.datas.ForEach((data) =>
 			{
@@ -415,11 +430,6 @@ namespace houself_cluster
 			this.datas.ForEach((data) =>
 			{
 				double k = 2 / (data.timeslot.Length + 1);
-				Data newData = new Data(
-						data.date,
-						data.uid,
-						new double[data.timeslot.Length]
-					);
 				for (int t = data.timeslot.Length - 1; t > 0; t--)
 				{
 					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
@@ -536,8 +546,17 @@ namespace houself_cluster
 				movingClusters.Add(newData);
 			});
 			this.clusters = movingClusters;
+			/*
+			this.clusters.ForEach((data) =>
+			{
+				double k = 2 / (data.timeslot.Length + 1);
+				for (int t = data.timeslot.Length - 1; t > 0; t--)
+				{
+					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
+				}
+			});
+			*/
 
-			
 			this.clusters.ForEach((cluster) =>
 			{
 				cluster.ToPrint();
@@ -784,10 +803,6 @@ namespace houself_cluster
 				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEASON_STATISTIC_SUCCESS, new Dictionary<string, dynamic> { { "statistics", statistics }, { "idx", c } }));
 
 			}
-			this.clusters.ForEach((cluster) =>
-			{
-				
-			});
 		}
 	}
 }

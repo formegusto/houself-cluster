@@ -20,6 +20,7 @@ namespace houself_cluster.Common
 		public const string EVALUATE = "view/evaluate";
 		public const string SAVEMODE = "view/savemode";
 		public const string SEASON_STATISTIC = "view/season_statistic";
+		public const string CONFIRM = "view/confirm";
 		public const string CHANGE_KEYWORD = "view/change_keyword";
 		public const string CHANGE_DAYS = "view/change_days";
 		public const string CHANGE_SEASONS = "view/change_seasons";
@@ -61,5 +62,8 @@ namespace houself_cluster.Common
 
 		public const string SEASON_STATISTIC_SUCCESS = "view/season_statistic/success";
 		public const string SEASON_STATISTIC_FAILURE = "view/season_statistic/failure";
+
+		public const string CONFIRM_SUCCESS = "view/confirm/success";
+		public const string CONFIRM_FAILURE = "view/confirm/failure";
 	}
 }
