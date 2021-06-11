@@ -188,6 +188,7 @@ namespace houself_cluster
 						Values = cv,
 						StrokeThickness = 4,
 						PointGeometry = null,
+						Fill = Brushes.Transparent
 					};
 					this.chartList[idx].Series.Add(ls);
 				}));
@@ -209,6 +210,7 @@ namespace houself_cluster
 				   Values = cv,
 				   StrokeThickness = 1,
 				   PointGeometry = null,
+				   Fill = Brushes.Transparent
 			   };
 			   Task.Run(() =>
 			   {
@@ -245,6 +247,7 @@ namespace houself_cluster
 					Values = cv,
 					StrokeThickness = 4,
 					PointGeometry = null,
+					Fill = Brushes.Transparent
 				};
 				
 				this.chartList[this.chartList.Count - 1].Series.Add(ls);
@@ -269,6 +272,7 @@ namespace houself_cluster
 						Values = cv,
 						StrokeThickness = 4,
 						PointGeometry = null,
+						Fill = null,
 					};
 					this.chartPanelGroup[c].SetText(string.Format("{0}|{1}|{2}|{3}", 
 						string.Format("{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[0].season), clusters[c].seasonFrequency[0].frequency),

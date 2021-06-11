@@ -169,6 +169,7 @@ namespace houself_cluster
 				movingClusters.Add(newData);
 			});
 			this.clusters = movingClusters;
+			
 			/*
 			this.clusters.ForEach((data) =>
 			{
@@ -178,7 +179,7 @@ namespace houself_cluster
 					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
 				}
 			});
-			*/
+			/**/
 
 			this.changed.Invoke(this, new ModelEventArgs(
 					MODEL_ACTION.RECLUSTER_SUCCESS,
@@ -320,9 +321,10 @@ namespace houself_cluster
 
 		public void DataPreprocessing()
 		{
-			/*
+			this.initDatas = this.datas;
 			// 이동평균
 			// 3h로 일단 고정
+				
 			List<Data> movingDatas = new List<Data>();
 			this.datas.ForEach((data) =>
 			{
@@ -348,7 +350,8 @@ namespace houself_cluster
 				movingDatas.Add(newData);
 			});
 			this.datas = movingDatas;
-
+		
+			/*
 			// 지수 이동 평균
 			List<Data> SMA = new List<Data>();
 			this.datas.ForEach((data) =>
@@ -364,6 +367,7 @@ namespace houself_cluster
 					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
 				}
 			});
+			/*
 			*/
 			// 차원 축소
 
@@ -397,7 +401,7 @@ namespace houself_cluster
 			});
 			
 			this.datas = newDatas;
-			this.initDatas = this.datas;
+			// this.initDatas = this.datas;
 
 			/*
 			List<Data> movingDatas = new List<Data>();
@@ -521,6 +525,7 @@ namespace houself_cluster
 			this.clusters = clusters;
 
 			// cluster 이동평균 설정
+			
 			List<Cluster> movingClusters = new List<Cluster>();
 			this.clusters.ForEach((cluster) =>
 			{
@@ -556,7 +561,7 @@ namespace houself_cluster
 					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
 				}
 			});
-			*/
+			/**/
 
 			this.clusters.ForEach((cluster) =>
 			{
@@ -808,6 +813,40 @@ namespace houself_cluster
 
 		public void Confirm()
 		{
+			
+			List<Data> newDatas = new List<Data>();
+			this.initDatas.ForEach((data) =>
+			{
+				Data newData = new Data(
+					data.date,
+					data.uid,
+					new double[(int)this.options.timeslot]
+					);
+				for (int t = 0; t < data.timeslot.Length; t++)
+				{
+					newData.timeslot
+						[t /
+							(LOAD_EXCEL_CONFIG.TIMESLOT /
+								(int)this.options.timeslot)]
+						+= data.timeslot[t];
+					if (((t + 1) /
+							(LOAD_EXCEL_CONFIG.TIMESLOT /
+								(int)this.options.timeslot)) !=
+						(t /
+							(LOAD_EXCEL_CONFIG.TIMESLOT /
+								(int)this.options.timeslot)))
+					{
+						data.timeslot[t] /= (int)this.options.timeslot;
+					}
+				}
+
+				newDatas.Add(newData);
+			});
+			
+			
+			this.initDatas = newDatas;
+			/**/
+
 			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.CONFIRM_SUCCESS,
 				new Dictionary<string, dynamic>
 				{
