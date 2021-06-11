@@ -140,6 +140,33 @@ namespace houself_cluster
 				}
 			}
 
+			List<Cluster> movingClusters = new List<Cluster>();
+			this.clusters.ForEach((cluster) =>
+			{
+				Cluster newData = new Cluster(
+					cluster.date,
+					cluster.uid,
+					new double[(int)this.options.timeslot]
+					);
+
+				double partialSum = 0.0;
+				for (int t = 0; t < cluster.timeslot.Length; t++)
+				{
+					partialSum += cluster.timeslot[t];
+					if (t < (1))
+					{
+						newData.timeslot[t] = cluster.timeslot[t];
+					}
+					else
+					{
+						newData.timeslot[t] = partialSum / 2;
+						partialSum -= cluster.timeslot[t - 1];
+					}
+				}
+				movingClusters.Add(newData);
+			});
+			this.clusters = movingClusters;
+
 			this.changed.Invoke(this, new ModelEventArgs(
 					MODEL_ACTION.RECLUSTER_SUCCESS,
 				new Dictionary<string, dynamic>() {
@@ -356,6 +383,7 @@ namespace houself_cluster
 			});
 			this.datas = newDatas;
 
+			
 			List<Data> movingDatas = new List<Data>();
 			this.datas.ForEach((data) =>
 			{
@@ -383,6 +411,7 @@ namespace houself_cluster
 			});
 			this.datas = movingDatas;
 
+			/*
 			this.datas.ForEach((data) =>
 			{
 				double k = 2 / (data.timeslot.Length + 1);
@@ -396,6 +425,7 @@ namespace houself_cluster
 					data.timeslot[t] = (data.timeslot[t] - data.timeslot[t - 1]) * k + data.timeslot[t - 1];
 				}
 			});
+			*/
 
 			Console.WriteLine(newDatas[0].timeslot.Length);
 			
@@ -477,8 +507,37 @@ namespace houself_cluster
 				}
 				
 			}
-
 			this.clusters = clusters;
+
+			// cluster 이동평균 설정
+			List<Cluster> movingClusters = new List<Cluster>();
+			this.clusters.ForEach((cluster) =>
+			{
+				Cluster newData = new Cluster(
+					cluster.date,
+					cluster.uid,
+					new double[(int)this.options.timeslot]
+					);
+
+				double partialSum = 0.0;
+				for (int t = 0; t < cluster.timeslot.Length; t++)
+				{
+					partialSum += cluster.timeslot[t];
+					if (t < (1))
+					{
+						newData.timeslot[t] = cluster.timeslot[t];
+					}
+					else
+					{
+						newData.timeslot[t] = partialSum / 2;
+						partialSum -= cluster.timeslot[t - 1];
+					}
+				}
+				movingClusters.Add(newData);
+			});
+			this.clusters = movingClusters;
+
+			
 			this.clusters.ForEach((cluster) =>
 			{
 				cluster.ToPrint();
