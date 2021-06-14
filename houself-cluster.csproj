@@ -78,6 +78,12 @@
     <Compile Include="Atom\AllChart.Designer.cs">
       <DependentUpon>AllChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Atom\AllTableChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Atom\AllTableChart.Designer.cs">
+      <DependentUpon>AllTableChart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Atom\ChartPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     <Compile Include="View.cs" />
     <EmbeddedResource Include="Atom\AllChart.resx">
       <DependentUpon>AllChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Atom\AllTableChart.resx">
+      <DependentUpon>AllTableChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Atom\ResultComponent.resx">
       <DependentUpon>ResultComponent.cs</DependentUpon>

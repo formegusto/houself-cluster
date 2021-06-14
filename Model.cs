@@ -36,11 +36,11 @@ namespace houself_cluster
 		void ChangeOption(string action, Dictionary<string, dynamic> payload);
 		void InitLoadExcel();
 		// 1. UID 탐색
-		void StartClustering();
+		void StartClustering(bool isNotify = false);
 		// 2. Datas 구성
-		void SetDatas();
+		void SetDatas(bool isNotify = false);
 		// 3. Data Preprocessing : Timeslot 기반
-		void DataPreprocessing();
+		void DataPreprocessing(bool isNotify = false);
 		// 4. Cluster 구성
 		void SetCluster();
 		// 5. Assign Instance 
@@ -81,6 +81,11 @@ namespace houself_cluster
 		}
 		public void FeatureScaling()
 		{
+			this.StartClustering(true);
+			this.SetDatas(true);
+			this.DataPreprocessing(true);
+
+
 			double maxTS = -1;
 			double minTS = Double.MaxValue;
 			this.datas.ForEach((data) =>
@@ -107,11 +112,7 @@ namespace houself_cluster
 
 			this.changed.Invoke(this,
 				new ModelEventArgs(
-					MODEL_ACTION.REQUEST_FS_SUCCESS,
-					new Dictionary<string, dynamic>()
-					{
-						{"datas", this.datas }
-					}));
+					MODEL_ACTION.DATA_PREPROCESSING_SUCCESS));
 		}
 		public void ChangeOption(string a, Dictionary<string, dynamic> p)
 		{
@@ -259,7 +260,7 @@ namespace houself_cluster
 				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.INIT_EXCEL_LOAD_SUCCESS));
 			});
 		}
-		public void StartClustering()
+		public void StartClustering(bool isNotify=false)
 		{
 			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
 			Console.WriteLine(this.options.ToString());
@@ -283,10 +284,15 @@ namespace houself_cluster
 			}
 
 			this.options.searchCol = searchCol;
-			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEARCH_KEYWORD_FIND));
+
+			if(!isNotify)
+			{
+				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.SEARCH_KEYWORD_FIND));
+			}
+			
 		}
 
-		public void SetDatas()
+		public void SetDatas(bool isNotify = false)
 		{
 			List<Data> datas = new List<Data>();
 			List<int> targetMonth = SeasonUtils.SeasonToMonth(this.options.season);
@@ -351,10 +357,14 @@ namespace houself_cluster
 			Console.WriteLine(LOAD_EXCEL_CONFIG.ToString());
 			Console.WriteLine(this.options.ToString());
 
-			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.REQUEST_DATAS_SUCCESS));
+			if(!isNotify)
+			{
+				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.REQUEST_DATAS_SUCCESS));
+			}
+			
 		}
 
-		public void DataPreprocessing()
+		public void DataPreprocessing(bool isNotify = false)
 		{
 			this.initDatas = this.datas;
 			// 이동평균
@@ -478,9 +488,12 @@ namespace houself_cluster
 			*/
 
 			Console.WriteLine(newDatas[0].timeslot.Length);
-			
 
-			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.DATA_PREPROCESSING_SUCCESS));
+			if (!isNotify)
+			{
+				this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.DATA_PREPROCESSING_SUCCESS));
+			}
+			
 		}
 
 		public void SetCluster()

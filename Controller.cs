@@ -53,6 +53,10 @@ namespace houself_cluster
 				case VIEW_ACTION.CONFIRM:
 					this.model.Confirm();
 					break;
+				case VIEW_ACTION.REQUEST_FS:
+					this.model.FeatureScaling();
+
+					break;
 			}
 		}
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)

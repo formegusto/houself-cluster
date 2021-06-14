@@ -69,6 +69,7 @@
 			this.ecvBtn = new MetroFramework.Controls.MetroButton();
 			this.statisticBtn = new MetroFramework.Controls.MetroButton();
 			this.ConfirmBtn = new MetroFramework.Controls.MetroButton();
+			this.FsBtn = new MetroFramework.Controls.MetroButton();
 			this.Header.SuspendLayout();
 			this.TimeslotComponent.SuspendLayout();
 			this.TimeslotTabs.SuspendLayout();
@@ -507,6 +508,7 @@
 			// 
 			// SideBar
 			// 
+			this.SideBar.Controls.Add(this.FsBtn);
 			this.SideBar.Controls.Add(this.ClusteringBtn);
 			this.SideBar.Controls.Add(this.KeywordBox);
 			this.SideBar.HorizontalScrollbarBarColor = true;
@@ -713,6 +715,19 @@
 			this.ConfirmBtn.UseSelectable = true;
 			this.ConfirmBtn.Click += new System.EventHandler(this.ConfirmBtn_Click);
 			// 
+			// FsBtn
+			// 
+			this.FsBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.FsBtn.FontSize = MetroFramework.MetroButtonSize.Medium;
+			this.FsBtn.Location = new System.Drawing.Point(0, 80);
+			this.FsBtn.Name = "FsBtn";
+			this.FsBtn.Size = new System.Drawing.Size(428, 40);
+			this.FsBtn.TabIndex = 4;
+			this.FsBtn.Text = "FeatureScaling";
+			this.FsBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+			this.FsBtn.UseSelectable = true;
+			this.FsBtn.Click += new System.EventHandler(this.FSBtn_Click);
+			// 
 			// Component
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -786,6 +801,7 @@
 		private MetroFramework.Controls.MetroButton statisticBtn;
 		private MetroFramework.Controls.MetroButton ClusteringBtn;
 		private MetroFramework.Controls.MetroButton ConfirmBtn;
+		private MetroFramework.Controls.MetroButton FsBtn;
 	}
 }
 

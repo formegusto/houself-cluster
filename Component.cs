@@ -85,6 +85,7 @@ namespace houself_cluster
 					   this.SideBar.Controls.Add(this.mergeButton);
 					   this.SideBar.Controls.Add(this.SaveBtn);
 					   this.SideBar.Controls.Add(this.NextClusteringBtn);
+					   this.SideBar.Controls.Add(this.FsBtn);
 					   this.SideBar.Controls.Add(this.ClusteringBtn);
 					   this.SideBar.Controls.Add(this.KeywordBox);
 				   }));
@@ -325,6 +326,7 @@ namespace houself_cluster
 			this.chartPanelGroup = null;
 			Delay(3000);
 		}
+		public void FSBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.REQUEST_FS));
 		public void StatisticBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.SEASON_STATISTIC));
 		public void SaveBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.SAVEMODE));
 		public void MergeBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.MERGECLUSTER));
