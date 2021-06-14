@@ -106,7 +106,7 @@ namespace houself_cluster
 			{
 				for (int t = 0; t < data.timeslot.Length; t++)
 				{
-					data.timeslot[t] = (data.timeslot[t] - minTS) / (maxTS - minTS);
+					data.timeslot[t] = Math.Round((data.timeslot[t] - minTS) / (maxTS - minTS), 2);
 				}
 			});
 
@@ -167,6 +167,7 @@ namespace houself_cluster
 
 				for (int e = 0; e < this.clusters[k].timeslot.Length; e++)
 				{
+					
 					this.clusters[k].timeslot[e] = 0;
 					for (int i = 0; i < this.clusters[k].instances.Count; i++)
 					{
@@ -369,7 +370,7 @@ namespace houself_cluster
 			this.initDatas = this.datas;
 			// 이동평균
 			// 3h로 일단 고정
-				/*
+				
 			List<Data> movingDatas = new List<Data>();
 			this.datas.ForEach((data) =>
 			{
@@ -662,13 +663,17 @@ namespace houself_cluster
 						"this date " + this.datas[d].date.ToString("yyyyMMdd") + "\n" +
 						"this season " + );
 						*/
-					this.changed.Invoke(this, new ModelEventArgs(
+					if(min1 < 0.095)
+					{
+						this.changed.Invoke(this, new ModelEventArgs(
 						MODEL_ACTION.ASSIGN_INSTANCE_SUCCESS,
 						new Dictionary<string, dynamic>()
 						{
-						{"data", this.datas[d] },
-						{"cluster", this.datas[d].mainCluster }
+							{"data", this.datas[d] },
+							{"cluster", this.datas[d].mainCluster }
 						}));
+					}
+					
 
 					this.clusters[mK].instances.Add(this.datas[d]);
 					Season season = DateUtils.DateToSeason(this.datas[d].date);

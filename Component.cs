@@ -124,7 +124,7 @@ namespace houself_cluster
 
 					break;
 				case MODEL_ACTION.CONFIRM_SUCCESS:
-					new AllChart(e.payload["datas"], e.payload["clusters"],SeasonUtils.GetBrush(e.payload["season"])).Show();
+					new AllChart(e.payload["datas"], e.payload["clusters"], SeasonUtils.GetBrush(e.payload["season"])).Show();
 
 					break;
 				default:
@@ -171,6 +171,10 @@ namespace houself_cluster
 					this.chartList[c].Series.Clear();
 				}));
 			}
+		}
+		public void Detail_TS_Cluster()
+		{
+
 		}
 
 		public void FS_SUCCESS(List<Data> datas)
@@ -326,7 +330,13 @@ namespace houself_cluster
 			this.chartPanelGroup = null;
 			Delay(3000);
 		}
-		public void FSBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.REQUEST_FS));
+		public void FSBtn_Click(object sender, EventArgs e) {
+			if (this.chartList != null)
+			{
+				Chart_Clear();
+			}
+			this.changed(this, new ViewEventArgs(VIEW_ACTION.REQUEST_FS));
+		}
 		public void StatisticBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.SEASON_STATISTIC));
 		public void SaveBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.SAVEMODE));
 		public void MergeBtn_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.MERGECLUSTER));
