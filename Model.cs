@@ -142,7 +142,7 @@ namespace houself_cluster
 				}
 			}
 
-			
+			/*
 			List<Cluster> movingClusters = new List<Cluster>();
 			this.clusters.ForEach((cluster) =>
 			{
@@ -324,7 +324,7 @@ namespace houself_cluster
 			this.initDatas = this.datas;
 			// 이동평균
 			// 3h로 일단 고정
-				
+				/*
 			List<Data> movingDatas = new List<Data>();
 			this.datas.ForEach((data) =>
 			{
@@ -525,7 +525,7 @@ namespace houself_cluster
 			this.clusters = clusters;
 
 			// cluster 이동평균 설정
-			
+			/*
 			List<Cluster> movingClusters = new List<Cluster>();
 			this.clusters.ForEach((cluster) =>
 			{
@@ -846,6 +846,33 @@ namespace houself_cluster
 			
 			this.initDatas = newDatas;
 			/**/
+
+			// 3h로 일단 고정
+			List<Data> movingDatas = new List<Data>();
+			this.initDatas.ForEach((data) =>
+			{
+			Data newData = new Data(
+				data.date,
+				data.uid,
+				new double[data.timeslot.Length]
+				);
+
+			double partialSum = 0.0;
+			for(int t = 0; t < data.timeslot.Length ; t++)
+			{
+				partialSum += data.timeslot[t];
+				if (t < (3 - 1))
+				{
+					newData.timeslot[t] = data.timeslot[t];
+				} else
+				{
+					newData.timeslot[t] = partialSum / 3;
+					partialSum -= data.timeslot[t - (3 - 1)];
+				}
+			}
+			movingDatas.Add(newData);
+			});
+			this.initDatas = movingDatas;
 
 			this.changed.Invoke(this, new ModelEventArgs(MODEL_ACTION.CONFIRM_SUCCESS,
 				new Dictionary<string, dynamic>

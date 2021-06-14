@@ -52,6 +52,7 @@ namespace houself_cluster.Atom
 					Values = cv,
 					StrokeThickness = 4,
 					PointGeometry = null,
+					Fill = System.Windows.Media.Brushes.Transparent
 				};
 
 				this.Chart.Series.Add(ls);

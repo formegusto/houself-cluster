@@ -272,7 +272,7 @@ namespace houself_cluster
 						Values = cv,
 						StrokeThickness = 4,
 						PointGeometry = null,
-						Fill = null,
+						Fill = Brushes.Transparent,
 					};
 					this.chartPanelGroup[c].SetText(string.Format("{0}|{1}|{2}|{3}", 
 						string.Format("{0}: {1}", SeasonUtils.SeasonToKR(clusters[c].seasonFrequency[0].season), clusters[c].seasonFrequency[0].frequency),
