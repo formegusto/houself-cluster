@@ -51,6 +51,7 @@ namespace houself_cluster
 		void Evaluate();
 		void SeasonStatistic();
 		void Confirm();
+		void FeatureScaling();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -77,6 +78,40 @@ namespace houself_cluster
 		public void Attach(IModelObserver imo)
 		{
 			this.changed += new ModelHandler<HouselfClusterModel>(imo.ModelNotify);
+		}
+		public void FeatureScaling()
+		{
+			double maxTS = -1;
+			double minTS = Double.MaxValue;
+			this.datas.ForEach((data) =>
+			{
+				for(int t=0;t< data.timeslot.Length; t++)
+				{
+					if (data.timeslot[t] > 0 && data.timeslot[t] > maxTS) { 
+						maxTS = data.timeslot[t];
+					}
+					if (data.timeslot[t] > 0 && data.timeslot[t] < minTS){ 
+						minTS = data.timeslot[t];
+					}
+				}
+			});
+
+			// 정규화
+			this.datas.ForEach((data) =>
+			{
+				for (int t = 0; t < data.timeslot.Length; t++)
+				{
+					data.timeslot[t] = (data.timeslot[t] - minTS) / (maxTS - minTS);
+				}
+			});
+
+			this.changed.Invoke(this,
+				new ModelEventArgs(
+					MODEL_ACTION.REQUEST_FS_SUCCESS,
+					new Dictionary<string, dynamic>()
+					{
+						{"datas", this.datas }
+					}));
 		}
 		public void ChangeOption(string a, Dictionary<string, dynamic> p)
 		{

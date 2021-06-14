@@ -171,6 +171,11 @@ namespace houself_cluster
 				}));
 			}
 		}
+
+		public void FS_SUCCESS(List<Data> datas)
+		{
+			Console.WriteLine("FS Succss");
+		}
 		public void Season_Line_Allocate(List<Cluster> sclusters, int idx)
 		{
 			for (int c = 0; c < 4; c++)

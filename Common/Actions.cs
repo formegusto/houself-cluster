@@ -25,6 +25,7 @@ namespace houself_cluster.Common
 		public const string CHANGE_DAYS = "view/change_days";
 		public const string CHANGE_SEASONS = "view/change_seasons";
 		public const string CHANGE_TIMESLOT = "view/change_timeslot";
+		public const string REQUEST_FS = "veiw/request_fs";
 	}
 	public static class MODEL_ACTION
 	{
@@ -65,5 +66,8 @@ namespace houself_cluster.Common
 
 		public const string CONFIRM_SUCCESS = "view/confirm/success";
 		public const string CONFIRM_FAILURE = "view/confirm/failure";
+
+		public const string REQUEST_FS_SUCCESS = "veiw/request_fs/success";
+		public const string REQUEST_FS_FAILURE = "veiw/request_fs/failure";
 	}
 }
