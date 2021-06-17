@@ -347,7 +347,7 @@ namespace houself_cluster
 
 			if(this.options.season != Season.ALL)
 			{
-				this.options.K = (int)Math.Pow(datas.Count / 2, 1f / 2) + 1;
+				this.options.K = (int)Math.Pow(datas.Count / 2, 1f / 2);
 			} else
 			{
 				this.options.K = (int)Math.Pow(datas.Count / 2, 1f / 2);
@@ -663,17 +663,22 @@ namespace houself_cluster
 						"this date " + this.datas[d].date.ToString("yyyyMMdd") + "\n" +
 						"this season " + );
 						*/
+
+					/*
+					 * 제외하는 로직
 					if(min1 < 0.095)
 					{
-						this.changed.Invoke(this, new ModelEventArgs(
+						
+					}
+					*/
+
+					this.changed.Invoke(this, new ModelEventArgs(
 						MODEL_ACTION.ASSIGN_INSTANCE_SUCCESS,
 						new Dictionary<string, dynamic>()
 						{
 							{"data", this.datas[d] },
 							{"cluster", this.datas[d].mainCluster }
 						}));
-					}
-					
 
 					this.clusters[mK].instances.Add(this.datas[d]);
 					Season season = DateUtils.DateToSeason(this.datas[d].date);

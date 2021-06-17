@@ -117,7 +117,7 @@ namespace houself_cluster
 			{
 				if (seasonFrequency[s].season != season &&
 					seasonFrequency[s].frequency != 0)
-					return false;
+				return false;
 			}
 
 			return true;
