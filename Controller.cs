@@ -58,7 +58,8 @@ namespace houself_cluster
 
 					break;
 				case VIEW_ACTION.API_TEST:
-					this.model.APITest();
+					// this.model.APITest();
+					this.model.APITestRequest();
 
 					break;
 			}

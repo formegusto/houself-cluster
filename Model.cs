@@ -11,6 +11,7 @@ using houself_cluster.Utils;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace houself_cluster
 {
@@ -57,6 +58,7 @@ namespace houself_cluster
 		void Confirm();
 		void FeatureScaling();
 		void APITest();
+		void APITestRequest();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -105,6 +107,32 @@ namespace houself_cluster
 			}
 
 			Console.WriteLine(result);
+		}
+		public void APITestRequest()
+		{
+			string result = string.Empty;
+
+			try
+			{
+				WebRequest request = WebRequest.Create("https://jsonplaceholder.typicode.com/users");
+				request.Method = "GET";
+				request.ContentType = "application/json";
+				using(WebResponse response = request.GetResponse())
+				using (Stream dataStream = response.GetResponseStream())
+				using (StreamReader reader = new StreamReader(dataStream))
+				{
+					result = reader.ReadToEnd();
+					Console.WriteLine(result);
+
+					var jarr = JArray.Parse(result);
+					Console.WriteLine(jarr);
+				}
+			} catch(Exception e)
+			{
+				Console.WriteLine(e.ToString());
+			}
+
+			
 		}
 		public void Attach(IModelObserver imo)
 		{
