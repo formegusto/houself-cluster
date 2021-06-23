@@ -126,6 +126,13 @@ namespace houself_cluster
 
 					var jarr = JArray.Parse(result);
 					Console.WriteLine(jarr);
+
+					foreach(var o in jarr)
+					{
+						Console.WriteLine(string.Format("{0} : {1}", "name", o["name"]));
+						Console.WriteLine(string.Format("{0} : {1}", "username", o["username"]));
+						Console.WriteLine(string.Format("{0} : {1}", "email", o["email"]));
+					}
 				}
 			} catch(Exception e)
 			{
