@@ -87,6 +87,7 @@ namespace houself_cluster
 					   this.SideBar.Controls.Add(this.NextClusteringBtn);
 					   this.SideBar.Controls.Add(this.FsBtn);
 					   this.SideBar.Controls.Add(this.ClusteringBtn);
+					   this.SideBar.Controls.Add(this.ApiTestBtn);
 					   this.SideBar.Controls.Add(this.KeywordBox);
 				   }));
 
@@ -330,6 +331,7 @@ namespace houself_cluster
 			this.chartPanelGroup = null;
 			Delay(3000);
 		}
+		public void APITest_Click(object sender, EventArgs e) => this.changed(this, new ViewEventArgs(VIEW_ACTION.API_TEST));
 		public void FSBtn_Click(object sender, EventArgs e) {
 			if (this.chartList != null)
 			{

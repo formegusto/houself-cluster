@@ -57,6 +57,10 @@ namespace houself_cluster
 					this.model.FeatureScaling();
 
 					break;
+				case VIEW_ACTION.API_TEST:
+					this.model.APITest();
+
+					break;
 			}
 		}
 		public void Dispatch(string action, Dictionary<string, dynamic> payload = null)

@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using houself_cluster.Common;
 using houself_cluster.Utils;
 
+using System.IO;
+using System.Net;
+using System.Net.Http;
+
 namespace houself_cluster
 {
 	public delegate void ModelHandler<IModel>(IModel sender, ModelEventArgs e);
@@ -52,6 +56,7 @@ namespace houself_cluster
 		void SeasonStatistic();
 		void Confirm();
 		void FeatureScaling();
+		void APITest();
 	}
 	public class HouselfClusterModel: IModel
 	{
@@ -74,6 +79,32 @@ namespace houself_cluster
 			this.options.day = Day.SUN;
 			this.options.season = Season.ALL;
 			this.options.timeslot = Timeslot.H3;
+		}
+		public void APITest()
+		{
+			string result = string.Empty;
+			try
+			{
+				WebClient cli = new WebClient();
+
+				cli.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+				using(Stream data = cli.OpenRead("https://jsonplaceholder.typicode.com/users"))
+				{
+					using (StreamReader reader = new StreamReader(data))
+					{
+						string s = reader.ReadToEnd();
+						result = s;
+						reader.Close();
+						data.Close();
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.ToString());
+			}
+
+			Console.WriteLine(result);
 		}
 		public void Attach(IModelObserver imo)
 		{
